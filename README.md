@@ -1,4 +1,4 @@
-﻿# Deadline Aware Tool Permissioning (DATP)
+﻿# Quality When Feasible: Deadline-Aware Tool Permissioning (DATP) for Tool-Augmented LLM Serving Under Firm Deadlines
 
 This repository provides a discrete-event simulation framework for deadline-constrained LLM serving with multiple inference modes. It introduces Deadline Aware Tool Permissioning (DATP), a policy that gates slow vs fast inference using deadline slack and an optional epsilon margin. The simulation uses empirical service-time traces (paired FAST/SLOW) or lognormal models, and supports standard baseline policies for rigorous comparisons.
 
