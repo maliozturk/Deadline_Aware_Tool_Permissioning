@@ -1,4 +1,4 @@
-﻿# Tool-Feasibility Gating (TFG) for Deadline-Constrained LLM Serving
+﻿# Deadline Aware Tool Permissioning (DATP)
 
 This repository provides a discrete-event simulation framework for deadline-constrained LLM serving with multiple inference modes. It introduces Tool-Feasibility Gating (TFG), a policy that gates slow vs fast inference using deadline slack and an optional epsilon margin. The simulation uses empirical service-time traces (paired FAST/SLOW) or lognormal models, and supports standard baseline policies for rigorous comparisons.
 
