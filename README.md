@@ -1,6 +1,6 @@
 ﻿# Deadline Aware Tool Permissioning (DATP)
 
-This repository provides a discrete-event simulation framework for deadline-constrained LLM serving with multiple inference modes. It introduces Tool-Feasibility Gating (DATP), a policy that gates slow vs fast inference using deadline slack and an optional epsilon margin. The simulation uses empirical service-time traces (paired FAST/SLOW) or lognormal models, and supports standard baseline policies for rigorous comparisons.
+This repository provides a discrete-event simulation framework for deadline-constrained LLM serving with multiple inference modes. It introduces Deadline Aware Tool Permissioning (DATP), a policy that gates slow vs fast inference using deadline slack and an optional epsilon margin. The simulation uses empirical service-time traces (paired FAST/SLOW) or lognormal models, and supports standard baseline policies for rigorous comparisons.
 
 The outputs are designed for publication-quality figures and tables. The proposed policy is labeled as "DATP*" in all plots and tables.
 
@@ -20,7 +20,7 @@ The outputs are designed for publication-quality figures and tables. The propose
 - QueueThreshold (Q0=5)
 - DriftPenaltyMyopic (V=1.0)
 - TTL-aware heuristic
-- Proposed: DATP* (Tool-Feasibility Gating; epsilon can be fixed or adaptive)
+- Proposed: DATP* (Deadline Aware Tool Permissioning; epsilon can be fixed or adaptive)
 
 ## TTL regimes (used in outputs)
 - TTL Regime I (mu=28, sigma=9) -> very_tight
