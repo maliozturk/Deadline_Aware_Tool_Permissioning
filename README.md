@@ -1,8 +1,8 @@
 ﻿# Deadline Aware Tool Permissioning (DATP)
 
-This repository provides a discrete-event simulation framework for deadline-constrained LLM serving with multiple inference modes. It introduces Tool-Feasibility Gating (TFG), a policy that gates slow vs fast inference using deadline slack and an optional epsilon margin. The simulation uses empirical service-time traces (paired FAST/SLOW) or lognormal models, and supports standard baseline policies for rigorous comparisons.
+This repository provides a discrete-event simulation framework for deadline-constrained LLM serving with multiple inference modes. It introduces Tool-Feasibility Gating (DATP), a policy that gates slow vs fast inference using deadline slack and an optional epsilon margin. The simulation uses empirical service-time traces (paired FAST/SLOW) or lognormal models, and supports standard baseline policies for rigorous comparisons.
 
-The outputs are designed for publication-quality figures and tables. The proposed policy is labeled as "TFG*" in all plots and tables.
+The outputs are designed for publication-quality figures and tables. The proposed policy is labeled as "DATP*" in all plots and tables.
 
 ## System model
 - Single-server queue, FCFS, non-preemptive service.
@@ -20,7 +20,7 @@ The outputs are designed for publication-quality figures and tables. The propose
 - QueueThreshold (Q0=5)
 - DriftPenaltyMyopic (V=1.0)
 - TTL-aware heuristic
-- Proposed: TFG* (Tool-Feasibility Gating; epsilon can be fixed or adaptive)
+- Proposed: DATP* (Tool-Feasibility Gating; epsilon can be fixed or adaptive)
 
 ## TTL regimes (used in outputs)
 - TTL Regime I (mu=28, sigma=9) -> very_tight
@@ -122,11 +122,11 @@ Summary utilities:
 
 [//]: # (This executes the following scripts in order:)
 
-[//]: # (- `Analysis/DP_vs_TFG_V_Sweep.py`)
+[//]: # (- `Analysis/DP_vs_DATP_V_Sweep.py`)
 
 [//]: # (- `Analysis/Trace_ECDF.py`)
 
-[//]: # (- `Analysis/Policy_GridSearch_vs_TFG.py`)
+[//]: # (- `Analysis/Policy_GridSearch_vs_DATP.py`)
 
 [//]: # (- `Analysis/Agent_Results_Stats.py`)
 
@@ -139,9 +139,9 @@ Summary utilities:
 
 [//]: # (python Analysis/Journal_Experiments.py)
 
-[//]: # (python Analysis/DP_vs_TFG_V_Sweep.py)
+[//]: # (python Analysis/DP_vs_DATP_V_Sweep.py)
 
-[//]: # (python Analysis/Policy_GridSearch_vs_TFG.py)
+[//]: # (python Analysis/Policy_GridSearch_vs_DATP.py)
 
 [//]: # (python Analysis/Trace_ECDF.py)
 
@@ -156,7 +156,7 @@ Summary utilities:
 
 [//]: # (- Load sweep &#40;D2&#41;: `Results/Journal/load_sweep/utility_vs_lambda.png`, `Results/Journal/load_sweep/dmr_vs_lambda.png`)
 
-[//]: # (- Epsilon trade-off &#40;D3&#41;: `Results/Journal/epsilon_tradeoff/tfg_epsilon_pareto.png`)
+[//]: # (- Epsilon trade-off &#40;D3&#41;: `Results/Journal/epsilon_tradeoff/DATP_epsilon_pareto.png`)
 
 [//]: # (- ECDF plots: `Results/Trace_ECDF/ecdf_fast_vs_slow.png`, `Results/Trace_ECDF/ecdf_fast_vs_slow_by_prompt_type.png`)
 
@@ -167,7 +167,7 @@ Summary utilities:
 ### Configuration points
 - Global defaults: `Configurations.py`
 - Journal experiments: `Analysis/Journal_Experiments.py` (lambda sweep, epsilon list, TTL presets)
-- TFG settings: `Configurations.py` under `Policy_Config`
+- DATP settings: `Configurations.py` under `Policy_Config`
 - Service-time source: `Configurations.py` under `Service_Config`
 
 If you want to switch to a lognormal service model or to a different trace CSV, update `Configurations.py`.
