@@ -1,6 +1,6 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Models/Distributions.py
 #  Purpose: Define interarrival and service-time distributions.

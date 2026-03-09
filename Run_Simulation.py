@@ -1,6 +1,6 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Run_Simulation.py
 #  Purpose: Run simulations, compute policy summaries, and write outputs.
@@ -40,7 +40,7 @@ from Models.Policies import (
     Static_Mix_Policy,
     Queue_Threshold_Policy,
     Drift_Penalty_Myopic_Policy,
-    TFGPolicy
+    DATPPolicy,
 )
 from Core.Task import Mode
 from Models.Utility import Firm_Deadline_Quality_Utility
@@ -53,7 +53,7 @@ POLICY_LABELS = {
     "Queue_Threshold_Policy": "QueueThreshold (Q0=5)",
     "Drift_Penalty_Myopic_Policy": "DriftPenaltyMyopic (V=1.0)",
     "Baseline_Heuristic_Policy": "TTL-aware heuristic",
-    "TFGPolicy": "TFG*",
+    "DATPPolicy": "DATP*",
 }
 
 
@@ -139,13 +139,13 @@ def _Write_Priority_Policy_Table(priority_policy_summaries: dict, out_dir: Path)
         "Fcfs_Always_Fast",
         "Baseline_Heuristic_Policy",
         "Drift_Penalty_Myopic_Policy",
-        "TFGPolicy",
+        "DATPPolicy",
     ]
     policy_short = {
         "Fcfs_Always_Fast": "AF",
         "Baseline_Heuristic_Policy": "H",
         "Drift_Penalty_Myopic_Policy": "DP",
-        "TFGPolicy": "TFG*",
+        "DATPPolicy": "DATP*",
     }
     class_order = [("premium", "Premium"), ("standard", "Normal"), ("overall", "Overall")]
 
@@ -215,7 +215,7 @@ def Run_Baseline() -> None:
         "Static_Mix_Policy",
         "Queue_Threshold_Policy",
         "Drift_Penalty_Myopic_Policy",
-        "TFGPolicy",
+        "DATPPolicy",
     ]
 
     Path("Results").mkdir(parents=True, exist_ok=True)
@@ -300,8 +300,8 @@ def Run_Baseline() -> None:
                                                                     service_model=service_lognormal_service_times,
                                                                     utility_cfg=simulation_config.utility_config)
 
-        elif policy_name == "TFGPolicy":
-            policy_scheduling_policy  =  TFGPolicy(simulation_config.policy_config, service_model=service_lognormal_service_times)
+        elif policy_name == "DATPPolicy":
+            policy_scheduling_policy  =  DATPPolicy(simulation_config.policy_config, service_model=service_lognormal_service_times)
 
         else:
             raise ValueError(f"Policy name {policy_name} not recognized.")
@@ -430,9 +430,9 @@ def Run_Baseline() -> None:
             priority_policy_summaries[policy_name] = _Priority_Class_Summaries(metrics_collector)
 
     if priority_miss_rates:
-        tfg_tables_dir = base / "TFGPolicy" / "tables"
-        _Plot_Priority_Miss_Rate_Comparison(priority_miss_rates, tfg_tables_dir)
-        _Write_Priority_Policy_Table(priority_policy_summaries, tfg_tables_dir)
+        datp_tables_dir = base / "DATPPolicy" / "tables"
+        _Plot_Priority_Miss_Rate_Comparison(priority_miss_rates, datp_tables_dir)
+        _Write_Priority_Policy_Table(priority_policy_summaries, datp_tables_dir)
 
 if __name__ == "__main__":
     Run_Baseline()

@@ -1,6 +1,6 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Metrics/Collector.py
 #  Purpose: Collect per-task metrics and aggregate statistics.

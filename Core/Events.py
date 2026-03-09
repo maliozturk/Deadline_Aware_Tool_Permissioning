@@ -1,6 +1,6 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Core/Events.py
 #  Purpose: Define discrete-event types and the event calendar.

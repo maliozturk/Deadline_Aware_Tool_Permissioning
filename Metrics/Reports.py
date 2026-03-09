@@ -1,6 +1,6 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Metrics/Reports.py
 #  Purpose: Format aggregated metrics into a report string.

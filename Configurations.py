@@ -1,6 +1,6 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Configurations.py
 #  Purpose: Define configuration dataclasses for simulation components.
@@ -99,34 +99,86 @@ class Policy_Config:
 
                                                        
                                                                                                       
-    tfg_slack_factor: float = 1.0                               
+    datp_slack_factor: float = 1.0                              
                                                                                                        
-    tfg_epsilon_f64: float = 0.0
+    datp_epsilon_f64: float = 0.0
 
                                                                           
-    tfg_adaptive_epsilon_enabled_bool: bool = False
-    tfg_adaptive_epsilon_window_i32: int = 25
-    tfg_adaptive_epsilon_kp_f64:        float = 0.02
-    tfg_adaptive_epsilon_ki_f64:        float = 0.002
-    tfg_adaptive_epsilon_min_f64:       float = -.10
-    tfg_adaptive_epsilon_max_f64:       float =  .10
+    datp_adaptive_epsilon_enabled_bool: bool = False
+    datp_adaptive_epsilon_window_i32: int = 25
+    datp_adaptive_epsilon_kp_f64:        float = 0.02
+    datp_adaptive_epsilon_ki_f64:        float = 0.002
+    datp_adaptive_epsilon_min_f64:       float = -.10
+    datp_adaptive_epsilon_max_f64:       float =  .10
 
                                       
                                                                       
                                                                    
-    tfg_wait_estimator: str = "mix"                           
+    datp_wait_estimator: str = "mix"                          
 
                                               
-    tfg_queue_slow_mix_p: float = 0.55
+    datp_queue_slow_mix_p: float = 0.55
 
                                                                             
-    tfg_include_in_service: bool = True
+    datp_include_in_service: bool = True
 
                                             
-    tfg_trace_enabled_bool: bool = False
+    datp_trace_enabled_bool: bool = False
 
                                                
-    tfg_quantile_q_f64: float = 0.9
+    datp_quantile_q_f64: float = 0.9
+
+    @property
+    def tfg_slack_factor(self) -> float:
+        return self.datp_slack_factor
+
+    @property
+    def tfg_epsilon_f64(self) -> float:
+        return self.datp_epsilon_f64
+
+    @property
+    def tfg_adaptive_epsilon_enabled_bool(self) -> bool:
+        return self.datp_adaptive_epsilon_enabled_bool
+
+    @property
+    def tfg_adaptive_epsilon_window_i32(self) -> int:
+        return self.datp_adaptive_epsilon_window_i32
+
+    @property
+    def tfg_adaptive_epsilon_kp_f64(self) -> float:
+        return self.datp_adaptive_epsilon_kp_f64
+
+    @property
+    def tfg_adaptive_epsilon_ki_f64(self) -> float:
+        return self.datp_adaptive_epsilon_ki_f64
+
+    @property
+    def tfg_adaptive_epsilon_min_f64(self) -> float:
+        return self.datp_adaptive_epsilon_min_f64
+
+    @property
+    def tfg_adaptive_epsilon_max_f64(self) -> float:
+        return self.datp_adaptive_epsilon_max_f64
+
+    @property
+    def tfg_wait_estimator(self) -> str:
+        return self.datp_wait_estimator
+
+    @property
+    def tfg_queue_slow_mix_p(self) -> float:
+        return self.datp_queue_slow_mix_p
+
+    @property
+    def tfg_include_in_service(self) -> bool:
+        return self.datp_include_in_service
+
+    @property
+    def tfg_trace_enabled_bool(self) -> bool:
+        return self.datp_trace_enabled_bool
+
+    @property
+    def tfg_quantile_q_f64(self) -> float:
+        return self.datp_quantile_q_f64
 
 
 

@@ -1,6 +1,6 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Core/Simulator.py
 #  Purpose: Run the single-server discrete-event simulation.
@@ -187,7 +187,9 @@ class Simulator:
                                                                                       
         self.queue_deque_task.append(task_)
 
-        if hasattr(self.policy_scheduling_policy, "TFG_Policy_Identifier"):
+        if hasattr(self.policy_scheduling_policy, "DATP_Policy_Identifier") or hasattr(
+            self.policy_scheduling_policy, "TFG_Policy_Identifier"
+        ):
             state_at_arrival = self._State()
             preset_mode = self.policy_scheduling_policy.Decide_Mode(task_, state_at_arrival)
             task_.chosen_mode_mode_opt = preset_mode

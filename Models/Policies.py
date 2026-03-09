@@ -1,9 +1,9 @@
 # =============================================================================
-#  TOOL FEASIBILITY GATING ALGORITHM (TFG)
-#  Product Signature: TFG
+#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
+#  Product Signature: DATP
 # ------------------------------------------------------------------------------
 #  File: Models/Policies.py
-#  Purpose: Implement scheduling policies including TFG and baselines.
+#  Purpose: Implement scheduling policies including DATP and baselines.
 #  Author: Muhammet Ali Ozturk
 #  Generated: 2026-01-18
 #  Environment: Python 3.9.13
@@ -22,7 +22,7 @@ from Models.Policy_Base import Scheduling_Policy, System_State
 
 
 @dataclass(frozen=True)
-class TFG_Decision_Trace:
+class DATP_Decision_Trace:
     task_id_i32            : int
     arrival_time_f64       : float
     delta_k_f64            : float
@@ -37,10 +37,10 @@ class TFG_Decision_Trace:
 
 
 @dataclass
-class TFGPolicy(Scheduling_Policy):
+class DATPPolicy(Scheduling_Policy):
     cfg: Policy_Config
     service_model: Service_Time_Model
-    decision_trace_list: List[TFG_Decision_Trace] = field(default_factory=list)
+    decision_trace_list: List[DATP_Decision_Trace] = field(default_factory=list)
     epsilon_trace_times_list_f64: List[float] = field(default_factory=list)
     epsilon_trace_values_list_f64: List[float] = field(default_factory=list)
     _epsilon_recent_misses_deque_i32: Deque[int] = field(init=False)
@@ -48,35 +48,35 @@ class TFGPolicy(Scheduling_Policy):
     _epsilon_f64: float = field(init=False, default=0.0)
 
     def __post_init__(self) -> None:
-        if self.cfg.tfg_wait_estimator not in {"conservative", "mix"}:
-            raise ValueError("tfg_wait_estimator must be one of {'conservative','mix'}.")
-        p = float(self.cfg.tfg_queue_slow_mix_p)
+        if self.cfg.datp_wait_estimator not in {"conservative", "mix"}:
+            raise ValueError("datp_wait_estimator must be one of {'conservative','mix'}.")
+        p = float(self.cfg.datp_queue_slow_mix_p)
         if not (0.0 <= p <= 1.0):
-            raise ValueError("tfg_queue_slow_mix_p must be in [0, 1].")
-        if float(self.cfg.tfg_slack_factor) <= 0:
-            raise ValueError("tfg_slack_factor must be > 0.")
-        eps = float(self.cfg.tfg_epsilon_f64)
+            raise ValueError("datp_queue_slow_mix_p must be in [0, 1].")
+        if float(self.cfg.datp_slack_factor) <= 0:
+            raise ValueError("datp_slack_factor must be > 0.")
+        eps = float(self.cfg.datp_epsilon_f64)
         if not (-1.0 < eps <= 1.0):
-            raise ValueError("tfg_epsilon_f64 must be in (-1, 1].")
+            raise ValueError("datp_epsilon_f64 must be in (-1, 1].")
 
-        self._epsilon_f64 = float(self.cfg.tfg_epsilon_f64)
-        self._epsilon_recent_misses_deque_i32 = deque(maxlen=int(self.cfg.tfg_adaptive_epsilon_window_i32))
+        self._epsilon_f64 = float(self.cfg.datp_epsilon_f64)
+        self._epsilon_recent_misses_deque_i32 = deque(maxlen=int(self.cfg.datp_adaptive_epsilon_window_i32))
 
-        if self.cfg.tfg_adaptive_epsilon_enabled_bool:
-            if self.cfg.tfg_adaptive_epsilon_window_i32 <= 0:
-                raise ValueError("tfg_adaptive_epsilon_window_i32 must be > 0.")
-            if float(self.cfg.tfg_adaptive_epsilon_kp_f64) < 0:
-                raise ValueError("tfg_adaptive_epsilon_kp_f64 must be >= 0.")
-            if float(self.cfg.tfg_adaptive_epsilon_ki_f64) < 0:
-                raise ValueError("tfg_adaptive_epsilon_ki_f64 must be >= 0.")
-            eps_min = float(self.cfg.tfg_adaptive_epsilon_min_f64)
-            eps_max = float(self.cfg.tfg_adaptive_epsilon_max_f64)
+        if self.cfg.datp_adaptive_epsilon_enabled_bool:
+            if self.cfg.datp_adaptive_epsilon_window_i32 <= 0:
+                raise ValueError("datp_adaptive_epsilon_window_i32 must be > 0.")
+            if float(self.cfg.datp_adaptive_epsilon_kp_f64) < 0:
+                raise ValueError("datp_adaptive_epsilon_kp_f64 must be >= 0.")
+            if float(self.cfg.datp_adaptive_epsilon_ki_f64) < 0:
+                raise ValueError("datp_adaptive_epsilon_ki_f64 must be >= 0.")
+            eps_min = float(self.cfg.datp_adaptive_epsilon_min_f64)
+            eps_max = float(self.cfg.datp_adaptive_epsilon_max_f64)
             if eps_min <= -1.0:
-                raise ValueError("tfg_adaptive_epsilon_min_f64 must be > -1.")
+                raise ValueError("datp_adaptive_epsilon_min_f64 must be > -1.")
             if eps_max <= -1.0:
-                raise ValueError("tfg_adaptive_epsilon_max_f64 must be > -1.")
+                raise ValueError("datp_adaptive_epsilon_max_f64 must be > -1.")
             if eps_min > eps_max:
-                raise ValueError("tfg_adaptive_epsilon_min_f64 must be <= tfg_adaptive_epsilon_max_f64.")
+                raise ValueError("datp_adaptive_epsilon_min_f64 must be <= datp_adaptive_epsilon_max_f64.")
             self._epsilon_f64 = self._Clamp_Epsilon(self._epsilon_f64)
 
     def Decide_Mode(self, task: Task, state: System_State) -> Mode:
@@ -89,29 +89,29 @@ class TFGPolicy(Scheduling_Policy):
         s_fast = float(self.service_model.Expected(Mode.FAST))
 
                                
-        if self.cfg.tfg_wait_estimator == "conservative":
+        if self.cfg.datp_wait_estimator == "conservative":
             s_avg = s_slow
         else:
                                                          
-            p = float(self.cfg.tfg_queue_slow_mix_p)
+            p = float(self.cfg.datp_queue_slow_mix_p)
             s_avg = p * s_slow + (1.0 - p) * s_fast
 
                                                              
-        in_service = float(state.server_remaining_time) if (state.server_busy_bool and self.cfg.tfg_include_in_service) else 0.0
+        in_service = float(state.server_remaining_time) if (state.server_busy_bool and self.cfg.datp_include_in_service) else 0.0
         W_hat = in_service + float(state.queue_length_i32) * s_avg
 
         epsilon = self._Current_Epsilon()
         slack = (
-            float(self.cfg.tfg_slack_factor)
+            float(self.cfg.datp_slack_factor)
             * float(delta_k)
             * (1.0 + float(epsilon))
         )
 
         decision = Mode.SLOW if (W_hat + s_slow) <= slack else Mode.FAST
 
-        if self.cfg.tfg_trace_enabled_bool:
+        if self.cfg.datp_trace_enabled_bool:
             self.decision_trace_list.append(
-                TFG_Decision_Trace(
+                DATP_Decision_Trace(
                     task_id_i32=int(task.task_id),
                     arrival_time_f64=float(task.arrival_time),
                     delta_k_f64=float(delta_k),
@@ -133,7 +133,7 @@ class TFGPolicy(Scheduling_Policy):
         return False
 
     def Observe_Task_Outcome(self, task: Task) -> None:
-        if not self.cfg.tfg_adaptive_epsilon_enabled_bool:
+        if not self.cfg.datp_adaptive_epsilon_enabled_bool:
             return
 
         missed = 1
@@ -149,15 +149,15 @@ class TFGPolicy(Scheduling_Policy):
             return
 
         dmr_k = float(np.mean(self._epsilon_recent_misses_deque_i32))
-        target = float(self.cfg.tfg_epsilon_f64)
+        target = float(self.cfg.datp_epsilon_f64)
                                                                             
         error = target - dmr_k
 
-        kp = float(self.cfg.tfg_adaptive_epsilon_kp_f64)
-        ki = float(self.cfg.tfg_adaptive_epsilon_ki_f64)
+        kp = float(self.cfg.datp_adaptive_epsilon_kp_f64)
+        ki = float(self.cfg.datp_adaptive_epsilon_ki_f64)
 
-        eps_min = float(self.cfg.tfg_adaptive_epsilon_min_f64)
-        eps_max = float(self.cfg.tfg_adaptive_epsilon_max_f64)
+        eps_min = float(self.cfg.datp_adaptive_epsilon_min_f64)
+        eps_max = float(self.cfg.datp_adaptive_epsilon_max_f64)
 
         provisional_integral = self._epsilon_error_integral_f64 + float(error)
         candidate = self._epsilon_f64 + (kp * error) + (ki * provisional_integral)
@@ -181,20 +181,27 @@ class TFGPolicy(Scheduling_Policy):
         self.epsilon_trace_times_list_f64.append(t_f64)
         self.epsilon_trace_values_list_f64.append(float(self._epsilon_f64))
 
-    def TFG_Policy_Identifier(self) -> None:
+    def DATP_Policy_Identifier(self) -> None:
         return
 
     def _Current_Epsilon(self) -> float:
-        if self.cfg.tfg_adaptive_epsilon_enabled_bool:
+        if self.cfg.datp_adaptive_epsilon_enabled_bool:
             return float(self._epsilon_f64)
-        return float(self.cfg.tfg_epsilon_f64)
+        return float(self.cfg.datp_epsilon_f64)
 
     def _Clamp_Epsilon(self, eps_f64: float) -> float:
-        if not self.cfg.tfg_adaptive_epsilon_enabled_bool:
+        if not self.cfg.datp_adaptive_epsilon_enabled_bool:
             return float(eps_f64)
-        eps_min = float(self.cfg.tfg_adaptive_epsilon_min_f64)
-        eps_max = float(self.cfg.tfg_adaptive_epsilon_max_f64)
+        eps_min = float(self.cfg.datp_adaptive_epsilon_min_f64)
+        eps_max = float(self.cfg.datp_adaptive_epsilon_max_f64)
         return float(np.clip(float(eps_f64), eps_min, eps_max))
+
+    def TFG_Policy_Identifier(self) -> None:
+        return self.DATP_Policy_Identifier()
+
+
+TFG_Decision_Trace = DATP_Decision_Trace
+TFGPolicy = DATPPolicy
 
 
 @dataclass
