@@ -92,7 +92,7 @@ class Policy_Config:
     static_mix_p: float = 0.5                                
 
                                                           
-    queue_threshold_tau: int = 5
+    queue_threshold_tau: int = 2
 
                                                                 
     drift_V: float = 1.0                                              

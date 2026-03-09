@@ -184,15 +184,11 @@ class Simulator:
         task_ = self._Make_Task(self.now_f64)
         self._in_system_list_task.append(task_)
 
-                                                                                      
-        self.queue_deque_task.append(task_)
+        # All policies are defined as arrival-epoch mode selectors in the paper setup.
+        state_at_arrival = self._State()
+        task_.chosen_mode_mode_opt = self.policy_scheduling_policy.Decide_Mode(task_, state_at_arrival)
 
-        if hasattr(self.policy_scheduling_policy, "DATP_Policy_Identifier") or hasattr(
-            self.policy_scheduling_policy, "TFG_Policy_Identifier"
-        ):
-            state_at_arrival = self._State()
-            preset_mode = self.policy_scheduling_policy.Decide_Mode(task_, state_at_arrival)
-            task_.chosen_mode_mode_opt = preset_mode
+        self.queue_deque_task.append(task_)
 
                                
         self._Schedule_Next_Arrival()

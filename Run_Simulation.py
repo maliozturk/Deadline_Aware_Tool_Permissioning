@@ -35,12 +35,14 @@ from Models.Distributions import (
 )
 from Models.Policies import (
     Baseline_Heuristic_Policy,
+    DATPPolicy,
     Fcfs_Always_Fast_Policy,
     Fcfs_Always_Slow_Policy,
     Static_Mix_Policy,
+    Queue_Length_Bang_Bang_Policy,
     Queue_Threshold_Policy,
+    TTL_Feasibility_Bang_Bang_Policy,
     Drift_Penalty_Myopic_Policy,
-    DATPPolicy,
 )
 from Core.Task import Mode
 from Models.Utility import Firm_Deadline_Quality_Utility
@@ -50,7 +52,9 @@ POLICY_LABELS = {
     "Fcfs_Always_Fast": "AlwaysFast (AF)",
     "Fcfs_Always_Slow": "AlwaysSlow (AS)",
     "Static_Mix_Policy": "StaticMix (p=0.5)",
-    "Queue_Threshold_Policy": "QueueThreshold (Q0=5)",
+    "Queue_Length_Bang_Bang_Policy": "Q-BB",
+    "Queue_Threshold_Policy": "Q-BB",
+    "TTL_Feasibility_Bang_Bang_Policy": "F-BB",
     "Drift_Penalty_Myopic_Policy": "DriftPenaltyMyopic (V=1.0)",
     "Baseline_Heuristic_Policy": "TTL-aware heuristic",
     "DATPPolicy": "DATP*",
@@ -138,12 +142,14 @@ def _Write_Priority_Policy_Table(priority_policy_summaries: dict, out_dir: Path)
     policy_order = [
         "Fcfs_Always_Fast",
         "Baseline_Heuristic_Policy",
+        "Queue_Length_Bang_Bang_Policy",
         "Drift_Penalty_Myopic_Policy",
         "DATPPolicy",
     ]
     policy_short = {
         "Fcfs_Always_Fast": "AF",
         "Baseline_Heuristic_Policy": "H",
+        "Queue_Length_Bang_Bang_Policy": "Q-BB",
         "Drift_Penalty_Myopic_Policy": "DP",
         "DATPPolicy": "DATP*",
     }
@@ -213,7 +219,8 @@ def Run_Baseline() -> None:
         "Fcfs_Always_Slow",
         "Baseline_Heuristic_Policy",
         "Static_Mix_Policy",
-        "Queue_Threshold_Policy",
+        "Queue_Length_Bang_Bang_Policy",
+        "TTL_Feasibility_Bang_Bang_Policy",
         "Drift_Penalty_Myopic_Policy",
         "DATPPolicy",
     ]
@@ -292,8 +299,14 @@ def Run_Baseline() -> None:
             policy_scheduling_policy  = Static_Mix_Policy(simulation_config.policy_config,
                                                           rng=np.random.default_rng(simulation_config.seed_i32 + 1000))
 
-        elif policy_name == "Queue_Threshold_Policy":
-            policy_scheduling_policy  = Queue_Threshold_Policy(simulation_config.policy_config)
+        elif policy_name == "Queue_Length_Bang_Bang_Policy":
+            policy_scheduling_policy  = Queue_Length_Bang_Bang_Policy(simulation_config.policy_config)
+
+        elif policy_name == "TTL_Feasibility_Bang_Bang_Policy":
+            policy_scheduling_policy  = TTL_Feasibility_Bang_Bang_Policy(
+                simulation_config.policy_config,
+                service_model=service_lognormal_service_times,
+            )
 
         elif policy_name == "Drift_Penalty_Myopic_Policy":
             policy_scheduling_policy  = Drift_Penalty_Myopic_Policy(simulation_config.policy_config,

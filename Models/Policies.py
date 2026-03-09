@@ -288,12 +288,31 @@ class Static_Mix_Policy(Scheduling_Policy):
 
 
 @dataclass
-class Queue_Threshold_Policy(Scheduling_Policy):
+class Queue_Length_Bang_Bang_Policy(Scheduling_Policy):
     cfg: Policy_Config
 
     def Decide_Mode(self, task: Task, state: System_State) -> Mode:
         tau = int(self.cfg.queue_threshold_tau)
-        return Mode.SLOW if state.queue_length_i32 <= tau else Mode.FAST
+        return Mode.SLOW if state.queue_length_i32 < tau else Mode.FAST
+
+    def Should_Switch_Mode(self, task: Task, state: System_State) -> bool:
+        return False
+
+
+@dataclass
+class TTL_Feasibility_Bang_Bang_Policy(Scheduling_Policy):
+    cfg: Policy_Config
+    service_model: Service_Time_Model
+
+    def Decide_Mode(self, task: Task, state: System_State) -> Mode:
+        ttl_rem_f64 = task.Ttl_Remaining(state.now_f64)
+        if ttl_rem_f64 <= 0.0:
+            return Mode.FAST
+
+        s_slow = float(self.service_model.Expected(Mode.SLOW))
+        in_service = float(state.server_remaining_time) if state.server_busy_bool else 0.0
+        w_tilde = in_service + float(state.queue_length_i32) * s_slow
+        return Mode.SLOW if (w_tilde + s_slow) <= ttl_rem_f64 else Mode.FAST
 
     def Should_Switch_Mode(self, task: Task, state: System_State) -> bool:
         return False
@@ -331,5 +350,8 @@ class Drift_Penalty_Myopic_Policy(Scheduling_Policy):
 
     def Should_Switch_Mode(self, task: Task, state: System_State) -> bool:
         return False
+
+
+Queue_Threshold_Policy = Queue_Length_Bang_Bang_Policy
 
 
