@@ -100,7 +100,7 @@ class Run_Config:
     outdir: str = "Results/Paper"
     tool_trials_csv: str = "Tool_Caller_Agent/results_tool_calls/tool_call_trials.csv"
 
-    lambda_rate_list_f64: Sequence[float] = (0.03, 0.05, 0.07, 0.09)
+    lambda_rate_list_f64: Sequence[float] = (0.03, 0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19)
     ttl_seconds_list_f64: Sequence[float] = (28.0, 35.0, 45.0, 60.0)
     ttl_presets_list_str: Sequence[str] = ("very_tight", "tight", "relaxed", "very_relaxed")
     datp_slack_factor_list_f64: Sequence[float] = (0.8, 0.9, 1.0, 1.1)

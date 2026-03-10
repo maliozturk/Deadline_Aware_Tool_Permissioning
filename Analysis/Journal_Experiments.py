@@ -48,6 +48,28 @@ POLICY_LABELS: Dict[str, str] = {
     "DATPPolicy": "DATP*",
 }
 
+POLICY_PLOT_ORDER: Sequence[str] = (
+    "AlwaysFast (AF)",
+    "AlwaysSlow (AS)",
+    "StaticMix (p=0.5)",
+    "TTL-aware heuristic",
+    "Q-BB",
+    "F-BB",
+    "DriftPenaltyMyopic (V=1.0)",
+    "DATP*",
+)
+
+POLICY_PLOT_STYLE: Dict[str, Dict[str, object]] = {
+    "AlwaysFast (AF)": {"color": "#4c4c4c", "linestyle": ":", "marker": "o"},
+    "AlwaysSlow (AS)": {"color": "#8c564b", "linestyle": "--", "marker": "s"},
+    "StaticMix (p=0.5)": {"color": "#17becf", "linestyle": "-.", "marker": "D"},
+    "TTL-aware heuristic": {"color": "#bcbd22", "linestyle": "--", "marker": "^"},
+    "Q-BB": {"color": "#ff7f0e", "linestyle": "-", "marker": "v"},
+    "F-BB": {"color": "#9467bd", "linestyle": "-", "marker": "P"},
+    "DriftPenaltyMyopic (V=1.0)": {"color": "#d62728", "linestyle": "-", "marker": "X"},
+    "DATP*": {"color": "#1f77b4", "linestyle": "-", "marker": "o"},
+}
+
 COMPARISON_POLICY_NAMES: Sequence[str] = (
     "Fcfs_Always_Fast",
     "Fcfs_Always_Slow",
@@ -97,8 +119,9 @@ class Run_Config:
         "very_relaxed",
     )
 
-    load_sweep_lambdas: Sequence[float] = (0.03, 0.05, 0.07, 0.09)
+    load_sweep_lambdas: Sequence[float] = (0.03, 0.05, 0.07, 0.09, 0.11, 0.13, 0.15, 0.17, 0.19)
     load_sweep_ttl_preset: str = "tight"
+    load_sweep_datp_best_dmr_epsilons: Sequence[float] = (-0.20, -0.15, -0.10, -0.05, 0.0, 0.05, 0.10)
 
     epsilon_sweep_lambda_f64: float = 0.05
     epsilon_list_f64: Sequence[float] = (-0.10, -0.05, 0.0, 0.05, 0.10)
@@ -142,6 +165,12 @@ def _Apply_Plot_Style() -> None:
 
 def _Policy_Label(policy_name: str) -> str:
     return POLICY_LABELS.get(policy_name, policy_name)
+
+
+def _Ordered_Policies(policy_names: Sequence[str]) -> List[str]:
+    ordered = [name for name in POLICY_PLOT_ORDER if name in policy_names]
+    extras = sorted(name for name in policy_names if name not in POLICY_PLOT_ORDER)
+    return ordered + extras
 
 
 def _Ttl_Label(preset_name: str) -> str:
@@ -340,16 +369,19 @@ def Run_Main_Table(run_cfg: Run_Config, sim_cfg: Simulation_Config) -> None:
 
 def _Plot_Load_Curve(rows: Sequence[Dict[str, object]], metric_key: str, out_path: str, title: str, ylabel: str) -> None:
     plt.figure(figsize=(6.5, 4))
-    policies = sorted({str(r["policy_name"]) for r in rows})
+    policies = _Ordered_Policies([str(r["policy_name"]) for r in rows])
     for policy in policies:
-        xs = [float(r["lambda"]) for r in rows if str(r["policy_name"]) == policy]
-        ys = [float(r[f"{metric_key}_mean"]) for r in rows if str(r["policy_name"]) == policy]
-        plt.plot(xs, ys, marker="o", label=policy)
+        policy_rows = [r for r in rows if str(r["policy_name"]) == policy]
+        policy_rows.sort(key=lambda r: float(r["lambda"]))
+        xs = [float(r["lambda"]) for r in policy_rows]
+        ys = [float(r[f"{metric_key}_mean"]) for r in policy_rows]
+        style = POLICY_PLOT_STYLE.get(policy, {})
+        plt.plot(xs, ys, label=policy, **style)
     plt.xlabel("arrival rate (lambda)")
     plt.ylabel(ylabel)
     plt.title(title)
     plt.grid(True, alpha=0.3)
-    plt.legend(fontsize=8)
+    plt.legend(fontsize=8, ncol=2)
     plt.tight_layout()
     plt.savefig(out_path)
     plt.close()
@@ -361,6 +393,7 @@ def Run_Load_Sweep(run_cfg: Run_Config, sim_cfg: Simulation_Config) -> None:
     _Apply_Plot_Style()
 
     rows: List[Dict[str, object]] = []
+    dmr_rows: List[Dict[str, object]] = []
     seeds = _Make_Seeds(run_cfg.seed_base_i32, run_cfg.num_reps_i32)
 
     cfg_ttl = _Apply_Ttl_Preset(sim_cfg, run_cfg.load_sweep_ttl_preset)
@@ -390,8 +423,53 @@ def Run_Load_Sweep(run_cfg: Run_Config, sim_cfg: Simulation_Config) -> None:
             }
             row.update(stats)
             rows.append(row)
+            dmr_row = dict(row)
+            dmr_row["selected_epsilon"] = ""
+            dmr_rows.append(dmr_row)
+
+        best_datp_row_opt: Dict[str, object] | None = None
+        best_datp_eps_opt: float | None = None
+        for eps in run_cfg.load_sweep_datp_best_dmr_epsilons:
+            run_rows = []
+            for seed in seeds:
+                cfg_seed = replace(
+                    cfg_lambda,
+                    seed_i32=int(seed),
+                    policy_config=replace(
+                        cfg_lambda.policy_config,
+                        datp_epsilon_f64=float(eps),
+                        datp_adaptive_epsilon_enabled_bool=bool(run_cfg.datp_adaptive_epsilon_enabled_bool),
+                    ),
+                )
+                agg, metrics = _Run_Single(cfg_seed, "DATPPolicy")
+                run_rows.append(_Extract_Metrics(agg, metrics))
+            stats = _Summarize_Runs(run_rows)
+            candidate_row: Dict[str, object] = {
+                "ttl_preset": _Ttl_Label(run_cfg.load_sweep_ttl_preset),
+                "lambda": float(lambda_f64),
+                "policy_name": "DATP*",
+                "selected_epsilon": float(eps),
+            }
+            candidate_row.update(stats)
+            if best_datp_row_opt is None:
+                best_datp_row_opt = candidate_row
+                best_datp_eps_opt = float(eps)
+                continue
+            candidate_miss = float(candidate_row["miss_rate_mean"])
+            best_miss = float(best_datp_row_opt["miss_rate_mean"])
+            candidate_util = float(candidate_row["mean_utility_mean"])
+            best_util = float(best_datp_row_opt["mean_utility_mean"])
+            if (candidate_miss < best_miss) or (
+                abs(candidate_miss - best_miss) <= 1e-12 and candidate_util > best_util
+            ):
+                best_datp_row_opt = candidate_row
+                best_datp_eps_opt = float(eps)
+        if best_datp_row_opt is not None:
+            dmr_rows = [r for r in dmr_rows if not (float(r["lambda"]) == float(lambda_f64) and str(r["policy_name"]) == "DATP*")]
+            dmr_rows.append(best_datp_row_opt)
 
     _Write_Csv(rows, os.path.join(out_dir, "load_sweep.csv"))
+    _Write_Csv(dmr_rows, os.path.join(out_dir, "load_sweep_dmr_best_datp.csv"))
 
     _Plot_Load_Curve(
         rows,
@@ -401,7 +479,7 @@ def Run_Load_Sweep(run_cfg: Run_Config, sim_cfg: Simulation_Config) -> None:
         ylabel="mean realized utility",
     )
     _Plot_Load_Curve(
-        rows,
+        dmr_rows,
         metric_key="miss_rate",
         out_path=os.path.join(out_dir, "dmr_vs_lambda.png"),
         title=f"DMR vs lambda ({_Ttl_Label(run_cfg.load_sweep_ttl_preset)})",
@@ -415,6 +493,7 @@ def Run_Epsilon_Tradeoff(run_cfg: Run_Config, sim_cfg: Simulation_Config) -> Non
     _Make_Dir(out_dir)
 
     rows: List[Dict[str, object]] = []
+    baseline_rows: List[Dict[str, object]] = []
     seeds = _Make_Seeds(run_cfg.seed_base_i32, run_cfg.num_reps_i32)
 
     cfg_ttl = _Apply_Ttl_Preset(sim_cfg, "tight")
@@ -447,12 +526,43 @@ def Run_Epsilon_Tradeoff(run_cfg: Run_Config, sim_cfg: Simulation_Config) -> Non
         row.update(stats)
         rows.append(row)
 
+    baseline_policy_names = (
+        "Fcfs_Always_Fast",
+        "Fcfs_Always_Slow",
+        "Static_Mix_Policy",
+        "Baseline_Heuristic_Policy",
+        "Queue_Length_Bang_Bang_Policy",
+        "TTL_Feasibility_Bang_Bang_Policy",
+        "Drift_Penalty_Myopic_Policy",
+    )
+    for policy_name in baseline_policy_names:
+        run_rows: List[Dict[str, float]] = []
+        for seed in seeds:
+            cfg_seed = replace(
+                cfg_lambda,
+                seed_i32=int(seed),
+                policy_config=replace(
+                    cfg_lambda.policy_config,
+                    datp_adaptive_epsilon_enabled_bool=bool(run_cfg.datp_adaptive_epsilon_enabled_bool),
+                ),
+            )
+            agg, metrics = _Run_Single(cfg_seed, policy_name)
+            run_rows.append(_Extract_Metrics(agg, metrics))
+        stats = _Summarize_Runs(run_rows)
+        row = {
+            "policy_name": _Policy_Label(policy_name),
+            "lambda": float(run_cfg.epsilon_sweep_lambda_f64),
+        }
+        row.update(stats)
+        baseline_rows.append(row)
+
     _Write_Csv(rows, os.path.join(out_dir, "epsilon_tradeoff.csv"))
 
     plt.figure(figsize=(6.0, 4))
     xs = [float(r["miss_rate_mean"]) for r in rows]
     ys = [float(r["mean_utility_mean"]) for r in rows]
-    plt.plot(xs, ys, marker="o")
+    datp_style = POLICY_PLOT_STYLE.get("DATP*", {})
+    plt.plot(xs, ys, label="DATP*", **datp_style)
     for row in rows:
         plt.annotate(
             f'{row["epsilon"]:+.2f}',
@@ -461,10 +571,23 @@ def Run_Epsilon_Tradeoff(run_cfg: Run_Config, sim_cfg: Simulation_Config) -> Non
             xytext=(4, 4),
             fontsize=8,
         )
+    for row in baseline_rows:
+        label = str(row["policy_name"])
+        style = POLICY_PLOT_STYLE.get(label, {})
+        plt.scatter(
+            float(row["miss_rate_mean"]),
+            float(row["mean_utility_mean"]),
+            s=55,
+            label=label,
+            color=style.get("color", "#333333"),
+            marker=style.get("marker", "o"),
+            alpha=0.95,
+        )
     plt.xlabel("deadline miss rate (DMR)")
     plt.ylabel("mean realized utility")
-    plt.title(f"DATP epsilon trade-off ({_Ttl_Label('tight')}, lambda=0.05)")
+    plt.title(f"DATP epsilon trade-off vs baselines ({_Ttl_Label('tight')}, lambda=0.05)")
     plt.grid(True, alpha=0.3)
+    plt.legend(fontsize=8, ncol=2)
     plt.tight_layout()
     plt.savefig(os.path.join(out_dir, "datp_epsilon_pareto.png"))
     plt.close()

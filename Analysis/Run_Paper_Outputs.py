@@ -10,6 +10,7 @@ SCRIPT_ORDER = [
     "DP_vs_TFG_V_Sweep.py",
     "Policy_GridSearch_vs_TFG.py",
     "Premium_Priority_Table.py",
+    "Trace_ECDF.py",
     "Journal_Experiments.py",
 ]
 
