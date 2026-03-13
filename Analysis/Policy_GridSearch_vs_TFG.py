@@ -30,9 +30,8 @@ from Models.Distributions import (
 )
 from Models.Policies import (
     Baseline_Heuristic_Policy,
-    DATPPolicy,
+    FTCPolicy,
     Queue_Length_Bang_Bang_Policy,
-    TTL_Feasibility_Bang_Bang_Policy,
 )
 from Models.Utility import Firm_Deadline_Quality_Utility
 
@@ -102,10 +101,8 @@ def _Run_Policy(sim_cfg: Simulation_Config, policy_name: str) -> Dict[str, float
         policy = Baseline_Heuristic_Policy(sim_cfg.policy_config, service_model)
     elif policy_name == "Queue_Length_Bang_Bang_Policy":
         policy = Queue_Length_Bang_Bang_Policy(sim_cfg.policy_config)
-    elif policy_name == "TTL_Feasibility_Bang_Bang_Policy":
-        policy = TTL_Feasibility_Bang_Bang_Policy(sim_cfg.policy_config, service_model)
-    elif policy_name == "DATPPolicy":
-        policy = DATPPolicy(sim_cfg.policy_config, service_model)
+    elif policy_name in {"FTCPolicy", "DATPPolicy"}:
+        policy = FTCPolicy(sim_cfg.policy_config, service_model)
     else:
         raise ValueError(f"Unknown policy: {policy_name}")
 
@@ -148,7 +145,7 @@ def _Plot_Grid_Comparison(
             marker="*",
             s=140,
             color="tab:orange",
-            label="DATP*",
+            label="FTC*",
             zorder=3,
         )
         ax.set_xlabel("DMR (miss rate)")
@@ -175,9 +172,9 @@ def Run_GridSearch_vs_TFG(
 
     results: List[Dict[str, object]] = []
 
-    datp_metrics = _Run_Policy(sim_cfg, "DATPPolicy")
+    datp_metrics = _Run_Policy(sim_cfg, "FTCPolicy")
     tfg_row = {
-        "policy_name": "DATPPolicy",
+        "policy_name": "FTCPolicy",
         "L_threshold_i32": float("nan"),
         "alpha_f64": float("nan"),
         "queue_threshold_tau": float("nan"),
@@ -228,18 +225,6 @@ def Run_GridSearch_vs_TFG(
         }
         qt_rows.append(row)
         results.append(row)
-
-    fbb_metrics = _Run_Policy(sim_cfg, "TTL_Feasibility_Bang_Bang_Policy")
-    results.append(
-        {
-            "policy_name": "TTL_Feasibility_Bang_Bang_Policy",
-            "L_threshold_i32": float("nan"),
-            "alpha_f64": float("nan"),
-            "queue_threshold_tau": float("nan"),
-            "miss_rate": float(fbb_metrics["miss_rate"]),
-            "mean_utility": float(fbb_metrics["mean_utility"]),
-        }
-    )
 
     table_path = os.path.join(out_dir, "policy_grid_vs_tfg_table.csv")
     _Write_Table(results, table_path)

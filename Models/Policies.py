@@ -1,9 +1,9 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC)
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Models/Policies.py
-#  Purpose: Implement scheduling policies including DATP and baselines.
+#  Purpose: Implement scheduling policies including FTC and baselines.
 #  Author: Muhammet Ali Ozturk
 #  Generated: 2026-01-18
 #  Environment: Python 3.9.13
@@ -22,7 +22,7 @@ from Models.Policy_Base import Scheduling_Policy, System_State
 
 
 @dataclass(frozen=True)
-class DATP_Decision_Trace:
+class FTC_Decision_Trace:
     task_id_i32            : int
     arrival_time_f64       : float
     delta_k_f64            : float
@@ -37,10 +37,10 @@ class DATP_Decision_Trace:
 
 
 @dataclass
-class DATPPolicy(Scheduling_Policy):
+class FTCPolicy(Scheduling_Policy):
     cfg: Policy_Config
     service_model: Service_Time_Model
-    decision_trace_list: List[DATP_Decision_Trace] = field(default_factory=list)
+    decision_trace_list: List[FTC_Decision_Trace] = field(default_factory=list)
     epsilon_trace_times_list_f64: List[float] = field(default_factory=list)
     epsilon_trace_values_list_f64: List[float] = field(default_factory=list)
     _epsilon_recent_misses_deque_i32: Deque[int] = field(init=False)
@@ -111,7 +111,7 @@ class DATPPolicy(Scheduling_Policy):
 
         if self.cfg.datp_trace_enabled_bool:
             self.decision_trace_list.append(
-                DATP_Decision_Trace(
+                FTC_Decision_Trace(
                     task_id_i32=int(task.task_id),
                     arrival_time_f64=float(task.arrival_time),
                     delta_k_f64=float(delta_k),
@@ -181,7 +181,7 @@ class DATPPolicy(Scheduling_Policy):
         self.epsilon_trace_times_list_f64.append(t_f64)
         self.epsilon_trace_values_list_f64.append(float(self._epsilon_f64))
 
-    def DATP_Policy_Identifier(self) -> None:
+    def FTC_Policy_Identifier(self) -> None:
         return
 
     def _Current_Epsilon(self) -> float:
@@ -197,11 +197,13 @@ class DATPPolicy(Scheduling_Policy):
         return float(np.clip(float(eps_f64), eps_min, eps_max))
 
     def TFG_Policy_Identifier(self) -> None:
-        return self.DATP_Policy_Identifier()
+        return self.FTC_Policy_Identifier()
 
 
-TFG_Decision_Trace = DATP_Decision_Trace
-TFGPolicy = DATPPolicy
+DATP_Decision_Trace = FTC_Decision_Trace
+DATPPolicy = FTCPolicy
+TFG_Decision_Trace = FTC_Decision_Trace
+TFGPolicy = FTCPolicy
 
 
 @dataclass

@@ -26,13 +26,12 @@ from Models.Distributions import (
 )
 from Models.Policies import (
     Baseline_Heuristic_Policy,
-    DATPPolicy,
     Drift_Penalty_Myopic_Policy,
+    FTCPolicy,
     Fcfs_Always_Fast_Policy,
     Fcfs_Always_Slow_Policy,
     Queue_Length_Bang_Bang_Policy,
     Static_Mix_Policy,
-    TTL_Feasibility_Bang_Bang_Policy,
 )
 from Models.Utility import Firm_Deadline_Quality_Utility
 
@@ -42,10 +41,10 @@ POLICY_LABELS: Dict[str, str] = {
     "Fcfs_Always_Slow": "AlwaysSlow (AS)",
     "Static_Mix_Policy": "StaticMix (p=0.5)",
     "Queue_Length_Bang_Bang_Policy": "Q-BB",
-    "TTL_Feasibility_Bang_Bang_Policy": "F-BB",
     "Drift_Penalty_Myopic_Policy": "DriftPenaltyMyopic (V=1.0)",
     "Baseline_Heuristic_Policy": "TTL-aware heuristic",
-    "DATPPolicy": "DATP*",
+    "FTCPolicy": "FTC*",
+    "DATPPolicy": "FTC*",
 }
 
 COMPARISON_POLICY_NAMES: Sequence[str] = (
@@ -53,10 +52,9 @@ COMPARISON_POLICY_NAMES: Sequence[str] = (
     "Fcfs_Always_Slow",
     "Static_Mix_Policy",
     "Queue_Length_Bang_Bang_Policy",
-    "TTL_Feasibility_Bang_Bang_Policy",
     "Drift_Penalty_Myopic_Policy",
     "Baseline_Heuristic_Policy",
-    "DATPPolicy",
+    "FTCPolicy",
 )
 
 TTL_PRESETS: Dict[str, Tuple[float, float]] = {
@@ -179,12 +177,10 @@ def _Build_Policy(
         return Static_Mix_Policy(sim_cfg.policy_config, rng=rng)
     if policy_name == "Queue_Length_Bang_Bang_Policy":
         return Queue_Length_Bang_Bang_Policy(sim_cfg.policy_config)
-    if policy_name == "TTL_Feasibility_Bang_Bang_Policy":
-        return TTL_Feasibility_Bang_Bang_Policy(sim_cfg.policy_config, service_model)
     if policy_name == "Drift_Penalty_Myopic_Policy":
         return Drift_Penalty_Myopic_Policy(sim_cfg.policy_config, service_model, sim_cfg.utility_config)
-    if policy_name == "DATPPolicy":
-        return DATPPolicy(sim_cfg.policy_config, service_model)
+    if policy_name in {"FTCPolicy", "DATPPolicy"}:
+        return FTCPolicy(sim_cfg.policy_config, service_model)
     raise ValueError(f"Unknown policy: {policy_name}")
 
 

@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC)
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Run_Simulation.py
 #  Purpose: Run simulations, compute policy summaries, and write outputs.
@@ -35,9 +35,9 @@ from Models.Distributions import (
 )
 from Models.Policies import (
     Baseline_Heuristic_Policy,
-    DATPPolicy,
     Fcfs_Always_Fast_Policy,
     Fcfs_Always_Slow_Policy,
+    FTCPolicy,
     Static_Mix_Policy,
     Queue_Length_Bang_Bang_Policy,
     Queue_Threshold_Policy,
@@ -57,7 +57,8 @@ POLICY_LABELS = {
     "TTL_Feasibility_Bang_Bang_Policy": "F-BB",
     "Drift_Penalty_Myopic_Policy": "DriftPenaltyMyopic (V=1.0)",
     "Baseline_Heuristic_Policy": "TTL-aware heuristic",
-    "DATPPolicy": "DATP*",
+    "FTCPolicy": "FTC*",
+    "DATPPolicy": "FTC*",
 }
 
 
@@ -144,14 +145,15 @@ def _Write_Priority_Policy_Table(priority_policy_summaries: dict, out_dir: Path)
         "Baseline_Heuristic_Policy",
         "Queue_Length_Bang_Bang_Policy",
         "Drift_Penalty_Myopic_Policy",
-        "DATPPolicy",
+        "FTCPolicy",
     ]
     policy_short = {
         "Fcfs_Always_Fast": "AF",
         "Baseline_Heuristic_Policy": "H",
         "Queue_Length_Bang_Bang_Policy": "Q-BB",
         "Drift_Penalty_Myopic_Policy": "DP",
-        "DATPPolicy": "DATP*",
+        "FTCPolicy": "FTC*",
+        "DATPPolicy": "FTC*",
     }
     class_order = [("premium", "Premium"), ("standard", "Normal"), ("overall", "Overall")]
 
@@ -313,8 +315,8 @@ def Run_Baseline() -> None:
                                                                     service_model=service_lognormal_service_times,
                                                                     utility_cfg=simulation_config.utility_config)
 
-        elif policy_name == "DATPPolicy":
-            policy_scheduling_policy  =  DATPPolicy(simulation_config.policy_config, service_model=service_lognormal_service_times)
+        elif policy_name in {"FTCPolicy", "DATPPolicy"}:
+            policy_scheduling_policy  =  FTCPolicy(simulation_config.policy_config, service_model=service_lognormal_service_times)
 
         else:
             raise ValueError(f"Policy name {policy_name} not recognized.")
