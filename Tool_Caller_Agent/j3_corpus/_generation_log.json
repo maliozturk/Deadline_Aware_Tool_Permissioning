@@ -1,0 +1,452 @@
+[
+  {
+    "filename": "doc_001.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Containment procedure for a compromised Windows endpoint detected via EDR alert. Include step-by-step actions, escalation criteria, and evidence preservation notes. Use professional incident response language. Variation 1 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 48.94,
+    "content_length_chars": 2991
+  },
+  {
+    "filename": "doc_002.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Containment procedure for a compromised Windows endpoint detected via EDR alert. Include step-by-step actions, escalation criteria, and evidence preservation notes. Use professional incident response language. Variation 2 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 59.92,
+    "content_length_chars": 3444
+  },
+  {
+    "filename": "doc_003.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Containment procedure for a compromised Windows endpoint detected via EDR alert. Include step-by-step actions, escalation criteria, and evidence preservation notes. Use professional incident response language. Variation 3 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 51.33,
+    "content_length_chars": 3494
+  },
+  {
+    "filename": "doc_004.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Containment procedure for a compromised Windows endpoint detected via EDR alert. Include step-by-step actions, escalation criteria, and evidence preservation notes. Use professional incident response language. Variation 4 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 40.19,
+    "content_length_chars": 2927
+  },
+  {
+    "filename": "doc_005.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Triage workflow for a phishing email reported by an employee. Include header analysis steps, attachment sandboxing procedure, and user communication template. Use professional SOC language. Variation 1 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 50.14,
+    "content_length_chars": 3710
+  },
+  {
+    "filename": "doc_006.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Triage workflow for a phishing email reported by an employee. Include header analysis steps, attachment sandboxing procedure, and user communication template. Use professional SOC language. Variation 2 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 53.57,
+    "content_length_chars": 3293
+  },
+  {
+    "filename": "doc_007.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Triage workflow for a phishing email reported by an employee. Include header analysis steps, attachment sandboxing procedure, and user communication template. Use professional SOC language. Variation 3 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 45.65,
+    "content_length_chars": 3283
+  },
+  {
+    "filename": "doc_008.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Triage workflow for a phishing email reported by an employee. Include header analysis steps, attachment sandboxing procedure, and user communication template. Use professional SOC language. Variation 4 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 58.16,
+    "content_length_chars": 3633
+  },
+  {
+    "filename": "doc_009.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Responding to a ransomware infection detected on a file server. Include isolation steps, backup verification, negotiation policy reference, and recovery procedure outline. Variation 1 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 56.47,
+    "content_length_chars": 3416
+  },
+  {
+    "filename": "doc_010.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Responding to a ransomware infection detected on a file server. Include isolation steps, backup verification, negotiation policy reference, and recovery procedure outline. Variation 2 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 59.87,
+    "content_length_chars": 3234
+  },
+  {
+    "filename": "doc_011.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Responding to a ransomware infection detected on a file server. Include isolation steps, backup verification, negotiation policy reference, and recovery procedure outline. Variation 3 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 58.76,
+    "content_length_chars": 3384
+  },
+  {
+    "filename": "doc_012.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Responding to a ransomware infection detected on a file server. Include isolation steps, backup verification, negotiation policy reference, and recovery procedure outline. Variation 4 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 61.39,
+    "content_length_chars": 3366
+  },
+  {
+    "filename": "doc_013.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Investigating unauthorized lateral movement detected by network monitoring. Include credential reset procedures, affected host enumeration, and forensic image collection. Variation 1 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 52.46,
+    "content_length_chars": 3104
+  },
+  {
+    "filename": "doc_014.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Investigating unauthorized lateral movement detected by network monitoring. Include credential reset procedures, affected host enumeration, and forensic image collection. Variation 2 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 52.51,
+    "content_length_chars": 3668
+  },
+  {
+    "filename": "doc_015.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Investigating unauthorized lateral movement detected by network monitoring. Include credential reset procedures, affected host enumeration, and forensic image collection. Variation 3 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 64.06,
+    "content_length_chars": 3432
+  },
+  {
+    "filename": "doc_016.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Investigating unauthorized lateral movement detected by network monitoring. Include credential reset procedures, affected host enumeration, and forensic image collection. Variation 4 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 55.86,
+    "content_length_chars": 3157
+  },
+  {
+    "filename": "doc_017.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Handling a DDoS attack against public-facing web infrastructure. Include traffic analysis, upstream provider coordination, and WAF rule deployment steps. Variation 1 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 58.13,
+    "content_length_chars": 3420
+  },
+  {
+    "filename": "doc_018.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Handling a DDoS attack against public-facing web infrastructure. Include traffic analysis, upstream provider coordination, and WAF rule deployment steps. Variation 2 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 43.2,
+    "content_length_chars": 2737
+  },
+  {
+    "filename": "doc_019.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Handling a DDoS attack against public-facing web infrastructure. Include traffic analysis, upstream provider coordination, and WAF rule deployment steps. Variation 3 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 54.39,
+    "content_length_chars": 3635
+  },
+  {
+    "filename": "doc_020.txt",
+    "category": "runbook",
+    "prompt": "Write a SOC runbook excerpt (300-500 words) for: Handling a DDoS attack against public-facing web infrastructure. Include traffic analysis, upstream provider coordination, and WAF rule deployment steps. Variation 4 of 4: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 60.14,
+    "content_length_chars": 3225
+  },
+  {
+    "filename": "doc_021.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a malicious IP address 198.51.100.42 associated with command-and-control traffic. Include first-seen date, associated malware family, WHOIS summary, and recommended firewall rules. Use professional threat intel format. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 50.12,
+    "content_length_chars": 2908
+  },
+  {
+    "filename": "doc_022.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a malicious IP address 198.51.100.42 associated with command-and-control traffic. Include first-seen date, associated malware family, WHOIS summary, and recommended firewall rules. Use professional threat intel format. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 41.26,
+    "content_length_chars": 2401
+  },
+  {
+    "filename": "doc_023.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a malicious IP address 198.51.100.42 associated with command-and-control traffic. Include first-seen date, associated malware family, WHOIS summary, and recommended firewall rules. Use professional threat intel format. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 45.71,
+    "content_length_chars": 2538
+  },
+  {
+    "filename": "doc_024.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a file hash (SHA-256: a1b2c3d4e5f6...) linked to the Cobalt Strike beacon payload. Include detection signatures, behavioral indicators, and MITRE ATT&CK mapping. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 47.52,
+    "content_length_chars": 3038
+  },
+  {
+    "filename": "doc_025.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a file hash (SHA-256: a1b2c3d4e5f6...) linked to the Cobalt Strike beacon payload. Include detection signatures, behavioral indicators, and MITRE ATT&CK mapping. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 49.71,
+    "content_length_chars": 3151
+  },
+  {
+    "filename": "doc_026.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a file hash (SHA-256: a1b2c3d4e5f6...) linked to the Cobalt Strike beacon payload. Include detection signatures, behavioral indicators, and MITRE ATT&CK mapping. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 56.91,
+    "content_length_chars": 3325
+  },
+  {
+    "filename": "doc_027.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about the domain evil-update.example.net used for DNS tunneling exfiltration. Include DNS query pattern analysis, associated campaigns, and detection rules. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 50.69,
+    "content_length_chars": 3333
+  },
+  {
+    "filename": "doc_028.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about the domain evil-update.example.net used for DNS tunneling exfiltration. Include DNS query pattern analysis, associated campaigns, and detection rules. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 57.43,
+    "content_length_chars": 3605
+  },
+  {
+    "filename": "doc_029.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about the domain evil-update.example.net used for DNS tunneling exfiltration. Include DNS query pattern analysis, associated campaigns, and detection rules. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 53.42,
+    "content_length_chars": 3257
+  },
+  {
+    "filename": "doc_030.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a suspicious SSL certificate fingerprint used in man-in-the-middle attacks targeting corporate VPN users. Include certificate details and remediation steps. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 48.85,
+    "content_length_chars": 3151
+  },
+  {
+    "filename": "doc_031.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a suspicious SSL certificate fingerprint used in man-in-the-middle attacks targeting corporate VPN users. Include certificate details and remediation steps. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 50.34,
+    "content_length_chars": 3522
+  },
+  {
+    "filename": "doc_032.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a suspicious SSL certificate fingerprint used in man-in-the-middle attacks targeting corporate VPN users. Include certificate details and remediation steps. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 45.91,
+    "content_length_chars": 3128
+  },
+  {
+    "filename": "doc_033.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a weaponized Office document (CVE-2024-XXXX) distributed via spear-phishing. Include macro analysis summary, payload delivery chain, and YARA rule. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 42.24,
+    "content_length_chars": 2896
+  },
+  {
+    "filename": "doc_034.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a weaponized Office document (CVE-2024-XXXX) distributed via spear-phishing. Include macro analysis summary, payload delivery chain, and YARA rule. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 53.1,
+    "content_length_chars": 3158
+  },
+  {
+    "filename": "doc_035.txt",
+    "category": "ioc",
+    "prompt": "Write an IOC intelligence entry (300-500 words) about a weaponized Office document (CVE-2024-XXXX) distributed via spear-phishing. Include macro analysis summary, payload delivery chain, and YARA rule. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 49.3,
+    "content_length_chars": 2884
+  },
+  {
+    "filename": "doc_036.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about APT group 'Midnight Typhoon' targeting financial institutions in Southeast Asia. Include TTPs, infrastructure, and recommended defensive measures. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 44.98,
+    "content_length_chars": 3762
+  },
+  {
+    "filename": "doc_037.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about APT group 'Midnight Typhoon' targeting financial institutions in Southeast Asia. Include TTPs, infrastructure, and recommended defensive measures. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 52.1,
+    "content_length_chars": 3768
+  },
+  {
+    "filename": "doc_038.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about APT group 'Midnight Typhoon' targeting financial institutions in Southeast Asia. Include TTPs, infrastructure, and recommended defensive measures. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 50.61,
+    "content_length_chars": 3549
+  },
+  {
+    "filename": "doc_039.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about a ransomware-as-a-service campaign called 'LockByte' that targets healthcare organizations. Include affiliate model, encryption methods, and negotiation patterns. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 38.71,
+    "content_length_chars": 2949
+  },
+  {
+    "filename": "doc_040.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about a ransomware-as-a-service campaign called 'LockByte' that targets healthcare organizations. Include affiliate model, encryption methods, and negotiation patterns. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 46.45,
+    "content_length_chars": 3314
+  },
+  {
+    "filename": "doc_041.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about a ransomware-as-a-service campaign called 'LockByte' that targets healthcare organizations. Include affiliate model, encryption methods, and negotiation patterns. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 54.59,
+    "content_length_chars": 3359
+  },
+  {
+    "filename": "doc_042.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about a supply-chain compromise affecting a popular open-source npm package. Include timeline, affected versions, and indicators of compromise. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 56.88,
+    "content_length_chars": 2626
+  },
+  {
+    "filename": "doc_043.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about a supply-chain compromise affecting a popular open-source npm package. Include timeline, affected versions, and indicators of compromise. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 51.91,
+    "content_length_chars": 2494
+  },
+  {
+    "filename": "doc_044.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about a supply-chain compromise affecting a popular open-source npm package. Include timeline, affected versions, and indicators of compromise. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 52.32,
+    "content_length_chars": 2706
+  },
+  {
+    "filename": "doc_045.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about credential harvesting campaigns using fake Microsoft 365 login pages. Include infrastructure analysis, evasion techniques, and detection strategies. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 44.16,
+    "content_length_chars": 3150
+  },
+  {
+    "filename": "doc_046.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about credential harvesting campaigns using fake Microsoft 365 login pages. Include infrastructure analysis, evasion techniques, and detection strategies. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 55.05,
+    "content_length_chars": 3844
+  },
+  {
+    "filename": "doc_047.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about credential harvesting campaigns using fake Microsoft 365 login pages. Include infrastructure analysis, evasion techniques, and detection strategies. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 57.45,
+    "content_length_chars": 4028
+  },
+  {
+    "filename": "doc_048.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about an insider threat case involving data exfiltration through personal cloud storage. Include behavioral indicators, DLP bypass methods, and investigation approach. Variation 1 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 42.51,
+    "content_length_chars": 3459
+  },
+  {
+    "filename": "doc_049.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about an insider threat case involving data exfiltration through personal cloud storage. Include behavioral indicators, DLP bypass methods, and investigation approach. Variation 2 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 50.35,
+    "content_length_chars": 3674
+  },
+  {
+    "filename": "doc_050.txt",
+    "category": "threat_intel",
+    "prompt": "Write a threat intelligence note (300-500 words) about an insider threat case involving data exfiltration through personal cloud storage. Include behavioral indicators, DLP bypass methods, and investigation approach. Variation 3 of 3: use different specific details, hostnames, IP addresses, and dates than other documents in this set.",
+    "status": "generated",
+    "generation_model": "qwen2.5:7b-instruct",
+    "elapsed_sec": 45.8,
+    "content_length_chars": 3384
+  }
+]

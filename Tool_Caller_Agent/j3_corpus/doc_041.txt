@@ -1,0 +1,48 @@
+**Threat Intelligence Note: LockByte Ransomware-as-a-Service Campaign Targeting Healthcare Organizations**
+
+**Date:** October 12, 2023
+
+**Campaign Overview:**
+LockByte is a well-known ransomware-as-a-service (RaaS) campaign that has recently intensified its targeting of healthcare organizations. This sophisticated cyber threat leverages a multi-step approach to maximize financial gains and operational disruptions for victims.
+
+**Threat Actors:**
+The LockByte RaaS platform operates under the leadership of a group known as "Silver Bullet," which has been active since 2019. The group offers a comprehensive service package that includes encryption tools, technical support, and a detailed affiliate model to streamline operations.
+
+**Affiliate Model:**
+LockByte's affiliate program is highly structured, offering various tiers based on the volume of victims compromised:
+- **Tier 1:** $5,000 for up to 2 victim organizations
+- **Tier 2:** $7,500 for 3-5 victim organizations
+- **Tier 3:** $15,000 for more than 6 victim organizations
+
+Affiliates are provided with a unique affiliate ID and access to the LockByte dashboard, which includes:
+- Real-time tracking of compromised targets
+- Automated encryption tools
+- Support for negotiating ransom payment terms
+- A dedicated support team for technical assistance
+
+**Encryption Methods:**
+LockByte employs advanced cryptographic techniques to ensure the effectiveness of its attacks. The primary encryption method used is AES-256 in CBC mode, which is known for its robustness and difficulty in decryption without the key. Additionally, the ransomware variant incorporates a file deletion routine that targets critical system files, rendering affected systems unusable until the ransom is paid.
+
+**Negotiation Patterns:**
+Ransom demands are typically negotiated through secure communication channels such as Telegram or encrypted messaging apps like Signal. Affiliates often leverage psychological tactics to pressure victims into compliance:
+- **Initial Demand:** A starting ransom of $10,000 to $20,000 is usually proposed.
+- **Extension Periods:** If no response is received within 48 hours, the demand may increase by 50%.
+- **Payment Methods:** Bitcoin and other cryptocurrencies are favored for transactions due to their anonymity.
+
+**Recent Incidents:**
+On October 1, 2023, LockByte affiliates targeted St. Mary's Hospital in Springfield, USA, compromising patient records and critical medical systems. The hospital was forced to shut down non-essential services as a precautionary measure while negotiating the ransom with Silver Bullet affiliates.
+
+**Mitigation Strategies:**
+Healthcare organizations are advised to implement robust cybersecurity measures, including:
+- Regular data backups
+- Patch management and software updates
+- Employee training on phishing and social engineering tactics
+- Incident response planning
+
+By understanding the operational dynamics of LockByte RaaS, security professionals can better prepare for and mitigate the risks associated with such ransomware campaigns.
+
+**References:**
+- LockByte RaaS Dashboard Analysis Report (2023)
+- Affiliates' Communication Logs (October 1, 2023)
+
+*Note: The specific hostnames, IP addresses, and dates mentioned are fictional and used for illustrative purposes. Actual threat intelligence reports should be based on verified data.*

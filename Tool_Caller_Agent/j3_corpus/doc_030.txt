@@ -1,0 +1,41 @@
+**Intelligence Entry: Suspicious SSL Certificate Fingerprint for Potential MITM Attack**
+
+**Date:** October 2023
+
+**Summary:**
+An analysis of network traffic has identified a suspicious SSL certificate fingerprint that may be indicative of a man-in-the-middle (MITM) attack targeting corporate Virtual Private Network (VPN) users. The fingerprint suggests an unauthorized third party is intercepting and potentially modifying communication between employees and their internal networks.
+
+**Certificate Details:**
+
+- **Subject:** `corporate-vpn-authentication.example.com`
+- **Issuer:** `GlobalSign RSA CA - G2`
+- **Serial Number:** `1a:bc:de:f0:98:76:54:32:10`
+- **Not Before:** October 1, 2023
+- **Not After:** September 30, 2024
+- **Fingerprint (SHA-256):** `A3:C4:5B:6E:F7:89:AB:CD:E1:23:45:67:89:AB:CD:EF`
+
+This certificate was observed being used in a limited timeframe, from October 10 to October 15, 2023. The use of this specific certificate is concerning as it does not match the standard certificates issued by the organization's trusted Certificate Authority (CA).
+
+**Indicators of Compromise (IoCs):**
+- **Hostname:** `corporate-vpn-authentication.example.com`
+- **IP Address:** `192.0.2.34` (This is a test IP address; in reality, this would be the IP address of the suspected MITM device)
+- **Certificate Fingerprint:** `A3:C4:5B:6E:F7:89:AB:CD:E1:23:45:67:89:AB:CD:EF`
+- **Issued by:** `GlobalSign RSA CA - G2`
+
+**Detection Methodology:**
+The certificate was detected through a combination of network traffic analysis, SSL/TLS inspection, and internal security monitoring tools. The use of an untrusted certificate in the context of corporate VPN communications is a strong indicator that something malicious might be happening.
+
+**Remediation Steps:**
+
+1. **Verify All Certificates:** Immediately verify all issued certificates against trusted CAs to ensure they are legitimate.
+2. **Update Security Policies:** Update security policies and procedures to include regular certificate validation checks, especially for high-risk endpoints like corporate VPNs.
+3. **Network Monitoring:** Implement or enhance network monitoring tools to detect unauthorized certificate usage in real-time.
+4. **Penetration Testing:** Conduct a penetration test focusing on the integrity of your SSL/TLS certificates and the potential vulnerabilities within your network infrastructure.
+5. **User Education:** Educate users about recognizing phishing attempts, especially those related to certificate warnings or unexpected requests for login credentials.
+6. **Incident Response Plan:** Develop or review an incident response plan that includes steps for identifying and mitigating MITM attacks.
+
+**Conclusion:**
+The presence of this suspicious SSL certificate indicates a potential security threat targeting corporate networks. Immediate action is required to mitigate the risk, ensuring that all critical communication channels remain secure.
+
+**Contact Information:**
+For further assistance or questions regarding this intelligence entry, please contact the Cybersecurity Incident Response Team at [team-email@company.com] or call 1-800-COMPANYSECURITY.

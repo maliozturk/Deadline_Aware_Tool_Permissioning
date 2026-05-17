@@ -1,0 +1,97 @@
+### SOC Runbook Excerpt: Triage Workflow for Phishing Email Reported by an Employee
+
+**Objective:** To efficiently triage a reported phishing email, analyze its components, isolate any potential threats, and communicate findings to the affected user.
+
+---
+
+#### **1. Initial Report Receipt**
+
+Upon receiving a report of a suspected phishing email from an employee via [helpdesk ticketing system], immediately acknowledge receipt and initiate the following steps:
+
+**Acknowledgment:** 
+- Date: 2023-10-15
+- Employee Name: Jane Doe
+- Affected Device: PC1234
+
+---
+
+#### **2. Header Analysis**
+
+**Objective:** To extract and analyze key information from the email header for further investigation.
+
+**Steps:**
+1. Retrieve the full email headers using the [email client’s] built-in feature or a third-party tool.
+2. Identify and record the following:
+   - Sender's email address
+   - Received date
+   - Email subject line
+   - IP address of the sender (if available)
+   - Hostnames from DNS records related to the sender domain
+
+**Example:** 
+- **Sender’s Email Address**: example@example.com
+- **Received Date**: 2023-10-15T14:30:00Z
+- **Subject Line**: Urgent: Update Your Account Information
+- **IP Address**: 93.184.216.34 (reverse DNS resolves to mail.example.com)
+
+**Analysis:** 
+- Compare the sender's IP address against known malicious IPs in our threat intelligence database.
+- Verify if any associated hostnames are flagged or suspicious.
+
+---
+
+#### **3. Attachment Sandboxing Procedure**
+
+**Objective:** To safely analyze any attachments without exposing the SOC environment to potential threats.
+
+**Steps:**
+1. Isolate the email from the user’s inbox by moving it to a designated quarantine folder.
+2. Use an on-demand sandboxing solution, such as [Cuckoo Sandbox], to analyze the attachment in a controlled environment.
+3. Monitor for any suspicious activities, including network connections, file creation/deletion, and browser behavior.
+
+**Sandbox Analysis:**
+- Date of analysis: 2023-10-15T16:00:00Z
+- Attachment Name: update_info.pdf
+- Suspicious Activities Detected:
+   - Network Connection to 93.184.216.34: Potential C&C Server
+   - File Creation in Temp Directory
+   - Browser Behavior Indicating Malware Download
+
+**Conclusion:** 
+- The attachment contains a potential malicious payload that attempts to establish a connection with an identified malicious IP address.
+
+---
+
+#### **4. User Communication Template**
+
+**Objective:** To inform the affected user and provide guidance on next steps.
+
+**Template:**
+```
+Subject: Phishing Email Report Follow-Up – Urgent Action Required
+
+Dear Jane Doe,
+
+Thank you for reporting the phishing email you received today. Our team has reviewed it, and we have taken the following actions:
+
+- The sender’s email address (example@example.com) was verified against our threat intelligence database.
+- We isolated the email and used [Cuckoo Sandbox] to analyze an attached file named "update_info.pdf".
+- Our analysis revealed suspicious activities indicating potential malware download.
+
+**Immediate Action Required:**
+1. Do not open any emails or attachments from unknown sources.
+2. Change your account password, especially if you entered personal information in the email.
+3. Run a full system scan with your antivirus software to ensure no malicious files were downloaded.
+
+If you have any questions or need further assistance, please contact our IT support team at [helpdesk phone number] or [helpdesk email].
+
+Thank you for your cooperation and attention to this matter.
+
+Best regards,
+[Your Name]
+Security Operations Center
+```
+
+---
+
+This triage workflow ensures a systematic

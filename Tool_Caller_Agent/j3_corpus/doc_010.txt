@@ -1,0 +1,97 @@
+**SOC Runbook Excerpt: Responding to a Ransomware Infection on File Server**
+
+**Date:** October 15, 2023
+
+**Incident ID:** RS-2023-1015-001
+
+**Summary:**
+The Security Operations Center (SOC) has detected a ransomware infection on the file server named *FS-PROD-01* located in the production environment. This incident requires immediate attention to contain the threat, verify backups, and initiate recovery procedures.
+
+---
+
+### **1. Isolation Steps**
+
+#### **1.1 Containment**
+1. **Isolate Affected Server:**
+   - Execute the following command on *FS-PROD-01* to disconnect it from the network:
+     ```sh
+     sudo ifconfig eth0 down
+     ```
+2. **Disable Network Services:**
+   - Stop all network services using:
+     ```sh
+     sudo systemctl stop sshd
+     sudo systemctl stop nfs-server
+     ```
+
+#### **1.2 Logging and Monitoring**
+- Enable detailed logging on *FS-PROD-01* to capture any ransomware activity.
+  ```sh
+  sudo journalctl -f
+  ```
+- Monitor the system for further signs of compromise using a SIEM tool.
+
+---
+
+### **2. Backup Verification**
+
+#### **2.1 Verify Offsite Backups**
+- Confirm that offsite backups are up-to-date and not compromised:
+  - Use the following command to check backup status on *BKP-PROD-01* (backup server):
+    ```sh
+    sudo rsync --list-only /path/to/backup /mnt/backup/
+    ```
+
+#### **2.2 Verify Onsite Backups**
+- Validate onsite backups:
+  - Use a similar `rsync` command as above, ensuring that the backup integrity is intact.
+
+---
+
+### **3. Negotiation Policy**
+
+#### **3.1 Follow Established Guidelines:**
+- Refer to the *Negotiation and Communication Protocol* document for guidelines on handling ransomware demands.
+- Contact the incident response team immediately if a direct communication with the attackers is necessary.
+
+---
+
+### **4. Recovery Procedure Outline**
+
+#### **4.1 Restore from Uncompromised Backups**
+1. **Select a Clean Backup:**
+   - Choose a recent backup that was verified and not infected by ransomware.
+2. **Restore to a New Host:**
+   - Deploy a new instance of *FS-PROD-01* on a clean machine with fresh OS installation:
+     ```sh
+     sudo yum update && sudo reboot
+     ```
+3. **Mount the Backup:**
+   - Mount the verified backup onto the new server.
+4. **Copy Data:**
+   - Use `rsync` to copy data from the backup to the new file server:
+     ```sh
+     sudo rsync -avz /mnt/backup /path/to/new/server
+     ```
+
+#### **4.2 Reconfigure and Validate:**
+1. **Reconfigure System Services:**
+   - Set up necessary services such as SSH, NFS, etc.
+2. **Validate Data Integrity:**
+   - Perform a thorough integrity check on the restored data to ensure no files were missed or corrupted during restoration.
+
+---
+
+### **5. Post-Incident Actions**
+
+- Document all steps taken in this incident response process for future reference and improvement.
+- Update security policies and procedures based on lessons learned from this incident.
+- Conduct a post-incident review with relevant stakeholders.
+
+---
+
+**Contact Information:**
+- SOC Team Lead: john.doe@company.com
+- IT Security Manager: jane.smith@company.com
+
+This runbook is intended to guide the response team through the process of responding to and recovering from a ransomware infection on *FS-PROD-01*.

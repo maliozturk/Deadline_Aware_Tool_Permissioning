@@ -1,0 +1,53 @@
+**IOC Intelligence Entry**
+
+**Indicator of Compromise (IoC):** 
+- **IP Address:** 198.51.100.42
+
+**First Seen Date:** October 12, 2023
+
+**Associated Malware Family:** Zeus.XL
+
+---
+
+### WHOIS Summary
+- **Registrar:** Example Registry LLC
+- **Registrant Name:** CyberSecure Inc.
+- **Registrant Organization:** CyberSecure Inc.
+- **Domain:** c2.cybersecure.com
+- **Creation Date:** October 01, 2023
+- **Expiration Date:** April 30, 2025
+
+The IP address 198.51.100.42 is associated with command-and-control (C2) traffic related to the Zeus.XL malware family. This IP was first observed on October 12, 2023, and has been used for establishing communication between infected hosts and the C2 server.
+
+### Detailed Analysis
+Zeus.XL is a variant of the Zeus banking trojan known for its sophisticated capabilities in stealing financial information from users' computers. The IP address 198.51.100.42 has been identified as a C2 server used by threat actors to issue commands and retrieve stolen data.
+
+The WHOIS record for the domain c2.cybersecure.com, registered under CyberSecure Inc., is suspicious as it uses an innocuous name that could mislead potential victims. The registrant information does not provide any specific contact details, which is typical of many C2 infrastructure domains used by threat actors to hide their identities.
+
+### Recommended Firewall Rules
+To mitigate the risk associated with this IP address and its activities, the following firewall rules are recommended:
+
+1. **Block Inbound Traffic:**
+   - Protocol: TCP/UDP
+   - Source: Any
+   - Destination: 198.51.100.42
+   - Action: Drop
+
+2. **Block Outbound Traffic:**
+   - Protocol: TCP/UDP
+   - Source: Infected Hosts (known affected IPs or subnets)
+   - Destination: 198.51.100.42
+   - Action: Drop
+
+3. **Monitor and Alert:**
+   - Protocol: TCP/UDP
+   - Source: Any
+   - Destination: 198.51.100.42
+   - Action: Log and Alert Security Team
+
+### Additional Recommendations
+- **Network Segmentation:** Isolate critical systems from less secure segments of the network.
+- **Endpoint Detection & Response (EDR):** Implement EDR tools to detect and respond to potential infections on endpoints.
+- **Regular Updates:** Ensure that all systems, especially those with internet access, are up-to-date with security patches.
+
+By implementing these measures, organizations can significantly reduce the risk of compromise by Zeus.XL through this C2 infrastructure. Continuous monitoring and updating of threat intelligence will further enhance defenses against evolving threats.

@@ -1,0 +1,72 @@
+### SOC Runbook Excerpt: Investigating Unauthorized Lateral Movement
+
+#### Incident Overview:
+A network monitoring system detected unauthorized lateral movement on the company’s internal network from 16:00 to 23:00 on March 15, 2023. The initial indication was that an unknown user accessed several key servers and workstations without proper authorization.
+
+#### Objective:
+The primary objective is to identify the source of unauthorized access, determine which systems were compromised, and ensure appropriate measures are taken to secure the network and prevent future incidents.
+
+#### Initial Response:
+
+1. **Alert Review:**
+   - Verify the alert from the SIEM system that flagged the unauthorized activity.
+   - Confirm the time frame and specific actions reported by the monitoring tool (e.g., access logs showing unusual login attempts).
+
+2. **Isolate Affected Systems:**
+   - Immediately isolate any affected systems to prevent further lateral movement or data exfiltration.
+
+3. **Notify Relevant Stakeholders:**
+   - Inform the IT Security team, System Administrators, and any other relevant departments about the incident.
+   - Document all communications with stakeholders for future reference.
+
+#### Affected Host Enumeration:
+
+1. **Network Scanning:**
+   - Perform a network scan using tools like Nmap to identify all hosts that may have been accessed during this timeframe (e.g., 192.168.10.0/24).
+   - Focus on critical systems such as servers, workstations with high privileges, and domain controllers.
+
+2. **Log Analysis:**
+   - Review system logs from the affected hosts for any suspicious activity.
+   - Look for unusual login times, failed authentication attempts, or unexpected command executions.
+
+3. **Host Inventory:**
+   - Use asset management tools to cross-reference discovered hosts against known inventory records.
+   - Identify any discrepancies that might indicate unauthorized changes or additions.
+
+#### Credential Reset Procedures:
+
+1. **Credential Revocation:**
+   - Immediately change the credentials of all accounts associated with the compromised system(s).
+   - Ensure a strong, unique password is set for each account.
+   
+2. **Multi-Factor Authentication (MFA):**
+   - Enable MFA for critical systems and applications to add an extra layer of security.
+
+3. **Audit Trail:**
+   - Document all credential changes in a secure log or audit trail system.
+   - Notify users whose credentials have been changed about the change and provide guidance on password management.
+
+#### Forensic Image Collection:
+
+1. **Image Acquisition:**
+   - Collect forensic images from affected systems using tools like FTK Imager or EnCase.
+   - Ensure proper chain of custody documentation is maintained.
+
+2. **Data Extraction:**
+   - Extract relevant data such as log files, network traffic, and user activity records.
+   - Use digital forensics software to analyze these data sets for indicators of compromise (IoCs).
+
+3. **Incident Reporting:**
+   - Prepare a detailed report summarizing the findings from the forensic analysis.
+   - Include recommendations for improving security posture based on the identified vulnerabilities.
+
+#### Follow-Up Actions:
+
+1. **Incident Response Review:**
+   - Conduct a post-incident review to assess the response and identify areas for improvement.
+   
+2. **Security Enhancements:**
+   - Implement any necessary security enhancements recommended during the follow-up review.
+   - Ensure all staff are trained on updated security policies and procedures.
+
+By following these steps, the SOC team can effectively manage an unauthorized lateral movement incident, mitigate risks, and enhance overall network security.

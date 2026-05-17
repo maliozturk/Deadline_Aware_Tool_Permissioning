@@ -1,0 +1,562 @@
+{"prompt_id": "cir_0001", "domain": "cyber_ir", "complexity": "simple", "text": "What is the IP address 198.51.100.42 associated with in our threat intel?", "source": "cyber_ir"}
+{"prompt_id": "cir_0002", "domain": "cyber_ir", "complexity": "simple", "text": "Is the domain evil-update.example.net flagged in our IOC database?", "source": "cyber_ir"}
+{"prompt_id": "cir_0003", "domain": "cyber_ir", "complexity": "simple", "text": "What malware family is linked to SHA-256 hash a1b2c3d4e5f6?", "source": "cyber_ir"}
+{"prompt_id": "cir_0004", "domain": "cyber_ir", "complexity": "simple", "text": "What is the MITRE ATT&CK technique for credential dumping?", "source": "cyber_ir"}
+{"prompt_id": "cir_0005", "domain": "cyber_ir", "complexity": "simple", "text": "What port does SSH typically run on?", "source": "cyber_ir"}
+{"prompt_id": "cir_0006", "domain": "cyber_ir", "complexity": "simple", "text": "What is the CVE number for the Log4Shell vulnerability?", "source": "cyber_ir"}
+{"prompt_id": "cir_0007", "domain": "cyber_ir", "complexity": "simple", "text": "What is the default SNMP community string?", "source": "cyber_ir"}
+{"prompt_id": "cir_0008", "domain": "cyber_ir", "complexity": "simple", "text": "Which MITRE ATT&CK tactic covers initial access?", "source": "cyber_ir"}
+{"prompt_id": "cir_0009", "domain": "cyber_ir", "complexity": "simple", "text": "What is a C2 beacon in the context of malware analysis?", "source": "cyber_ir"}
+{"prompt_id": "cir_0010", "domain": "cyber_ir", "complexity": "simple", "text": "What file extension do YARA rules typically use?", "source": "cyber_ir"}
+{"prompt_id": "cir_0011", "domain": "cyber_ir", "complexity": "simple", "text": "What is the difference between a vulnerability and an exploit?", "source": "cyber_ir"}
+{"prompt_id": "cir_0012", "domain": "cyber_ir", "complexity": "simple", "text": "What protocol does DNS use by default?", "source": "cyber_ir"}
+{"prompt_id": "cir_0013", "domain": "cyber_ir", "complexity": "simple", "text": "What is the standard port for HTTPS?", "source": "cyber_ir"}
+{"prompt_id": "cir_0014", "domain": "cyber_ir", "complexity": "simple", "text": "Define 'lateral movement' in cybersecurity.", "source": "cyber_ir"}
+{"prompt_id": "cir_0015", "domain": "cyber_ir", "complexity": "simple", "text": "What does the acronym IOC stand for in threat intelligence?", "source": "cyber_ir"}
+{"prompt_id": "cir_0016", "domain": "cyber_ir", "complexity": "simple", "text": "What is a zero-day vulnerability?", "source": "cyber_ir"}
+{"prompt_id": "cir_0017", "domain": "cyber_ir", "complexity": "simple", "text": "What is the purpose of a SOC in an organization?", "source": "cyber_ir"}
+{"prompt_id": "cir_0018", "domain": "cyber_ir", "complexity": "simple", "text": "What is the default port for RDP?", "source": "cyber_ir"}
+{"prompt_id": "cir_0019", "domain": "cyber_ir", "complexity": "simple", "text": "What does EDR stand for?", "source": "cyber_ir"}
+{"prompt_id": "cir_0020", "domain": "cyber_ir", "complexity": "simple", "text": "What is phishing?", "source": "cyber_ir"}
+{"prompt_id": "cir_0021", "domain": "cyber_ir", "complexity": "simple", "text": "What is the purpose of a SIEM system?", "source": "cyber_ir"}
+{"prompt_id": "cir_0022", "domain": "cyber_ir", "complexity": "simple", "text": "What is a botnet?", "source": "cyber_ir"}
+{"prompt_id": "cir_0023", "domain": "cyber_ir", "complexity": "simple", "text": "Define 'threat actor' in cybersecurity.", "source": "cyber_ir"}
+{"prompt_id": "cir_0024", "domain": "cyber_ir", "complexity": "simple", "text": "What is the CVSS score range?", "source": "cyber_ir"}
+{"prompt_id": "cir_0025", "domain": "cyber_ir", "complexity": "simple", "text": "What is a honeypot?", "source": "cyber_ir"}
+{"prompt_id": "cir_0026", "domain": "cyber_ir", "complexity": "simple", "text": "What does TTP stand for in threat intelligence?", "source": "cyber_ir"}
+{"prompt_id": "cir_0027", "domain": "cyber_ir", "complexity": "simple", "text": "What is the purpose of network segmentation?", "source": "cyber_ir"}
+{"prompt_id": "cir_0028", "domain": "cyber_ir", "complexity": "simple", "text": "What is a watering hole attack?", "source": "cyber_ir"}
+{"prompt_id": "cir_0029", "domain": "cyber_ir", "complexity": "simple", "text": "What is the difference between IDS and IPS?", "source": "cyber_ir"}
+{"prompt_id": "cir_0030", "domain": "cyber_ir", "complexity": "simple", "text": "What is DLP in cybersecurity?", "source": "cyber_ir"}
+{"prompt_id": "cir_0031", "domain": "cyber_ir", "complexity": "simple", "text": "What is a reverse shell?", "source": "cyber_ir"}
+{"prompt_id": "cir_0032", "domain": "cyber_ir", "complexity": "simple", "text": "What tool is commonly used for packet capture?", "source": "cyber_ir"}
+{"prompt_id": "cir_0033", "domain": "cyber_ir", "complexity": "simple", "text": "What is the purpose of a firewall rule?", "source": "cyber_ir"}
+{"prompt_id": "cir_0034", "domain": "cyber_ir", "complexity": "simple", "text": "Define 'exfiltration' in a data breach context.", "source": "cyber_ir"}
+{"prompt_id": "cir_0035", "domain": "cyber_ir", "complexity": "simple", "text": "What is a brute force attack?", "source": "cyber_ir"}
+{"prompt_id": "cir_0036", "domain": "cyber_ir", "complexity": "simple", "text": "What is multi-factor authentication?", "source": "cyber_ir"}
+{"prompt_id": "cir_0037", "domain": "cyber_ir", "complexity": "simple", "text": "What is the default port for SMB?", "source": "cyber_ir"}
+{"prompt_id": "cir_0038", "domain": "cyber_ir", "complexity": "simple", "text": "What is an APT group?", "source": "cyber_ir"}
+{"prompt_id": "cir_0039", "domain": "cyber_ir", "complexity": "simple", "text": "What is ransomware?", "source": "cyber_ir"}
+{"prompt_id": "cir_0040", "domain": "cyber_ir", "complexity": "simple", "text": "What does SOC Level 1 analyst typically handle?", "source": "cyber_ir"}
+{"prompt_id": "cir_0041", "domain": "cyber_ir", "complexity": "simple", "text": "What is a sandbox in malware analysis?", "source": "cyber_ir"}
+{"prompt_id": "cir_0042", "domain": "cyber_ir", "complexity": "simple", "text": "What is OSINT?", "source": "cyber_ir"}
+{"prompt_id": "cir_0043", "domain": "cyber_ir", "complexity": "simple", "text": "What is the purpose of a VPN?", "source": "cyber_ir"}
+{"prompt_id": "cir_0044", "domain": "cyber_ir", "complexity": "simple", "text": "What is a DDoS attack?", "source": "cyber_ir"}
+{"prompt_id": "cir_0045", "domain": "cyber_ir", "complexity": "simple", "text": "What is a rootkit?", "source": "cyber_ir"}
+{"prompt_id": "cir_0046", "domain": "cyber_ir", "complexity": "simple", "text": "What does SOAR stand for?", "source": "cyber_ir"}
+{"prompt_id": "cir_0047", "domain": "cyber_ir", "complexity": "simple", "text": "What is an indicator of compromise?", "source": "cyber_ir"}
+{"prompt_id": "cir_0048", "domain": "cyber_ir", "complexity": "simple", "text": "What is the kill chain model?", "source": "cyber_ir"}
+{"prompt_id": "cir_0049", "domain": "cyber_ir", "complexity": "simple", "text": "What is privilege escalation?", "source": "cyber_ir"}
+{"prompt_id": "cir_0050", "domain": "cyber_ir", "complexity": "simple", "text": "What is threat hunting?", "source": "cyber_ir"}
+{"prompt_id": "cir_0051", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate a sudden spike in failed SSH logins on host web-prod-04 between 03:00 and 04:00 UTC.", "source": "cyber_ir"}
+{"prompt_id": "cir_0052", "domain": "cyber_ir", "complexity": "medium", "text": "Determine whether IOC 198.51.100.42 warrants a containment action given current threat-intel context.", "source": "cyber_ir"}
+{"prompt_id": "cir_0053", "domain": "cyber_ir", "complexity": "medium", "text": "An endpoint reports a new outbound connection to a domain flagged yesterday in threat intel. What is the recommended next step?", "source": "cyber_ir"}
+{"prompt_id": "cir_0054", "domain": "cyber_ir", "complexity": "medium", "text": "A user reports receiving a suspicious email with a PDF attachment. What triage steps should the SOC take?", "source": "cyber_ir"}
+{"prompt_id": "cir_0055", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate the following: EDR alert for PowerShell execution on WSRV-12, and DNS query to evil-update.example.net from the same host.", "source": "cyber_ir"}
+{"prompt_id": "cir_0056", "domain": "cyber_ir", "complexity": "medium", "text": "Check if any runbook covers the containment of a compromised endpoint detected via Cobalt Strike beacon.", "source": "cyber_ir"}
+{"prompt_id": "cir_0057", "domain": "cyber_ir", "complexity": "medium", "text": "A new YARA rule triggered on a file uploaded to the malware sandbox. What follow-up actions are needed?", "source": "cyber_ir"}
+{"prompt_id": "cir_0058", "domain": "cyber_ir", "complexity": "medium", "text": "Assess whether the SSL certificate anomaly reported by the proxy is related to a known MITM campaign.", "source": "cyber_ir"}
+{"prompt_id": "cir_0059", "domain": "cyber_ir", "complexity": "medium", "text": "A host in the DMZ is sending unusually large DNS responses. Could this indicate DNS tunneling exfiltration?", "source": "cyber_ir"}
+{"prompt_id": "cir_0060", "domain": "cyber_ir", "complexity": "medium", "text": "Review the IOC entry for domain evil-update.example.net and recommend blocking actions.", "source": "cyber_ir"}
+{"prompt_id": "cir_0061", "domain": "cyber_ir", "complexity": "medium", "text": "What containment steps should be taken for a host exhibiting lateral movement behavior?", "source": "cyber_ir"}
+{"prompt_id": "cir_0062", "domain": "cyber_ir", "complexity": "medium", "text": "A DLP alert fired for a large file upload to a personal cloud storage service. What investigation steps apply?", "source": "cyber_ir"}
+{"prompt_id": "cir_0063", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate a phishing email header analysis with known threat actor infrastructure patterns.", "source": "cyber_ir"}
+{"prompt_id": "cir_0064", "domain": "cyber_ir", "complexity": "medium", "text": "Determine if the failed login pattern on the VPN gateway matches known credential stuffing campaigns.", "source": "cyber_ir"}
+{"prompt_id": "cir_0065", "domain": "cyber_ir", "complexity": "medium", "text": "Assess the risk of a new outbound connection to an IP in our threat intel watchlist.", "source": "cyber_ir"}
+{"prompt_id": "cir_0066", "domain": "cyber_ir", "complexity": "medium", "text": "A security scanner detected an unpatched Apache server in the DMZ. What is the remediation priority?", "source": "cyber_ir"}
+{"prompt_id": "cir_0067", "domain": "cyber_ir", "complexity": "medium", "text": "Check if the file hash detected by the EDR matches any known malware families in our IOC database.", "source": "cyber_ir"}
+{"prompt_id": "cir_0068", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate why a production server is making outbound connections to a Tor exit node.", "source": "cyber_ir"}
+{"prompt_id": "cir_0069", "domain": "cyber_ir", "complexity": "medium", "text": "Review the runbook for DDoS mitigation and identify applicable steps for the current attack vector.", "source": "cyber_ir"}
+{"prompt_id": "cir_0070", "domain": "cyber_ir", "complexity": "medium", "text": "A host is generating ICMP traffic at 10x normal volume. What could this indicate?", "source": "cyber_ir"}
+{"prompt_id": "cir_0071", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate firewall deny logs with the IOC list to identify potential blocked C2 attempts.", "source": "cyber_ir"}
+{"prompt_id": "cir_0072", "domain": "cyber_ir", "complexity": "medium", "text": "A user account was locked after 50 failed password attempts in 5 minutes. Is this a targeted attack?", "source": "cyber_ir"}
+{"prompt_id": "cir_0073", "domain": "cyber_ir", "complexity": "medium", "text": "What is the recommended procedure for isolating a server suspected of running a crypto miner?", "source": "cyber_ir"}
+{"prompt_id": "cir_0074", "domain": "cyber_ir", "complexity": "medium", "text": "Assess whether a newly discovered open S3 bucket poses an immediate data leak risk.", "source": "cyber_ir"}
+{"prompt_id": "cir_0075", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate a spike in outbound SMTP traffic from an internal mail relay.", "source": "cyber_ir"}
+{"prompt_id": "cir_0076", "domain": "cyber_ir", "complexity": "medium", "text": "Determine if the executable flagged by antivirus is a false positive or a genuine threat based on IOC data.", "source": "cyber_ir"}
+{"prompt_id": "cir_0077", "domain": "cyber_ir", "complexity": "medium", "text": "A network sensor detected port scanning from an internal host. What escalation path applies?", "source": "cyber_ir"}
+{"prompt_id": "cir_0078", "domain": "cyber_ir", "complexity": "medium", "text": "Review the containment runbook and determine if credential rotation is required for the compromised service account.", "source": "cyber_ir"}
+{"prompt_id": "cir_0079", "domain": "cyber_ir", "complexity": "medium", "text": "A WAF alert shows SQL injection attempts against the customer portal. What immediate actions are needed?", "source": "cyber_ir"}
+{"prompt_id": "cir_0080", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate VPN login anomalies with geo-impossible travel alerts for user jsmith@corp.", "source": "cyber_ir"}
+{"prompt_id": "cir_0081", "domain": "cyber_ir", "complexity": "medium", "text": "Assess the threat level of a USB device insertion alert on a classified workstation.", "source": "cyber_ir"}
+{"prompt_id": "cir_0082", "domain": "cyber_ir", "complexity": "medium", "text": "A third-party vendor reported a breach. What steps should our SOC take to assess exposure?", "source": "cyber_ir"}
+{"prompt_id": "cir_0083", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate alerts for multiple hosts beaconing to the same external IP at regular intervals.", "source": "cyber_ir"}
+{"prompt_id": "cir_0084", "domain": "cyber_ir", "complexity": "medium", "text": "Determine if the anomalous registry modification on host WSRV-15 matches known persistence techniques.", "source": "cyber_ir"}
+{"prompt_id": "cir_0085", "domain": "cyber_ir", "complexity": "medium", "text": "A certificate transparency log shows a new cert issued for our domain by an unknown CA. What should we do?", "source": "cyber_ir"}
+{"prompt_id": "cir_0086", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate the IDS signature alert with recent threat intel on the targeted vulnerability.", "source": "cyber_ir"}
+{"prompt_id": "cir_0087", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate an alert for unusual scheduled task creation across multiple domain-joined hosts.", "source": "cyber_ir"}
+{"prompt_id": "cir_0088", "domain": "cyber_ir", "complexity": "medium", "text": "Assess whether a detected LSASS memory access pattern indicates credential harvesting.", "source": "cyber_ir"}
+{"prompt_id": "cir_0089", "domain": "cyber_ir", "complexity": "medium", "text": "A SOC analyst reports a possible insider threat. What data sources should be reviewed first?", "source": "cyber_ir"}
+{"prompt_id": "cir_0090", "domain": "cyber_ir", "complexity": "medium", "text": "Determine the blast radius of a compromised service account with domain admin privileges.", "source": "cyber_ir"}
+{"prompt_id": "cir_0091", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate DNS queries to a recently registered domain from multiple internal hosts.", "source": "cyber_ir"}
+{"prompt_id": "cir_0092", "domain": "cyber_ir", "complexity": "medium", "text": "A web application firewall detected a rapid increase in 403 errors. Is this reconnaissance?", "source": "cyber_ir"}
+{"prompt_id": "cir_0093", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate endpoint telemetry showing PowerShell download cradle execution with threat intel.", "source": "cyber_ir"}
+{"prompt_id": "cir_0094", "domain": "cyber_ir", "complexity": "medium", "text": "Assess the impact of a misconfigured cloud security group allowing unrestricted SSH access.", "source": "cyber_ir"}
+{"prompt_id": "cir_0095", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate a report of data exfiltration through steganography in uploaded images.", "source": "cyber_ir"}
+{"prompt_id": "cir_0096", "domain": "cyber_ir", "complexity": "medium", "text": "Determine if the spike in Kerberos ticket requests indicates a golden ticket attack.", "source": "cyber_ir"}
+{"prompt_id": "cir_0097", "domain": "cyber_ir", "complexity": "medium", "text": "Review the incident response runbook for steps to handle a supply chain compromise.", "source": "cyber_ir"}
+{"prompt_id": "cir_0098", "domain": "cyber_ir", "complexity": "medium", "text": "A host is making API calls to an internal service it should not have access to. What investigation steps apply?", "source": "cyber_ir"}
+{"prompt_id": "cir_0099", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate a phishing campaign targeting our executives with known spear-phishing threat actors.", "source": "cyber_ir"}
+{"prompt_id": "cir_0100", "domain": "cyber_ir", "complexity": "medium", "text": "Assess the risk of a deprecated TLS 1.0 connection detected on a payment processing server.", "source": "cyber_ir"}
+{"prompt_id": "cir_0101", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate a SOC alert for process hollowing detected on a workstation.", "source": "cyber_ir"}
+{"prompt_id": "cir_0102", "domain": "cyber_ir", "complexity": "medium", "text": "Determine if the unusual increase in email forwarding rules indicates account compromise.", "source": "cyber_ir"}
+{"prompt_id": "cir_0103", "domain": "cyber_ir", "complexity": "medium", "text": "Review firewall logs for evidence of data exfiltration over DNS to a known C2 domain.", "source": "cyber_ir"}
+{"prompt_id": "cir_0104", "domain": "cyber_ir", "complexity": "medium", "text": "A new vulnerability in our VPN appliance was published. Assess our exposure and prioritize patching.", "source": "cyber_ir"}
+{"prompt_id": "cir_0105", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate an anomalous spike in authentication events from a service account during off-hours.", "source": "cyber_ir"}
+{"prompt_id": "cir_0106", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate web proxy logs showing connections to paste sites with potential data leak indicators.", "source": "cyber_ir"}
+{"prompt_id": "cir_0107", "domain": "cyber_ir", "complexity": "medium", "text": "Assess whether the detected WMI activity on multiple hosts is legitimate admin work or malicious.", "source": "cyber_ir"}
+{"prompt_id": "cir_0108", "domain": "cyber_ir", "complexity": "medium", "text": "A threat intel report mentions our industry vertical as a target. What proactive measures should we take?", "source": "cyber_ir"}
+{"prompt_id": "cir_0109", "domain": "cyber_ir", "complexity": "medium", "text": "Determine the appropriate escalation path for a ransomware negotiation request received via email.", "source": "cyber_ir"}
+{"prompt_id": "cir_0110", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate a SIEM correlation rule that triggered for simultaneous logins from two countries.", "source": "cyber_ir"}
+{"prompt_id": "cir_0111", "domain": "cyber_ir", "complexity": "medium", "text": "Assess the effectiveness of our current email filtering rules against the latest phishing techniques.", "source": "cyber_ir"}
+{"prompt_id": "cir_0112", "domain": "cyber_ir", "complexity": "medium", "text": "Review the triage workflow for a malware alert that triggered during a software deployment.", "source": "cyber_ir"}
+{"prompt_id": "cir_0113", "domain": "cyber_ir", "complexity": "medium", "text": "Correlate network flow data with endpoint logs to trace the lateral movement path of an attacker.", "source": "cyber_ir"}
+{"prompt_id": "cir_0114", "domain": "cyber_ir", "complexity": "medium", "text": "Determine if the new scheduled task on the domain controller is part of a persistence mechanism.", "source": "cyber_ir"}
+{"prompt_id": "cir_0115", "domain": "cyber_ir", "complexity": "medium", "text": "Investigate a sudden drop in SIEM event ingestion rate from a critical log source.", "source": "cyber_ir"}
+{"prompt_id": "cir_0116", "domain": "cyber_ir", "complexity": "complex", "text": "Summarize the likely root cause of incident ticket INC-4521 using available runbook excerpts.", "source": "cyber_ir"}
+{"prompt_id": "cir_0117", "domain": "cyber_ir", "complexity": "complex", "text": "Conduct a multi-step investigation of a suspected APT intrusion: correlate EDR alerts, DNS anomalies, and IOC hits to build a timeline.", "source": "cyber_ir"}
+{"prompt_id": "cir_0118", "domain": "cyber_ir", "complexity": "complex", "text": "Given IOC hits for both IP 198.51.100.42 and domain evil-update.example.net on the same host, determine if this is a coordinated campaign.", "source": "cyber_ir"}
+{"prompt_id": "cir_0119", "domain": "cyber_ir", "complexity": "complex", "text": "Reconstruct the attack chain for a compromised endpoint: initial access via phishing, credential theft via Mimikatz, lateral movement to domain controller.", "source": "cyber_ir"}
+{"prompt_id": "cir_0120", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the organization's exposure to the Midnight Typhoon APT based on current IOC data and defensive posture.", "source": "cyber_ir"}
+{"prompt_id": "cir_0121", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a potential supply chain compromise: trace the attack from the compromised npm package to affected internal systems.", "source": "cyber_ir"}
+{"prompt_id": "cir_0122", "domain": "cyber_ir", "complexity": "complex", "text": "Determine whether the LockByte ransomware campaign poses an imminent threat given our industry and current defensive controls.", "source": "cyber_ir"}
+{"prompt_id": "cir_0123", "domain": "cyber_ir", "complexity": "complex", "text": "Correlate multiple data sources (EDR, SIEM, DNS, proxy logs) to identify the full scope of a credential harvesting campaign.", "source": "cyber_ir"}
+{"prompt_id": "cir_0124", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate the effectiveness of our current detection rules against the MITRE ATT&CK techniques used by Midnight Typhoon.", "source": "cyber_ir"}
+{"prompt_id": "cir_0125", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a multi-stage attack: initial spear-phish, macro-enabled document execution, C2 establishment, and data exfiltration.", "source": "cyber_ir"}
+{"prompt_id": "cir_0126", "domain": "cyber_ir", "complexity": "complex", "text": "Build a threat model for our public-facing web infrastructure based on current threat intel and recent attack patterns.", "source": "cyber_ir"}
+{"prompt_id": "cir_0127", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the risk of insider data exfiltration given the behavioral indicators described in our threat intel notes.", "source": "cyber_ir"}
+{"prompt_id": "cir_0128", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate lateral movement across three network segments, correlating firewall logs, authentication events, and endpoint telemetry.", "source": "cyber_ir"}
+{"prompt_id": "cir_0129", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate whether our DDoS mitigation strategy is adequate based on the attack patterns described in our runbooks.", "source": "cyber_ir"}
+{"prompt_id": "cir_0130", "domain": "cyber_ir", "complexity": "complex", "text": "Conduct a gap analysis of our incident response capabilities against the TTPs of the Midnight Typhoon APT group.", "source": "cyber_ir"}
+{"prompt_id": "cir_0131", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a complex phishing campaign: analyze email headers, trace the infrastructure, and correlate with known threat actors.", "source": "cyber_ir"}
+{"prompt_id": "cir_0132", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the blast radius of a compromised domain admin account and recommend containment actions using available runbooks.", "source": "cyber_ir"}
+{"prompt_id": "cir_0133", "domain": "cyber_ir", "complexity": "complex", "text": "Determine if multiple seemingly unrelated alerts (DNS tunneling, certificate anomaly, PowerShell execution) are part of a single campaign.", "source": "cyber_ir"}
+{"prompt_id": "cir_0134", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate the sufficiency of our YARA rules against the latest malware samples documented in our IOC entries.", "source": "cyber_ir"}
+{"prompt_id": "cir_0135", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a suspected ransomware pre-deployment stage: identify encryption staging, C2 communication, and lateral movement indicators.", "source": "cyber_ir"}
+{"prompt_id": "cir_0136", "domain": "cyber_ir", "complexity": "complex", "text": "Conduct a post-incident review of a phishing-initiated breach using all available runbook and threat intel documentation.", "source": "cyber_ir"}
+{"prompt_id": "cir_0137", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the organization's vulnerability to a supply chain attack based on our current vendor risk posture and available threat intel.", "source": "cyber_ir"}
+{"prompt_id": "cir_0138", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a multi-vector attack combining DDoS distraction with simultaneous data exfiltration through DNS tunneling.", "source": "cyber_ir"}
+{"prompt_id": "cir_0139", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate the correlation between a recent certificate transparency anomaly and known MITM campaigns in our threat intel.", "source": "cyber_ir"}
+{"prompt_id": "cir_0140", "domain": "cyber_ir", "complexity": "complex", "text": "Build an investigation timeline for a suspected APT presence, from initial beacon detection to confirmed lateral movement.", "source": "cyber_ir"}
+{"prompt_id": "cir_0141", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the potential impact of a compromised backup system and recommend recovery procedures using available runbooks.", "source": "cyber_ir"}
+{"prompt_id": "cir_0142", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate whether anomalous VPN access patterns indicate a compromised credential or a legitimate remote worker.", "source": "cyber_ir"}
+{"prompt_id": "cir_0143", "domain": "cyber_ir", "complexity": "complex", "text": "Conduct a threat hunt for indicators of the LockByte ransomware affiliate model across our endpoint fleet.", "source": "cyber_ir"}
+{"prompt_id": "cir_0144", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate whether our containment procedures are adequate for a scenario involving simultaneous compromise of multiple segments.", "source": "cyber_ir"}
+{"prompt_id": "cir_0145", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a complex insider threat case: correlate DLP alerts, access logs, and behavioral analytics to build a case.", "source": "cyber_ir"}
+{"prompt_id": "cir_0146", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the strategic implications of two concurrent APT campaigns targeting our organization from different threat actors.", "source": "cyber_ir"}
+{"prompt_id": "cir_0147", "domain": "cyber_ir", "complexity": "complex", "text": "Determine the full kill chain of an attack that began with a watering hole compromise of an industry news site.", "source": "cyber_ir"}
+{"prompt_id": "cir_0148", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate our detection and response capabilities against DNS tunneling exfiltration techniques documented in our IOC database.", "source": "cyber_ir"}
+{"prompt_id": "cir_0149", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a potential zero-day exploitation: correlate crash dumps, anomalous behavior, and threat intel to assess severity.", "source": "cyber_ir"}
+{"prompt_id": "cir_0150", "domain": "cyber_ir", "complexity": "complex", "text": "Build a comprehensive risk assessment for a newly discovered vulnerability affecting our core infrastructure.", "source": "cyber_ir"}
+{"prompt_id": "cir_0151", "domain": "cyber_ir", "complexity": "complex", "text": "Conduct a red-team-style analysis of our external attack surface using documented IOCs and threat intel.", "source": "cyber_ir"}
+{"prompt_id": "cir_0152", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a suspected state-sponsored attack: correlate TTPs with known nation-state threat actors in our database.", "source": "cyber_ir"}
+{"prompt_id": "cir_0153", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the effectiveness of our layered defense strategy against the specific attack vectors described in recent threat intel.", "source": "cyber_ir"}
+{"prompt_id": "cir_0154", "domain": "cyber_ir", "complexity": "complex", "text": "Determine the optimal containment strategy for a worm-like malware spreading through SMB across our internal network.", "source": "cyber_ir"}
+{"prompt_id": "cir_0155", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate the forensic evidence preservation requirements for a potential law enforcement referral.", "source": "cyber_ir"}
+{"prompt_id": "cir_0156", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a complex cloud security incident involving misconfigured IAM roles, unauthorized API calls, and data exposure.", "source": "cyber_ir"}
+{"prompt_id": "cir_0157", "domain": "cyber_ir", "complexity": "complex", "text": "Build an evidence-based recommendation for executive leadership on whether to pay a ransomware demand.", "source": "cyber_ir"}
+{"prompt_id": "cir_0158", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the completeness of our incident response runbooks against the NIST Cybersecurity Framework.", "source": "cyber_ir"}
+{"prompt_id": "cir_0159", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a potential data breach involving encrypted exfiltration channels and determine the scope of data loss.", "source": "cyber_ir"}
+{"prompt_id": "cir_0160", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate whether our current threat hunting capabilities can detect the advanced evasion techniques described in recent intel.", "source": "cyber_ir"}
+{"prompt_id": "cir_0161", "domain": "cyber_ir", "complexity": "complex", "text": "Conduct a comprehensive investigation of a business email compromise (BEC) spanning multiple departments and vendors.", "source": "cyber_ir"}
+{"prompt_id": "cir_0162", "domain": "cyber_ir", "complexity": "complex", "text": "Assess the organization's resilience to a destructive wiper malware attack based on backup and recovery capabilities.", "source": "cyber_ir"}
+{"prompt_id": "cir_0163", "domain": "cyber_ir", "complexity": "complex", "text": "Investigate a suspected firmware-level compromise on network equipment and determine containment priorities.", "source": "cyber_ir"}
+{"prompt_id": "cir_0164", "domain": "cyber_ir", "complexity": "complex", "text": "Build a strategic threat assessment combining all available IOC data, threat intel, and runbook gap analysis.", "source": "cyber_ir"}
+{"prompt_id": "cir_0165", "domain": "cyber_ir", "complexity": "complex", "text": "Evaluate the end-to-end security of our software development pipeline against supply chain attack vectors.", "source": "cyber_ir"}
+{"prompt_id": "leg_0001", "domain": "general", "complexity": "simple", "text": "What is the capital of Sweden?", "source": "legacy"}
+{"prompt_id": "leg_0002", "domain": "general", "complexity": "simple", "text": "How many teeth do children typically have?", "source": "legacy"}
+{"prompt_id": "leg_0003", "domain": "general", "complexity": "simple", "text": "What is the opposite of 'fast'?", "source": "legacy"}
+{"prompt_id": "leg_0004", "domain": "general", "complexity": "simple", "text": "Which planet is known for its large red spot?", "source": "legacy"}
+{"prompt_id": "leg_0005", "domain": "general", "complexity": "simple", "text": "How many edges does a cube have?", "source": "legacy"}
+{"prompt_id": "leg_0006", "domain": "general", "complexity": "simple", "text": "What is the capital of Greece?", "source": "legacy"}
+{"prompt_id": "leg_0007", "domain": "general", "complexity": "simple", "text": "What do you call a person who writes books?", "source": "legacy"}
+{"prompt_id": "leg_0008", "domain": "general", "complexity": "simple", "text": "How many millimeters are in a centimeter?", "source": "legacy"}
+{"prompt_id": "leg_0009", "domain": "general", "complexity": "simple", "text": "What is the color of snow?", "source": "legacy"}
+{"prompt_id": "leg_0010", "domain": "general", "complexity": "simple", "text": "Which animal is known for its shell?", "source": "legacy"}
+{"prompt_id": "leg_0011", "domain": "general", "complexity": "simple", "text": "What is the capital of India?", "source": "legacy"}
+{"prompt_id": "leg_0012", "domain": "general", "complexity": "simple", "text": "How many hours are there in a weekend?", "source": "legacy"}
+{"prompt_id": "leg_0013", "domain": "general", "complexity": "simple", "text": "What is the chemical symbol for iron?", "source": "legacy"}
+{"prompt_id": "leg_0014", "domain": "general", "complexity": "simple", "text": "Which sense do humans use to hear?", "source": "legacy"}
+{"prompt_id": "leg_0015", "domain": "general", "complexity": "simple", "text": "What do you call a baby cat?", "source": "legacy"}
+{"prompt_id": "leg_0016", "domain": "general", "complexity": "simple", "text": "How many corners does a rectangle have?", "source": "legacy"}
+{"prompt_id": "leg_0017", "domain": "general", "complexity": "simple", "text": "What is the capital of Portugal?", "source": "legacy"}
+{"prompt_id": "leg_0018", "domain": "general", "complexity": "simple", "text": "What is the opposite of 'up'?", "source": "legacy"}
+{"prompt_id": "leg_0019", "domain": "general", "complexity": "simple", "text": "How many days are there in June?", "source": "legacy"}
+{"prompt_id": "leg_0020", "domain": "general", "complexity": "simple", "text": "What is the primary ingredient in cheese?", "source": "legacy"}
+{"prompt_id": "leg_0021", "domain": "general", "complexity": "simple", "text": "Which planet is famous for its blue color?", "source": "legacy"}
+{"prompt_id": "leg_0022", "domain": "general", "complexity": "simple", "text": "How many grams are in a kilogram?", "source": "legacy"}
+{"prompt_id": "leg_0023", "domain": "general", "complexity": "simple", "text": "What is the capital of New Zealand?", "source": "legacy"}
+{"prompt_id": "leg_0024", "domain": "general", "complexity": "simple", "text": "What do you call an animal that eats both plants and meat?", "source": "legacy"}
+{"prompt_id": "leg_0025", "domain": "general", "complexity": "simple", "text": "How many letters are in the word 'computer'?", "source": "legacy"}
+{"prompt_id": "leg_0026", "domain": "general", "complexity": "simple", "text": "What is the color of an emerald?", "source": "legacy"}
+{"prompt_id": "leg_0027", "domain": "general", "complexity": "simple", "text": "Which tool is used to cut paper?", "source": "legacy"}
+{"prompt_id": "leg_0028", "domain": "general", "complexity": "simple", "text": "How many sides does an octagon have?", "source": "legacy"}
+{"prompt_id": "leg_0029", "domain": "general", "complexity": "simple", "text": "What is the capital of Thailand?", "source": "legacy"}
+{"prompt_id": "leg_0030", "domain": "general", "complexity": "simple", "text": "What do you call water in gas form?", "source": "legacy"}
+{"prompt_id": "leg_0031", "domain": "general", "complexity": "simple", "text": "How many eyes does a human usually have?", "source": "legacy"}
+{"prompt_id": "leg_0032", "domain": "general", "complexity": "simple", "text": "What is the opposite of 'early'?", "source": "legacy"}
+{"prompt_id": "leg_0033", "domain": "general", "complexity": "simple", "text": "Which animal is known for hopping?", "source": "legacy"}
+{"prompt_id": "leg_0034", "domain": "general", "complexity": "simple", "text": "What is the capital of Finland?", "source": "legacy"}
+{"prompt_id": "leg_0035", "domain": "general", "complexity": "simple", "text": "How many days are there in a fortnight?", "source": "legacy"}
+{"prompt_id": "leg_0036", "domain": "general", "complexity": "simple", "text": "What is the main ingredient in soup?", "source": "legacy"}
+{"prompt_id": "leg_0037", "domain": "general", "complexity": "simple", "text": "What is the color of copper?", "source": "legacy"}
+{"prompt_id": "leg_0038", "domain": "general", "complexity": "simple", "text": "How many bones are in a human hand?", "source": "legacy"}
+{"prompt_id": "leg_0039", "domain": "general", "complexity": "simple", "text": "What do you call a place where books are borrowed?", "source": "legacy"}
+{"prompt_id": "leg_0040", "domain": "general", "complexity": "simple", "text": "What is the capital of Chile?", "source": "legacy"}
+{"prompt_id": "leg_0041", "domain": "general", "complexity": "simple", "text": "How many sides does a circle have?", "source": "legacy"}
+{"prompt_id": "leg_0042", "domain": "general", "complexity": "simple", "text": "Which fruit is typically red or green and grows on trees?", "source": "legacy"}
+{"prompt_id": "leg_0043", "domain": "general", "complexity": "simple", "text": "What is the opposite of 'happy'?", "source": "legacy"}
+{"prompt_id": "leg_0044", "domain": "general", "complexity": "simple", "text": "How many minutes are in half an hour?", "source": "legacy"}
+{"prompt_id": "leg_0045", "domain": "general", "complexity": "simple", "text": "What is the capital of Ireland?", "source": "legacy"}
+{"prompt_id": "leg_0046", "domain": "general", "complexity": "simple", "text": "What do you call a device that tells time?", "source": "legacy"}
+{"prompt_id": "leg_0047", "domain": "general", "complexity": "simple", "text": "How many arms does an octopus have?", "source": "legacy"}
+{"prompt_id": "leg_0048", "domain": "general", "complexity": "simple", "text": "What is the color of the sky on a clear day?", "source": "legacy"}
+{"prompt_id": "leg_0049", "domain": "general", "complexity": "simple", "text": "Which season comes after spring?", "source": "legacy"}
+{"prompt_id": "leg_0050", "domain": "general", "complexity": "simple", "text": "What is the capital of Germany?", "source": "legacy"}
+{"prompt_id": "leg_0051", "domain": "general", "complexity": "simple", "text": "How many sides does a triangle have?", "source": "legacy"}
+{"prompt_id": "leg_0052", "domain": "general", "complexity": "simple", "text": "What is the freezing point of water in Fahrenheit?", "source": "legacy"}
+{"prompt_id": "leg_0053", "domain": "general", "complexity": "simple", "text": "Which planet is known for its rings?", "source": "legacy"}
+{"prompt_id": "leg_0054", "domain": "general", "complexity": "simple", "text": "How many continents are there?", "source": "legacy"}
+{"prompt_id": "leg_0055", "domain": "general", "complexity": "simple", "text": "What color do you get when you mix blue and red?", "source": "legacy"}
+{"prompt_id": "leg_0056", "domain": "general", "complexity": "simple", "text": "What is the largest land animal?", "source": "legacy"}
+{"prompt_id": "leg_0057", "domain": "general", "complexity": "simple", "text": "How many hours are in a week?", "source": "legacy"}
+{"prompt_id": "leg_0058", "domain": "general", "complexity": "simple", "text": "What gas do plants absorb from the air?", "source": "legacy"}
+{"prompt_id": "leg_0059", "domain": "general", "complexity": "simple", "text": "What is the square root of 16?", "source": "legacy"}
+{"prompt_id": "leg_0060", "domain": "general", "complexity": "simple", "text": "Which animal is known for its long neck?", "source": "legacy"}
+{"prompt_id": "leg_0061", "domain": "general", "complexity": "simple", "text": "What is the capital of South Korea?", "source": "legacy"}
+{"prompt_id": "leg_0062", "domain": "general", "complexity": "simple", "text": "How many vowels are in the English alphabet?", "source": "legacy"}
+{"prompt_id": "leg_0063", "domain": "general", "complexity": "simple", "text": "What is the main language spoken in Brazil?", "source": "legacy"}
+{"prompt_id": "leg_0064", "domain": "general", "complexity": "simple", "text": "What does HTML stand for?", "source": "legacy"}
+{"prompt_id": "leg_0065", "domain": "general", "complexity": "simple", "text": "What is the boiling point of water in Fahrenheit?", "source": "legacy"}
+{"prompt_id": "leg_0066", "domain": "general", "complexity": "simple", "text": "How many days are in September?", "source": "legacy"}
+{"prompt_id": "leg_0067", "domain": "general", "complexity": "simple", "text": "What is the fastest land animal?", "source": "legacy"}
+{"prompt_id": "leg_0068", "domain": "general", "complexity": "simple", "text": "What shape has three sides?", "source": "legacy"}
+{"prompt_id": "leg_0069", "domain": "general", "complexity": "simple", "text": "What is the currency of Japan?", "source": "legacy"}
+{"prompt_id": "leg_0070", "domain": "general", "complexity": "simple", "text": "How many planets orbit the Sun?", "source": "legacy"}
+{"prompt_id": "leg_0071", "domain": "general", "complexity": "simple", "text": "What is the chemical symbol for gold?", "source": "legacy"}
+{"prompt_id": "leg_0072", "domain": "general", "complexity": "simple", "text": "Which ocean is the largest by surface area?", "source": "legacy"}
+{"prompt_id": "leg_0073", "domain": "general", "complexity": "simple", "text": "How many fingers does a human hand have?", "source": "legacy"}
+{"prompt_id": "leg_0074", "domain": "general", "complexity": "simple", "text": "What is the opposite of 'cold'?", "source": "legacy"}
+{"prompt_id": "leg_0075", "domain": "general", "complexity": "simple", "text": "What do cows produce that humans drink?", "source": "legacy"}
+{"prompt_id": "leg_0076", "domain": "general", "complexity": "simple", "text": "What is the tallest animal in the world?", "source": "legacy"}
+{"prompt_id": "leg_0077", "domain": "general", "complexity": "simple", "text": "How many letters are in the word 'alphabet'?", "source": "legacy"}
+{"prompt_id": "leg_0078", "domain": "general", "complexity": "simple", "text": "What is the capital of Egypt?", "source": "legacy"}
+{"prompt_id": "leg_0079", "domain": "general", "complexity": "simple", "text": "What do you call an animal that eats meat?", "source": "legacy"}
+{"prompt_id": "leg_0080", "domain": "general", "complexity": "simple", "text": "How many minutes are in two hours?", "source": "legacy"}
+{"prompt_id": "leg_0081", "domain": "general", "complexity": "simple", "text": "What is the primary source of energy for Earth?", "source": "legacy"}
+{"prompt_id": "leg_0082", "domain": "general", "complexity": "simple", "text": "Which planet is known as Earth's twin?", "source": "legacy"}
+{"prompt_id": "leg_0083", "domain": "general", "complexity": "simple", "text": "What is the color of grass?", "source": "legacy"}
+{"prompt_id": "leg_0084", "domain": "general", "complexity": "simple", "text": "How many legs does an insect have?", "source": "legacy"}
+{"prompt_id": "leg_0085", "domain": "general", "complexity": "simple", "text": "What is the capital of Argentina?", "source": "legacy"}
+{"prompt_id": "leg_0086", "domain": "general", "complexity": "simple", "text": "What does CPU stand for?", "source": "legacy"}
+{"prompt_id": "leg_0087", "domain": "general", "complexity": "simple", "text": "What do you call frozen rain?", "source": "legacy"}
+{"prompt_id": "leg_0088", "domain": "general", "complexity": "simple", "text": "How many sides does a hexagon have?", "source": "legacy"}
+{"prompt_id": "leg_0089", "domain": "general", "complexity": "simple", "text": "Which animal is known for changing its color?", "source": "legacy"}
+{"prompt_id": "leg_0090", "domain": "general", "complexity": "simple", "text": "What is the capital of Norway?", "source": "legacy"}
+{"prompt_id": "leg_0091", "domain": "general", "complexity": "simple", "text": "How many months are in a year?", "source": "legacy"}
+{"prompt_id": "leg_0092", "domain": "general", "complexity": "simple", "text": "What is the basic unit of life?", "source": "legacy"}
+{"prompt_id": "leg_0093", "domain": "general", "complexity": "simple", "text": "What is the color of coal?", "source": "legacy"}
+{"prompt_id": "leg_0094", "domain": "general", "complexity": "simple", "text": "How many wheels does a car usually have?", "source": "legacy"}
+{"prompt_id": "leg_0095", "domain": "general", "complexity": "simple", "text": "What is the capital of Mexico?", "source": "legacy"}
+{"prompt_id": "leg_0096", "domain": "general", "complexity": "simple", "text": "What do you call a baby dog?", "source": "legacy"}
+{"prompt_id": "leg_0097", "domain": "general", "complexity": "simple", "text": "What planet do humans live on?", "source": "legacy"}
+{"prompt_id": "leg_0098", "domain": "general", "complexity": "simple", "text": "How many seconds are in an hour?", "source": "legacy"}
+{"prompt_id": "leg_0099", "domain": "general", "complexity": "simple", "text": "What is the capital of Turkey?", "source": "legacy"}
+{"prompt_id": "leg_0100", "domain": "general", "complexity": "simple", "text": "At what temperature does water boil?", "source": "legacy"}
+{"prompt_id": "leg_0101", "domain": "general", "complexity": "simple", "text": "Which company is Elon Musk the CEO of?", "source": "legacy"}
+{"prompt_id": "leg_0102", "domain": "general", "complexity": "simple", "text": "What is the code to add an item to a list in Python?", "source": "legacy"}
+{"prompt_id": "leg_0103", "domain": "general", "complexity": "simple", "text": "What is 2 times 2?", "source": "legacy"}
+{"prompt_id": "leg_0104", "domain": "general", "complexity": "simple", "text": "Which continents is Istanbul located in?", "source": "legacy"}
+{"prompt_id": "leg_0105", "domain": "general", "complexity": "simple", "text": "Is the Moon Earth's satellite?", "source": "legacy"}
+{"prompt_id": "leg_0106", "domain": "general", "complexity": "simple", "text": "What color do you get when you mix red and yellow?", "source": "legacy"}
+{"prompt_id": "leg_0107", "domain": "general", "complexity": "simple", "text": "How many days are there in a year?", "source": "legacy"}
+{"prompt_id": "leg_0108", "domain": "general", "complexity": "simple", "text": "How many players play football (soccer) on a team?", "source": "legacy"}
+{"prompt_id": "leg_0109", "domain": "general", "complexity": "simple", "text": "What is the largest ocean in the world?", "source": "legacy"}
+{"prompt_id": "leg_0110", "domain": "general", "complexity": "simple", "text": "How many hearts does the human body have?", "source": "legacy"}
+{"prompt_id": "leg_0111", "domain": "general", "complexity": "simple", "text": "Paris is the capital of which country?", "source": "legacy"}
+{"prompt_id": "leg_0112", "domain": "general", "complexity": "simple", "text": "What is the sum of the interior angles of a triangle?", "source": "legacy"}
+{"prompt_id": "leg_0113", "domain": "general", "complexity": "simple", "text": "Is the Sun a star?", "source": "legacy"}
+{"prompt_id": "leg_0114", "domain": "general", "complexity": "simple", "text": "How do you create a link in HTML?", "source": "legacy"}
+{"prompt_id": "leg_0115", "domain": "general", "complexity": "simple", "text": "Which continent is Turkey in?", "source": "legacy"}
+{"prompt_id": "leg_0116", "domain": "general", "complexity": "simple", "text": "How many days are there in a week?", "source": "legacy"}
+{"prompt_id": "leg_0117", "domain": "general", "complexity": "simple", "text": "Which is denser: salt water or fresh water?", "source": "legacy"}
+{"prompt_id": "leg_0118", "domain": "general", "complexity": "simple", "text": "Is a cat a mammal?", "source": "legacy"}
+{"prompt_id": "leg_0119", "domain": "general", "complexity": "simple", "text": "How many moons does Earth have?", "source": "legacy"}
+{"prompt_id": "leg_0120", "domain": "general", "complexity": "simple", "text": "What are materials that conduct electricity called?", "source": "legacy"}
+{"prompt_id": "leg_0121", "domain": "general", "complexity": "simple", "text": "How many centimeters are in a meter?", "source": "legacy"}
+{"prompt_id": "leg_0122", "domain": "general", "complexity": "simple", "text": "What does 'hello' mean in English?", "source": "legacy"}
+{"prompt_id": "leg_0123", "domain": "general", "complexity": "simple", "text": "What does water turn into when it freezes?", "source": "legacy"}
+{"prompt_id": "leg_0124", "domain": "general", "complexity": "simple", "text": "What is the command to print to the console in JavaScript?", "source": "legacy"}
+{"prompt_id": "leg_0125", "domain": "general", "complexity": "simple", "text": "What is the smallest prime number?", "source": "legacy"}
+{"prompt_id": "leg_0126", "domain": "general", "complexity": "simple", "text": "How many chromosomes do humans have?", "source": "legacy"}
+{"prompt_id": "leg_0127", "domain": "general", "complexity": "simple", "text": "What is the currency of Turkey?", "source": "legacy"}
+{"prompt_id": "leg_0128", "domain": "general", "complexity": "simple", "text": "How many minutes are in an hour?", "source": "legacy"}
+{"prompt_id": "leg_0129", "domain": "general", "complexity": "simple", "text": "What is the chemical symbol for oxygen?", "source": "legacy"}
+{"prompt_id": "leg_0130", "domain": "general", "complexity": "simple", "text": "How many sides does a square have?", "source": "legacy"}
+{"prompt_id": "leg_0131", "domain": "general", "complexity": "simple", "text": "What is the freezing point of water in Celsius?", "source": "legacy"}
+{"prompt_id": "leg_0132", "domain": "general", "complexity": "simple", "text": "Which planet is known as the Red Planet?", "source": "legacy"}
+{"prompt_id": "leg_0133", "domain": "general", "complexity": "simple", "text": "How many letters are there in the English alphabet?", "source": "legacy"}
+{"prompt_id": "leg_0134", "domain": "general", "complexity": "simple", "text": "What do bees produce?", "source": "legacy"}
+{"prompt_id": "leg_0135", "domain": "general", "complexity": "simple", "text": "What is the opposite of 'hot'?", "source": "legacy"}
+{"prompt_id": "leg_0136", "domain": "general", "complexity": "simple", "text": "How many continents are there on Earth?", "source": "legacy"}
+{"prompt_id": "leg_0137", "domain": "general", "complexity": "simple", "text": "What is the main language spoken in Spain?", "source": "legacy"}
+{"prompt_id": "leg_0138", "domain": "general", "complexity": "simple", "text": "What is the name of the device used to measure temperature?", "source": "legacy"}
+{"prompt_id": "leg_0139", "domain": "general", "complexity": "simple", "text": "What is the capital of Japan?", "source": "legacy"}
+{"prompt_id": "leg_0140", "domain": "general", "complexity": "simple", "text": "How many planets are in the Solar System?", "source": "legacy"}
+{"prompt_id": "leg_0141", "domain": "general", "complexity": "simple", "text": "What gas do humans breathe in to survive?", "source": "legacy"}
+{"prompt_id": "leg_0142", "domain": "general", "complexity": "simple", "text": "What is 15 minus 7?", "source": "legacy"}
+{"prompt_id": "leg_0143", "domain": "general", "complexity": "simple", "text": "Which animal is known as the 'king of the jungle'?", "source": "legacy"}
+{"prompt_id": "leg_0144", "domain": "general", "complexity": "simple", "text": "How many hours are there in a day?", "source": "legacy"}
+{"prompt_id": "leg_0145", "domain": "general", "complexity": "simple", "text": "What is the color of a ripe banana?", "source": "legacy"}
+{"prompt_id": "leg_0146", "domain": "general", "complexity": "simple", "text": "What do you call a shape with five sides?", "source": "legacy"}
+{"prompt_id": "leg_0147", "domain": "general", "complexity": "simple", "text": "What is the first month of the year?", "source": "legacy"}
+{"prompt_id": "leg_0148", "domain": "general", "complexity": "simple", "text": "How many days are there in February in a non-leap year?", "source": "legacy"}
+{"prompt_id": "leg_0149", "domain": "general", "complexity": "simple", "text": "What is the capital of Canada?", "source": "legacy"}
+{"prompt_id": "leg_0150", "domain": "general", "complexity": "simple", "text": "How many legs does a spider have?", "source": "legacy"}
+{"prompt_id": "leg_0151", "domain": "general", "complexity": "simple", "text": "What is the largest planet in our Solar System?", "source": "legacy"}
+{"prompt_id": "leg_0152", "domain": "general", "complexity": "simple", "text": "What is 9 divided by 3?", "source": "legacy"}
+{"prompt_id": "leg_0153", "domain": "general", "complexity": "simple", "text": "Which organ pumps blood through the body?", "source": "legacy"}
+{"prompt_id": "leg_0154", "domain": "general", "complexity": "simple", "text": "What is the primary color you get by mixing blue and yellow?", "source": "legacy"}
+{"prompt_id": "leg_0155", "domain": "general", "complexity": "simple", "text": "How many months have 31 days?", "source": "legacy"}
+{"prompt_id": "leg_0156", "domain": "general", "complexity": "simple", "text": "What is the name of the ship that sank in 1912 after hitting an iceberg?", "source": "legacy"}
+{"prompt_id": "leg_0157", "domain": "general", "complexity": "simple", "text": "What is the currency of the United Kingdom?", "source": "legacy"}
+{"prompt_id": "leg_0158", "domain": "general", "complexity": "simple", "text": "What is the nearest star to Earth?", "source": "legacy"}
+{"prompt_id": "leg_0159", "domain": "general", "complexity": "simple", "text": "What is the capital of Australia?", "source": "legacy"}
+{"prompt_id": "leg_0160", "domain": "general", "complexity": "simple", "text": "How many degrees are in a full circle?", "source": "legacy"}
+{"prompt_id": "leg_0161", "domain": "general", "complexity": "simple", "text": "Which vitamin is produced when the skin is exposed to sunlight?", "source": "legacy"}
+{"prompt_id": "leg_0162", "domain": "general", "complexity": "simple", "text": "What is the largest continent on Earth?", "source": "legacy"}
+{"prompt_id": "leg_0163", "domain": "general", "complexity": "simple", "text": "What is 100 divided by 4?", "source": "legacy"}
+{"prompt_id": "leg_0164", "domain": "general", "complexity": "simple", "text": "What do you call an animal that eats only plants?", "source": "legacy"}
+{"prompt_id": "leg_0165", "domain": "general", "complexity": "simple", "text": "How many zeros are in one million?", "source": "legacy"}
+{"prompt_id": "leg_0166", "domain": "general", "complexity": "simple", "text": "What is the process by which plants make food using sunlight called?", "source": "legacy"}
+{"prompt_id": "leg_0167", "domain": "general", "complexity": "simple", "text": "Which instrument is used to measure air pressure?", "source": "legacy"}
+{"prompt_id": "leg_0168", "domain": "general", "complexity": "simple", "text": "How many strings does a standard guitar have?", "source": "legacy"}
+{"prompt_id": "leg_0169", "domain": "general", "complexity": "simple", "text": "What is the capital of Brazil?", "source": "legacy"}
+{"prompt_id": "leg_0170", "domain": "general", "complexity": "simple", "text": "How many bones are in the adult human body?", "source": "legacy"}
+{"prompt_id": "leg_0171", "domain": "general", "complexity": "simple", "text": "What is 7 times 8?", "source": "legacy"}
+{"prompt_id": "leg_0172", "domain": "general", "complexity": "simple", "text": "Which planet is closest to the Sun?", "source": "legacy"}
+{"prompt_id": "leg_0173", "domain": "general", "complexity": "simple", "text": "What is the tallest mountain in the world called?", "source": "legacy"}
+{"prompt_id": "leg_0174", "domain": "general", "complexity": "simple", "text": "How many colors are there in a rainbow?", "source": "legacy"}
+{"prompt_id": "leg_0175", "domain": "general", "complexity": "simple", "text": "What is the largest mammal on Earth?", "source": "legacy"}
+{"prompt_id": "leg_0176", "domain": "general", "complexity": "simple", "text": "What is the name of the force that pulls objects toward Earth?", "source": "legacy"}
+{"prompt_id": "leg_0177", "domain": "general", "complexity": "simple", "text": "How many days are there in a leap year?", "source": "legacy"}
+{"prompt_id": "leg_0178", "domain": "general", "complexity": "simple", "text": "Which metal is liquid at room temperature?", "source": "legacy"}
+{"prompt_id": "leg_0179", "domain": "general", "complexity": "simple", "text": "What is the capital of Italy?", "source": "legacy"}
+{"prompt_id": "leg_0180", "domain": "general", "complexity": "simple", "text": "How many wheels does a standard bicycle have?", "source": "legacy"}
+{"prompt_id": "leg_0181", "domain": "general", "complexity": "simple", "text": "What is 12 plus 19?", "source": "legacy"}
+{"prompt_id": "leg_0182", "domain": "general", "complexity": "simple", "text": "Which ocean is on the west coast of the United States?", "source": "legacy"}
+{"prompt_id": "leg_0183", "domain": "general", "complexity": "simple", "text": "What is the main ingredient in bread?", "source": "legacy"}
+{"prompt_id": "leg_0184", "domain": "general", "complexity": "simple", "text": "What is the largest internal organ in the human body?", "source": "legacy"}
+{"prompt_id": "leg_0185", "domain": "general", "complexity": "simple", "text": "How many days are there in the month of April?", "source": "legacy"}
+{"prompt_id": "leg_0186", "domain": "general", "complexity": "simple", "text": "What is the name of the line that separates day and night on Earth?", "source": "legacy"}
+{"prompt_id": "leg_0187", "domain": "general", "complexity": "simple", "text": "Which animal is famous for black-and-white stripes?", "source": "legacy"}
+{"prompt_id": "leg_0188", "domain": "general", "complexity": "simple", "text": "What is the name of the hard outer layer of a tree?", "source": "legacy"}
+{"prompt_id": "leg_0189", "domain": "general", "complexity": "simple", "text": "What is the capital of Italy?", "source": "legacy"}
+{"prompt_id": "leg_0190", "domain": "general", "complexity": "simple", "text": "How many seconds are in one minute?", "source": "legacy"}
+{"prompt_id": "leg_0191", "domain": "general", "complexity": "simple", "text": "What is the largest organ in the human body?", "source": "legacy"}
+{"prompt_id": "leg_0192", "domain": "general", "complexity": "simple", "text": "What is 12 plus 19?", "source": "legacy"}
+{"prompt_id": "leg_0193", "domain": "general", "complexity": "simple", "text": "Which ocean is on the east coast of the United States?", "source": "legacy"}
+{"prompt_id": "leg_0194", "domain": "general", "complexity": "simple", "text": "What do you call frozen water?", "source": "legacy"}
+{"prompt_id": "leg_0195", "domain": "general", "complexity": "simple", "text": "How many teeth does an adult human typically have?", "source": "legacy"}
+{"prompt_id": "leg_0196", "domain": "general", "complexity": "simple", "text": "Which planet has the most prominent rings?", "source": "legacy"}
+{"prompt_id": "leg_0197", "domain": "general", "complexity": "simple", "text": "What is the main ingredient in bread that makes it rise?", "source": "legacy"}
+{"prompt_id": "leg_0198", "domain": "general", "complexity": "simple", "text": "What is the name of the tool used to see very small objects in science?", "source": "legacy"}
+{"prompt_id": "leg_0199", "domain": "general", "complexity": "complex", "text": "Explain how incentives can unintentionally encourage harmful behavior in organizations.", "source": "legacy"}
+{"prompt_id": "leg_0200", "domain": "general", "complexity": "complex", "text": "Design a scalable logging system and explain how you would index and query logs efficiently.", "source": "legacy"}
+{"prompt_id": "leg_0201", "domain": "general", "complexity": "complex", "text": "Analyze how loss aversion influences consumer purchasing decisions.", "source": "legacy"}
+{"prompt_id": "leg_0202", "domain": "general", "complexity": "complex", "text": "Explain the difference between synchronous and asynchronous communication in distributed systems.", "source": "legacy"}
+{"prompt_id": "leg_0203", "domain": "general", "complexity": "complex", "text": "Propose a strategy for evaluating long-term user satisfaction beyond short-term engagement metrics.", "source": "legacy"}
+{"prompt_id": "leg_0204", "domain": "general", "complexity": "complex", "text": "Discuss how path dependence affects economic and technological evolution.", "source": "legacy"}
+{"prompt_id": "leg_0205", "domain": "general", "complexity": "complex", "text": "Explain how rate limiting protects APIs from abuse and failure cascades.", "source": "legacy"}
+{"prompt_id": "leg_0206", "domain": "general", "complexity": "complex", "text": "Design a framework to balance exploration vs exploitation in recommendation systems.", "source": "legacy"}
+{"prompt_id": "leg_0207", "domain": "general", "complexity": "complex", "text": "Analyze how social media algorithms amplify extreme content and propose mitigations.", "source": "legacy"}
+{"prompt_id": "leg_0208", "domain": "general", "complexity": "complex", "text": "Explain the difference between precision, recall, and F1-score with concrete examples.", "source": "legacy"}
+{"prompt_id": "leg_0209", "domain": "general", "complexity": "complex", "text": "Propose an approach to detect concept drift without labeled data.", "source": "legacy"}
+{"prompt_id": "leg_0210", "domain": "general", "complexity": "complex", "text": "Discuss how organizational structure influences software architecture (Conway’s Law).", "source": "legacy"}
+{"prompt_id": "leg_0211", "domain": "general", "complexity": "complex", "text": "Explain how auction mechanisms differ (first-price, second-price, VCG) and their incentives.", "source": "legacy"}
+{"prompt_id": "leg_0212", "domain": "general", "complexity": "complex", "text": "Design a pricing strategy for a freemium SaaS product using behavioral insights.", "source": "legacy"}
+{"prompt_id": "leg_0213", "domain": "general", "complexity": "complex", "text": "Analyze the trade-offs between transparency and security in system design.", "source": "legacy"}
+{"prompt_id": "leg_0214", "domain": "general", "complexity": "complex", "text": "Explain how memory hierarchy affects program performance and optimization choices.", "source": "legacy"}
+{"prompt_id": "leg_0215", "domain": "general", "complexity": "complex", "text": "Propose a methodology for stress-testing a large-scale distributed system.", "source": "legacy"}
+{"prompt_id": "leg_0216", "domain": "general", "complexity": "complex", "text": "Discuss the limits of rational-agent models in economics and AI.", "source": "legacy"}
+{"prompt_id": "leg_0217", "domain": "general", "complexity": "complex", "text": "Explain how shadow IT emerges and how organizations can manage it.", "source": "legacy"}
+{"prompt_id": "leg_0218", "domain": "general", "complexity": "complex", "text": "Design a human-in-the-loop system for moderating online content at scale.", "source": "legacy"}
+{"prompt_id": "leg_0219", "domain": "general", "complexity": "complex", "text": "Analyze how principal–agent problems arise in corporate governance.", "source": "legacy"}
+{"prompt_id": "leg_0220", "domain": "general", "complexity": "complex", "text": "Explain the difference between online learning and batch learning in ML systems.", "source": "legacy"}
+{"prompt_id": "leg_0221", "domain": "general", "complexity": "complex", "text": "Propose a framework for evaluating the societal impact of new technologies.", "source": "legacy"}
+{"prompt_id": "leg_0222", "domain": "general", "complexity": "complex", "text": "Discuss how latency and throughput trade off in system performance engineering.", "source": "legacy"}
+{"prompt_id": "leg_0223", "domain": "general", "complexity": "complex", "text": "Explain how adversarial examples challenge machine learning robustness.", "source": "legacy"}
+{"prompt_id": "leg_0224", "domain": "general", "complexity": "complex", "text": "Design a rollback strategy for data schema changes in production systems.", "source": "legacy"}
+{"prompt_id": "leg_0225", "domain": "general", "complexity": "complex", "text": "Analyze how scarcity framing affects perceived value in marketing.", "source": "legacy"}
+{"prompt_id": "leg_0226", "domain": "general", "complexity": "complex", "text": "Explain how distributed locks work and where they fail in practice.", "source": "legacy"}
+{"prompt_id": "leg_0227", "domain": "general", "complexity": "complex", "text": "Propose a strategy to align product metrics with long-term company goals.", "source": "legacy"}
+{"prompt_id": "leg_0228", "domain": "general", "complexity": "complex", "text": "Discuss the implications of Goodhart’s Law in performance measurement.", "source": "legacy"}
+{"prompt_id": "leg_0229", "domain": "general", "complexity": "complex", "text": "Explain how Bayesian updating differs from frequentist inference conceptually.", "source": "legacy"}
+{"prompt_id": "leg_0230", "domain": "general", "complexity": "complex", "text": "Design a system to personalize content without creating echo chambers.", "source": "legacy"}
+{"prompt_id": "leg_0231", "domain": "general", "complexity": "complex", "text": "Analyze how platform governance choices affect creator incentives.", "source": "legacy"}
+{"prompt_id": "leg_0232", "domain": "general", "complexity": "complex", "text": "Explain how eventual consistency can surface user-visible anomalies.", "source": "legacy"}
+{"prompt_id": "leg_0233", "domain": "general", "complexity": "complex", "text": "Propose a method to estimate causal lift when randomization is impossible.", "source": "legacy"}
+{"prompt_id": "leg_0234", "domain": "general", "complexity": "complex", "text": "Discuss the role of norms and culture in enforcing cooperation.", "source": "legacy"}
+{"prompt_id": "leg_0235", "domain": "general", "complexity": "complex", "text": "Explain how cold starts differ for users vs items in recommender systems.", "source": "legacy"}
+{"prompt_id": "leg_0236", "domain": "general", "complexity": "complex", "text": "Design an observability strategy covering metrics, logs, and traces.", "source": "legacy"}
+{"prompt_id": "leg_0237", "domain": "general", "complexity": "complex", "text": "Analyze the trade-offs between static and dynamic typing in large codebases.", "source": "legacy"}
+{"prompt_id": "leg_0238", "domain": "general", "complexity": "complex", "text": "Explain how feedback loops can destabilize complex systems.", "source": "legacy"}
+{"prompt_id": "leg_0239", "domain": "general", "complexity": "complex", "text": "Propose a strategy for gradual deprecation of public APIs.", "source": "legacy"}
+{"prompt_id": "leg_0240", "domain": "general", "complexity": "complex", "text": "Discuss how interpretability requirements vary across high-stakes domains.", "source": "legacy"}
+{"prompt_id": "leg_0241", "domain": "general", "complexity": "complex", "text": "Explain how market power emerges from economies of scale in digital goods.", "source": "legacy"}
+{"prompt_id": "leg_0242", "domain": "general", "complexity": "complex", "text": "Design a cross-functional decision-making process for data-driven products.", "source": "legacy"}
+{"prompt_id": "leg_0243", "domain": "general", "complexity": "complex", "text": "Analyze how defaults influence user choices and ethical considerations.", "source": "legacy"}
+{"prompt_id": "leg_0244", "domain": "general", "complexity": "complex", "text": "Explain how concurrency bugs differ from parallelism bugs.", "source": "legacy"}
+{"prompt_id": "leg_0245", "domain": "general", "complexity": "complex", "text": "Propose a framework to evaluate trustworthiness in AI assistants.", "source": "legacy"}
+{"prompt_id": "leg_0246", "domain": "general", "complexity": "complex", "text": "Discuss how organizational incentives can distort data reporting.", "source": "legacy"}
+{"prompt_id": "leg_0247", "domain": "general", "complexity": "complex", "text": "Explain how resilience engineering differs from traditional risk management.", "source": "legacy"}
+{"prompt_id": "leg_0248", "domain": "general", "complexity": "complex", "text": "Design a system to measure true user value rather than proxy metrics.", "source": "legacy"}
+{"prompt_id": "leg_0249", "domain": "general", "complexity": "complex", "text": "Explain the difference between supervised, unsupervised, and reinforcement learning with real-world examples.", "source": "legacy"}
+{"prompt_id": "leg_0250", "domain": "general", "complexity": "complex", "text": "Design a scalable architecture for a real-time chat application and explain key trade-offs.", "source": "legacy"}
+{"prompt_id": "leg_0251", "domain": "general", "complexity": "complex", "text": "Analyze how confirmation bias affects decision-making in organizations and propose mitigation strategies.", "source": "legacy"}
+{"prompt_id": "leg_0252", "domain": "general", "complexity": "complex", "text": "Explain how blockchain achieves trust without a central authority, including its limitations.", "source": "legacy"}
+{"prompt_id": "leg_0253", "domain": "general", "complexity": "complex", "text": "Design an experiment to measure the causal impact of a new feature on user retention.", "source": "legacy"}
+{"prompt_id": "leg_0254", "domain": "general", "complexity": "complex", "text": "Discuss how cultural factors influence negotiation strategies in international business.", "source": "legacy"}
+{"prompt_id": "leg_0255", "domain": "general", "complexity": "complex", "text": "Explain the difference between horizontal and vertical scaling and when to use each.", "source": "legacy"}
+{"prompt_id": "leg_0256", "domain": "general", "complexity": "complex", "text": "Analyze the ethical implications of facial recognition technology in public spaces.", "source": "legacy"}
+{"prompt_id": "leg_0257", "domain": "general", "complexity": "complex", "text": "Explain how TCP ensures reliable data transmission over unreliable networks.", "source": "legacy"}
+{"prompt_id": "leg_0258", "domain": "general", "complexity": "complex", "text": "Propose a strategy to handle missing data in a large-scale machine learning dataset.", "source": "legacy"}
+{"prompt_id": "leg_0259", "domain": "general", "complexity": "complex", "text": "Explain how monetary policy tools influence inflation and unemployment.", "source": "legacy"}
+{"prompt_id": "leg_0260", "domain": "general", "complexity": "complex", "text": "Design a fault-tolerant data pipeline for processing streaming events at scale.", "source": "legacy"}
+{"prompt_id": "leg_0261", "domain": "general", "complexity": "complex", "text": "Discuss how cognitive load theory impacts instructional design.", "source": "legacy"}
+{"prompt_id": "leg_0262", "domain": "general", "complexity": "complex", "text": "Explain the trade-offs between SQL and NoSQL databases for analytical workloads.", "source": "legacy"}
+{"prompt_id": "leg_0263", "domain": "general", "complexity": "complex", "text": "Analyze how network effects can create monopolies in digital markets.", "source": "legacy"}
+{"prompt_id": "leg_0264", "domain": "general", "complexity": "complex", "text": "Explain how backpressure works in stream processing systems.", "source": "legacy"}
+{"prompt_id": "leg_0265", "domain": "general", "complexity": "complex", "text": "Design a user authentication flow that balances security and usability.", "source": "legacy"}
+{"prompt_id": "leg_0266", "domain": "general", "complexity": "complex", "text": "Discuss how survivorship bias distorts conclusions in data analysis.", "source": "legacy"}
+{"prompt_id": "leg_0267", "domain": "general", "complexity": "complex", "text": "Explain the role of embeddings in semantic search systems.", "source": "legacy"}
+{"prompt_id": "leg_0268", "domain": "general", "complexity": "complex", "text": "Propose a framework to evaluate fairness in machine learning models.", "source": "legacy"}
+{"prompt_id": "leg_0269", "domain": "general", "complexity": "complex", "text": "Analyze how exchange rates affect international trade balances.", "source": "legacy"}
+{"prompt_id": "leg_0270", "domain": "general", "complexity": "complex", "text": "Explain the principles of RESTful API design and common anti-patterns.", "source": "legacy"}
+{"prompt_id": "leg_0271", "domain": "general", "complexity": "complex", "text": "Design a monitoring system to detect anomalies in real-time metrics.", "source": "legacy"}
+{"prompt_id": "leg_0272", "domain": "general", "complexity": "complex", "text": "Discuss how incentives shape behavior in online platforms.", "source": "legacy"}
+{"prompt_id": "leg_0273", "domain": "general", "complexity": "complex", "text": "Explain how container orchestration systems like Kubernetes manage failures.", "source": "legacy"}
+{"prompt_id": "leg_0274", "domain": "general", "complexity": "complex", "text": "Analyze the environmental trade-offs of cloud computing versus on-premise infrastructure.", "source": "legacy"}
+{"prompt_id": "leg_0275", "domain": "general", "complexity": "complex", "text": "Explain how causal graphs help distinguish correlation from causation.", "source": "legacy"}
+{"prompt_id": "leg_0276", "domain": "general", "complexity": "complex", "text": "Design a recommendation system for news while minimizing filter bubbles.", "source": "legacy"}
+{"prompt_id": "leg_0277", "domain": "general", "complexity": "complex", "text": "Discuss the psychological factors behind habit formation in product design.", "source": "legacy"}
+{"prompt_id": "leg_0278", "domain": "general", "complexity": "complex", "text": "Explain the difference between eventual consistency and linearizability.", "source": "legacy"}
+{"prompt_id": "leg_0279", "domain": "general", "complexity": "complex", "text": "Propose a data anonymization strategy that balances privacy and utility.", "source": "legacy"}
+{"prompt_id": "leg_0280", "domain": "general", "complexity": "complex", "text": "Analyze how algorithmic decision-making can reinforce social inequalities.", "source": "legacy"}
+{"prompt_id": "leg_0281", "domain": "general", "complexity": "complex", "text": "Explain how transformers differ from RNNs in handling long-range dependencies.", "source": "legacy"}
+{"prompt_id": "leg_0282", "domain": "general", "complexity": "complex", "text": "Design an access control model for a multi-tenant SaaS platform.", "source": "legacy"}
+{"prompt_id": "leg_0283", "domain": "general", "complexity": "complex", "text": "Discuss the limitations of accuracy as a metric in imbalanced classification problems.", "source": "legacy"}
+{"prompt_id": "leg_0284", "domain": "general", "complexity": "complex", "text": "Explain how market signaling works in labor markets.", "source": "legacy"}
+{"prompt_id": "leg_0285", "domain": "general", "complexity": "complex", "text": "Design a system to detect and mitigate bot activity on a website.", "source": "legacy"}
+{"prompt_id": "leg_0286", "domain": "general", "complexity": "complex", "text": "Analyze the trade-offs between centralized and decentralized governance models.", "source": "legacy"}
+{"prompt_id": "leg_0287", "domain": "general", "complexity": "complex", "text": "Explain how feature flags enable safer software deployments.", "source": "legacy"}
+{"prompt_id": "leg_0288", "domain": "general", "complexity": "complex", "text": "Propose an evaluation framework for explainability in AI systems.", "source": "legacy"}
+{"prompt_id": "leg_0289", "domain": "general", "complexity": "complex", "text": "Discuss how time-series forecasting differs from cross-sectional prediction.", "source": "legacy"}
+{"prompt_id": "leg_0290", "domain": "general", "complexity": "complex", "text": "Explain how schema evolution can be handled in distributed data systems.", "source": "legacy"}
+{"prompt_id": "leg_0291", "domain": "general", "complexity": "complex", "text": "Analyze the role of trust in peer-to-peer marketplaces.", "source": "legacy"}
+{"prompt_id": "leg_0292", "domain": "general", "complexity": "complex", "text": "Design a consent management system compliant with data protection laws.", "source": "legacy"}
+{"prompt_id": "leg_0293", "domain": "general", "complexity": "complex", "text": "Explain how graph databases differ from relational databases and when to use them.", "source": "legacy"}
+{"prompt_id": "leg_0294", "domain": "general", "complexity": "complex", "text": "Discuss the economic rationale behind subscription pricing models.", "source": "legacy"}
+{"prompt_id": "leg_0295", "domain": "general", "complexity": "complex", "text": "Explain how model ensembles improve robustness and when they fail.", "source": "legacy"}
+{"prompt_id": "leg_0296", "domain": "general", "complexity": "complex", "text": "Design a strategy to prevent data drift in production ML systems.", "source": "legacy"}
+{"prompt_id": "leg_0297", "domain": "general", "complexity": "complex", "text": "Analyze how social proof influences user behavior in online reviews.", "source": "legacy"}
+{"prompt_id": "leg_0298", "domain": "general", "complexity": "complex", "text": "Explain quantum entanglement as if you were explaining it to a 5-year-old.", "source": "legacy"}
+{"prompt_id": "leg_0299", "domain": "general", "complexity": "complex", "text": "Design a database schema for an e-commerce website and explain the tables.", "source": "legacy"}
+{"prompt_id": "leg_0300", "domain": "general", "complexity": "complex", "text": "Analyze the economic impacts of climate change on agriculture.", "source": "legacy"}
+{"prompt_id": "leg_0301", "domain": "general", "complexity": "complex", "text": "Explain step by step the logic of writing an asynchronous web scraper in Python.", "source": "legacy"}
+{"prompt_id": "leg_0302", "domain": "general", "complexity": "complex", "text": "Discuss the ontological basis of the statement 'I think, therefore I am' in philosophy.", "source": "legacy"}
+{"prompt_id": "leg_0303", "domain": "general", "complexity": "complex", "text": "What are the logistical and psychological challenges of building a colony on Mars?", "source": "legacy"}
+{"prompt_id": "leg_0304", "domain": "general", "complexity": "complex", "text": "Explain how opening theory in chess affects middlegame strategy.", "source": "legacy"}
+{"prompt_id": "leg_0305", "domain": "general", "complexity": "complex", "text": "Create an essay outline about the ethical problems of artificial intelligence.", "source": "legacy"}
+{"prompt_id": "leg_0306", "domain": "general", "complexity": "complex", "text": "List and elaborate on the legal processes to consider when founding a startup.", "source": "legacy"}
+{"prompt_id": "leg_0307", "domain": "general", "complexity": "complex", "text": "Why is the sky blue? Explain in detail with the physical principles.", "source": "legacy"}
+{"prompt_id": "leg_0308", "domain": "general", "complexity": "complex", "text": "When designing a recommendation system, how would you solve the cold-start problem? Compare methods.", "source": "legacy"}
+{"prompt_id": "leg_0309", "domain": "general", "complexity": "complex", "text": "In modern cryptography, what is 'forward secrecy' and why is it important? Explain with an example scenario.", "source": "legacy"}
+{"prompt_id": "leg_0310", "domain": "general", "complexity": "complex", "text": "What are the pros and cons of building an offline-first architecture in a mobile app? Propose a synchronization strategy.", "source": "legacy"}
+{"prompt_id": "leg_0311", "domain": "general", "complexity": "complex", "text": "Analyze how inflation affects income distribution through its mechanisms (wages, assets, indebtedness).", "source": "legacy"}
+{"prompt_id": "leg_0312", "domain": "general", "complexity": "complex", "text": "What signals would you look at to detect overfitting in a neural network, and how would you intervene?", "source": "legacy"}
+{"prompt_id": "leg_0313", "domain": "general", "complexity": "complex", "text": "Discuss the difference between deontological ethics and consequentialism in Kant’s moral philosophy, using an argument structure.", "source": "legacy"}
+{"prompt_id": "leg_0314", "domain": "general", "complexity": "complex", "text": "For optimizing public transportation in a city, what data would you collect and which optimization approach would you choose?", "source": "legacy"}
+{"prompt_id": "leg_0315", "domain": "general", "complexity": "complex", "text": "Why is distributed tracing necessary in a microservices architecture? Explain with its core components.", "source": "legacy"}
+{"prompt_id": "leg_0316", "domain": "general", "complexity": "complex", "text": "Design a process to ensure data quality in a large-scale data pipeline.", "source": "legacy"}
+{"prompt_id": "leg_0317", "domain": "general", "complexity": "complex", "text": "Which is more effective for reducing greenhouse gas emissions: a carbon tax or emissions trading? Evaluate depending on conditions.", "source": "legacy"}
+{"prompt_id": "leg_0318", "domain": "general", "complexity": "complex", "text": "How would you measure demand elasticity to set a product’s price, and how would you incorporate it into a model?", "source": "legacy"}
+{"prompt_id": "leg_0319", "domain": "general", "complexity": "complex", "text": "Explain intuitively and technically how the attention mechanism in transformer-based models affects information flow.", "source": "legacy"}
+{"prompt_id": "leg_0320", "domain": "general", "complexity": "complex", "text": "Create an end-to-end compliance plan to make a company’s data GDPR/KVKK-compliant.", "source": "legacy"}
+{"prompt_id": "leg_0321", "domain": "general", "complexity": "complex", "text": "In game theory, what does a Nash equilibrium guarantee, and in which cases is it insufficient? Discuss with examples.", "source": "legacy"}
+{"prompt_id": "leg_0322", "domain": "general", "complexity": "complex", "text": "Explain the CAP theorem in distributed systems with real-world examples and how it influences architectural decisions.", "source": "legacy"}
+{"prompt_id": "leg_0323", "domain": "general", "complexity": "complex", "text": "In A/B testing, how would you detect and prevent p-hacking and multiple-comparisons problems?", "source": "legacy"}
+{"prompt_id": "leg_0324", "domain": "general", "complexity": "complex", "text": "How would you study the long-term impact of investment in education on economic growth from a causality perspective?", "source": "legacy"}
+{"prompt_id": "leg_0325", "domain": "general", "complexity": "complex", "text": "How would you mitigate the prompt injection threat in an LLM application? Propose a layered defense strategy.", "source": "legacy"}
+{"prompt_id": "leg_0326", "domain": "general", "complexity": "complex", "text": "How can you tell if a dataset has selection bias, and which methods would you use to correct it?", "source": "legacy"}
+{"prompt_id": "leg_0327", "domain": "general", "complexity": "complex", "text": "When writing a persuasive speech, how would you balance ethos/pathos/logos? Propose a structure.", "source": "legacy"}
+{"prompt_id": "leg_0328", "domain": "general", "complexity": "complex", "text": "Design an API rate-limiting strategy for a public service: compare token bucket vs leaky bucket and justify your choice.", "source": "legacy"}
+{"prompt_id": "leg_0329", "domain": "general", "complexity": "complex", "text": "Explain how gradient descent behaves on a non-convex loss surface, and what techniques help escape saddle points.", "source": "legacy"}
+{"prompt_id": "leg_0330", "domain": "general", "complexity": "complex", "text": "Propose an experiment to estimate the causal effect of remote work on productivity, including threats to validity.", "source": "legacy"}
+{"prompt_id": "leg_0331", "domain": "general", "complexity": "complex", "text": "Analyze the trade-offs between eventual consistency and strong consistency in a global-scale system with user-facing latency constraints.", "source": "legacy"}
+{"prompt_id": "leg_0332", "domain": "general", "complexity": "complex", "text": "Create a threat model for a consumer web app and propose mitigations for the top risks (auth, data leakage, abuse).", "source": "legacy"}
+{"prompt_id": "leg_0333", "domain": "general", "complexity": "complex", "text": "Explain the difference between principal component analysis (PCA) and t-SNE/UMAP, and when you would choose each for exploration.", "source": "legacy"}
+{"prompt_id": "leg_0334", "domain": "general", "complexity": "complex", "text": "Design a data governance approach for a company adopting a lakehouse architecture, including access control and lineage.", "source": "legacy"}
+{"prompt_id": "leg_0335", "domain": "general", "complexity": "complex", "text": "In macroeconomics, explain how an interest rate hike transmits to inflation via multiple channels, and where it can fail.", "source": "legacy"}
+{"prompt_id": "leg_0336", "domain": "general", "complexity": "complex", "text": "Draft a policy for responsible AI use in hiring, including fairness evaluation, monitoring, and appeal mechanisms.", "source": "legacy"}
+{"prompt_id": "leg_0337", "domain": "general", "complexity": "complex", "text": "Explain how to evaluate an LLM-powered assistant end-to-end (offline metrics, human eval, and online A/B testing) and define success criteria.", "source": "legacy"}
+{"prompt_id": "leg_0338", "domain": "general", "complexity": "complex", "text": "Design a sharded database strategy for a fast-growing application and explain how you would handle re-sharding with minimal downtime.", "source": "legacy"}
+{"prompt_id": "leg_0339", "domain": "general", "complexity": "complex", "text": "Explain how retrieval-augmented generation (RAG) can fail (hallucinations, stale context, retrieval mismatch) and propose concrete mitigations.", "source": "legacy"}
+{"prompt_id": "leg_0340", "domain": "general", "complexity": "complex", "text": "Propose a monitoring and alerting plan for a machine learning model in production (data drift, concept drift, performance decay).", "source": "legacy"}
+{"prompt_id": "leg_0341", "domain": "general", "complexity": "complex", "text": "Analyze how misinformation spreads on social networks using network effects and incentives, and suggest intervention points.", "source": "legacy"}
+{"prompt_id": "leg_0342", "domain": "general", "complexity": "complex", "text": "Compare zero-shot, few-shot, and fine-tuning approaches for adapting an LLM to a domain; include cost, risk, and evaluation considerations.", "source": "legacy"}
+{"prompt_id": "leg_0343", "domain": "general", "complexity": "complex", "text": "Explain the economics of two-sided marketplaces and how pricing strategy differs from single-sided markets.", "source": "legacy"}
+{"prompt_id": "leg_0344", "domain": "general", "complexity": "complex", "text": "Design an incident response runbook for a suspected credential-stuffing attack, including containment and postmortem steps.", "source": "legacy"}
+{"prompt_id": "leg_0345", "domain": "general", "complexity": "complex", "text": "Discuss the philosophical debate between compatibilism and libertarian free will, and how each addresses moral responsibility.", "source": "legacy"}
+{"prompt_id": "leg_0346", "domain": "general", "complexity": "complex", "text": "Create a plan to migrate a monolith to microservices while minimizing organizational and technical risk; include sequencing and boundaries.", "source": "legacy"}
+{"prompt_id": "leg_0347", "domain": "general", "complexity": "complex", "text": "Explain why correlation does not imply causation using at least three distinct confounding scenarios and how to resolve them empirically.", "source": "legacy"}
+{"prompt_id": "leg_0348", "domain": "general", "complexity": "complex", "text": "Explain how differential privacy works at a high level and how you would choose an epsilon value for a real product use-case.", "source": "legacy"}
+{"prompt_id": "leg_0349", "domain": "general", "complexity": "complex", "text": "Design a feature store for machine learning: discuss offline vs online serving, consistency, and backfilling.", "source": "legacy"}
+{"prompt_id": "leg_0350", "domain": "general", "complexity": "complex", "text": "Compare BERT-style encoder models vs GPT-style decoder models: architectural differences and best-fit tasks.", "source": "legacy"}
+{"prompt_id": "leg_0351", "domain": "general", "complexity": "complex", "text": "Propose a methodology to audit a dataset for demographic bias without having explicit demographic labels.", "source": "legacy"}
+{"prompt_id": "leg_0352", "domain": "general", "complexity": "complex", "text": "Explain how a compiler optimizes code (e.g., inlining, loop unrolling, dead-code elimination) and the trade-offs involved.", "source": "legacy"}
+{"prompt_id": "leg_0353", "domain": "general", "complexity": "complex", "text": "Analyze the impact of supply chain disruptions on inflation and employment, using an aggregate-demand/aggregate-supply lens.", "source": "legacy"}
+{"prompt_id": "leg_0354", "domain": "general", "complexity": "complex", "text": "Design an experiment to measure the long-term retention impact of a new onboarding flow, including metric definitions and pitfalls.", "source": "legacy"}
+{"prompt_id": "leg_0355", "domain": "general", "complexity": "complex", "text": "Explain the Byzantine Generals Problem and how practical consensus protocols address it in real-world systems.", "source": "legacy"}
+{"prompt_id": "leg_0356", "domain": "general", "complexity": "complex", "text": "Outline a secure key management and rotation policy for a cloud-native application handling sensitive user data.", "source": "legacy"}
+{"prompt_id": "leg_0357", "domain": "general", "complexity": "complex", "text": "Discuss how narrative framing affects public policy support, referencing cognitive biases and decision-making mechanisms.", "source": "legacy"}
+{"prompt_id": "leg_0358", "domain": "general", "complexity": "complex", "text": "Design a caching strategy for a high-traffic application: what to cache, eviction policies, and how to prevent cache stampedes.", "source": "legacy"}
+{"prompt_id": "leg_0359", "domain": "general", "complexity": "complex", "text": "Explain the bias–variance trade-off and how it guides model selection and regularization choices in practice.", "source": "legacy"}
+{"prompt_id": "leg_0360", "domain": "general", "complexity": "complex", "text": "Propose a robust evaluation plan for a credit-scoring model that balances accuracy, fairness, and regulatory constraints.", "source": "legacy"}
+{"prompt_id": "leg_0361", "domain": "general", "complexity": "complex", "text": "Analyze the geopolitical and economic consequences of large-scale renewable energy adoption for oil-exporting countries.", "source": "legacy"}
+{"prompt_id": "leg_0362", "domain": "general", "complexity": "complex", "text": "Explain how backpropagation works conceptually, and why vanishing/exploding gradients occur in deep networks.", "source": "legacy"}
+{"prompt_id": "leg_0363", "domain": "general", "complexity": "complex", "text": "Design a multilingual search system: tokenization, ranking, language detection, and evaluation methodology.", "source": "legacy"}
+{"prompt_id": "leg_0364", "domain": "general", "complexity": "complex", "text": "Discuss how institutional incentives can lead to policy lock-in, and propose mechanisms to enable adaptive policymaking.", "source": "legacy"}
+{"prompt_id": "leg_0365", "domain": "general", "complexity": "complex", "text": "Compare containerization and virtual machines for production workloads: isolation, performance, and operational trade-offs.", "source": "legacy"}
+{"prompt_id": "leg_0366", "domain": "general", "complexity": "complex", "text": "Create a plan for secure software supply chain management (SBOMs, signing, dependency pinning, CI/CD controls).", "source": "legacy"}
+{"prompt_id": "leg_0367", "domain": "general", "complexity": "complex", "text": "Explain how to perform a root-cause analysis for a sudden drop in conversion rate, including hypotheses and data checks.", "source": "legacy"}
+{"prompt_id": "leg_0368", "domain": "general", "complexity": "complex", "text": "Design a fraud-detection system for online payments: features, model choice, latency constraints, and human review loops.", "source": "legacy"}
+{"prompt_id": "leg_0369", "domain": "general", "complexity": "complex", "text": "Explain how L1 vs L2 regularization changes model behavior, sparsity, and robustness; include when you’d prefer each.", "source": "legacy"}
+{"prompt_id": "leg_0370", "domain": "general", "complexity": "complex", "text": "Propose an architecture for real-time analytics (stream processing): ingestion, storage, windowing, and exactly-once trade-offs.", "source": "legacy"}
+{"prompt_id": "leg_0371", "domain": "general", "complexity": "complex", "text": "Analyze how housing supply constraints affect rent inflation and labor mobility, and propose policy interventions with trade-offs.", "source": "legacy"}
+{"prompt_id": "leg_0372", "domain": "general", "complexity": "complex", "text": "Explain how public-key infrastructure (PKI) works end-to-end and where trust can break in practice.", "source": "legacy"}
+{"prompt_id": "leg_0373", "domain": "general", "complexity": "complex", "text": "Design a privacy-preserving telemetry strategy for a mobile app while keeping it useful for debugging and product decisions.", "source": "legacy"}
+{"prompt_id": "leg_0374", "domain": "general", "complexity": "complex", "text": "Discuss the ethics of persuasive design in consumer apps and propose a framework for avoiding dark patterns.", "source": "legacy"}
+{"prompt_id": "leg_0375", "domain": "general", "complexity": "complex", "text": "Compare Monte Carlo methods vs deterministic numerical methods for estimating integrals or uncertainties; provide use-cases.", "source": "legacy"}
+{"prompt_id": "leg_0376", "domain": "general", "complexity": "complex", "text": "Create a plan to evaluate and reduce carbon footprint of a data center workload, including measurement and optimization levers.", "source": "legacy"}
+{"prompt_id": "leg_0377", "domain": "general", "complexity": "complex", "text": "Explain how to build a robust ETL testing strategy (unit, integration, reconciliation) for mission-critical reporting.", "source": "legacy"}
+{"prompt_id": "leg_0378", "domain": "general", "complexity": "complex", "text": "Design a reliable messaging system for microservices: compare at-least-once vs exactly-once delivery and how you’d implement idempotency.", "source": "legacy"}
+{"prompt_id": "leg_0379", "domain": "general", "complexity": "complex", "text": "Explain how feature drift differs from concept drift, and propose detection + remediation steps for each.", "source": "legacy"}
+{"prompt_id": "leg_0380", "domain": "general", "complexity": "complex", "text": "Propose a strategy to reduce churn for a subscription product using cohort analysis, segmentation, and experimentation.", "source": "legacy"}
+{"prompt_id": "leg_0381", "domain": "general", "complexity": "complex", "text": "Analyze the trade-offs of central bank digital currencies (CBDCs) for privacy, financial stability, and monetary policy.", "source": "legacy"}
+{"prompt_id": "leg_0382", "domain": "general", "complexity": "complex", "text": "Explain how to defend an application against SSRF vulnerabilities with concrete controls and validation strategies.", "source": "legacy"}
+{"prompt_id": "leg_0383", "domain": "general", "complexity": "complex", "text": "Design a high-quality labeling workflow for training data: guidelines, QA sampling, inter-annotator agreement, and iteration.", "source": "legacy"}
+{"prompt_id": "leg_0384", "domain": "general", "complexity": "complex", "text": "Discuss the philosophical problem of induction and how it impacts scientific reasoning and everyday decision-making.", "source": "legacy"}
+{"prompt_id": "leg_0385", "domain": "general", "complexity": "complex", "text": "Compare batch processing vs stream processing for anomaly detection: latency, cost, and accuracy implications.", "source": "legacy"}
+{"prompt_id": "leg_0386", "domain": "general", "complexity": "complex", "text": "Create an approach to evaluate a ranking/search algorithm using offline metrics (NDCG/MAP) and online metrics; address metric gaming.", "source": "legacy"}
+{"prompt_id": "leg_0387", "domain": "general", "complexity": "complex", "text": "Explain how to plan a zero-downtime migration from one authentication system to another (sessions, tokens, rollout, rollback).", "source": "legacy"}
+{"prompt_id": "leg_0388", "domain": "general", "complexity": "complex", "text": "Explain how vector databases enable semantic search, and how you would choose an embedding model and distance metric.", "source": "legacy"}
+{"prompt_id": "leg_0389", "domain": "general", "complexity": "complex", "text": "Design a robust rollout strategy for a risky backend change (canary, feature flags, rollback) with clear success metrics.", "source": "legacy"}
+{"prompt_id": "leg_0390", "domain": "general", "complexity": "complex", "text": "Analyze how algorithmic pricing can lead to tacit collusion, and suggest monitoring or regulatory safeguards.", "source": "legacy"}
+{"prompt_id": "leg_0391", "domain": "general", "complexity": "complex", "text": "Propose a secure authentication architecture for a consumer app (MFA, session management, refresh tokens) and common pitfalls.", "source": "legacy"}
+{"prompt_id": "leg_0392", "domain": "general", "complexity": "complex", "text": "Compare optimistic vs pessimistic concurrency control in databases, including failure modes and performance trade-offs.", "source": "legacy"}
+{"prompt_id": "leg_0393", "domain": "general", "complexity": "complex", "text": "Explain how knowledge distillation works for model compression and where it can degrade performance unexpectedly.", "source": "legacy"}
+{"prompt_id": "leg_0394", "domain": "general", "complexity": "complex", "text": "Design a labeling strategy for training a high-quality classifier when labels are expensive (active learning, weak supervision).", "source": "legacy"}
+{"prompt_id": "leg_0395", "domain": "general", "complexity": "complex", "text": "Discuss how central bank communication (forward guidance) affects market expectations and economic outcomes, with mechanisms.", "source": "legacy"}
+{"prompt_id": "leg_0396", "domain": "general", "complexity": "complex", "text": "Outline an approach to detect and mitigate data leakage in machine learning pipelines, including time-based leakage.", "source": "legacy"}
+{"prompt_id": "leg_0397", "domain": "general", "complexity": "complex", "text": "Explain how to construct a decision matrix for build-vs-buy choices in software, including hidden costs and vendor risk.", "source": "legacy"}

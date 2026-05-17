@@ -1,0 +1,74 @@
+### SOC Runbook Excerpt for Responding to a Ransomware Infection on File Server
+
+#### Incident Overview:
+A ransomware infection was detected on the file server with hostname `FS1234` (IP: 192.168.10.5) at 17:25 on October 1, 2023.
+
+---
+
+#### Initial Response:
+
+**Step 1: Isolation of Affected Systems**
+- **Isolate the Infected File Server (`FS1234`)**:
+    - Disconnect `FS1234` from the network using the following command in PowerShell: 
+        ```powershell
+        netsh advfirewall firewall add rule name="Disconnect FS1234" dir=out action=block remoteip=192.168.10.5
+        ```
+    - Notify all relevant teams and stakeholders about the isolation of `FS1234`.
+
+**Step 2: Verification of Backup Integrity**
+- **Verify Most Recent Backups**:
+    - Access the backup server with hostname `BackupServer` (IP: 192.168.20.7) to verify that recent backups are intact.
+    - Execute the following command in PowerShell on the backup server to check the integrity of the most recent backup:
+        ```powershell
+        Test-Path \\backupserver\backups$\FS1234\latest
+        ```
+    - If backups are found, ensure their integrity and availability by restoring a test environment using the `Restore-Item` cmdlet.
+    - Document the steps taken to verify backup integrity.
+
+**Step 3: Incident Notification**
+- **Notify SOC Team and Stakeholders**:
+    - Send an email notification to the SOC team and relevant stakeholders including the CISO, IT Manager, and Legal Department with details of the incident.
+        ```plaintext
+        Subject: Ransomware Infection Detected on File Server FS1234
+
+        [Date]: October 1, 2023
+        Location: 192.168.10.5
+        Affected Systems: FS1234
+        Action Taken: Network isolation and backup verification initiated.
+
+        Please review the attached report for further details.
+        ```
+
+---
+
+#### Negotiation Policy:
+
+- **Refer to the Ransomware Negotiation Policy**:
+    - Consult the company's ransomware negotiation policy, which is located in the [Internal Security Repository] > [Policies & Procedures].
+    - Key points include:
+        1. Do not pay ransoms unless absolutely necessary and with prior approval.
+        2. Maintain open communication channels with the attackers while ensuring no sensitive information is disclosed.
+
+---
+
+#### Recovery Procedure:
+
+**Step 4: System Recovery**
+- **Initiate Data Recovery from Backup**:
+    - Restore `FS1234` using a verified, intact backup from the `BackupServer`.
+    - Use the `Restore-Item` cmdlet in PowerShell to restore files:
+        ```powershell
+        Restore-Item -Path \\backupserver\backups$\FS1234\latest -Destination C:\Files
+        ```
+    - Validate the restoration process by comparing file hashes before and after recovery.
+
+**Step 5: Post-Incident Analysis**
+- **Analyze and Document the Incident**:
+    - Conduct a thorough post-incident analysis to identify how the ransomware was introduced into the network.
+    - Document findings, lessons learned, and recommendations for future prevention in the incident report.
+    - Ensure all team members are updated on the progress and conclusions of the recovery efforts.
+
+**Step 6: System Hardening**
+- **Implement Preventive Measures**:
+    - Update security policies to include regular system scans and continuous monitoring.
+    - Conduct a full system hardening review for `FS12

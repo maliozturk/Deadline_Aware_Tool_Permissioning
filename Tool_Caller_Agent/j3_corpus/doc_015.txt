@@ -1,0 +1,65 @@
+### SOC Runbook Excerpt: Investigating Unauthorized Lateral Movement
+
+**Objective:** The objective is to identify the source and extent of unauthorized lateral movement within the network, isolate affected hosts, and implement necessary security measures to prevent further breaches.
+
+**Incident Details:**
+- **Date/Time of Detection:** April 12, 2023, at 14:30 UTC
+- **Detected By:** Network Intrusion Detection System (NIDS)
+- **IP Address of Malicious Entity:** 192.168.10.54
+- **Hostnames Involved:**
+  - Internal Server: `webserver01`
+  - Database Server: `dbserver01`
+
+**Step 1: Initial Alert Acknowledgment and Isolation**
+
+1.1. Confirm the alert with NIDS logs.
+   - Verify that unauthorized access was detected from IP 192.168.10.54 to both `webserver01` and `dbserver01`.
+
+1.2. Immediately isolate the affected hosts by:
+   - Disconnecting `webserver01` and `dbserver01` from the network.
+   - Removing them from any active services or configurations.
+
+**Step 2: Credential Reset Procedures**
+
+2.1. Identify all credentials used on both servers.
+   - For `webserver01`, review user accounts with access to the web application.
+   - For `dbserver01`, check for database administrators and other privileged users.
+
+2.2. Generate new, strong passwords for affected accounts:
+   - Use a password manager tool to create unique, complex passwords.
+   - Ensure that these passwords are not reused across any other systems or applications.
+
+2.3. Promptly change the credentials on both servers:
+   - Use secure methods (e.g., RDP with SFTP) to update the necessary user accounts.
+   - Document all changes and maintain a record of updated passwords.
+
+**Step 3: Enumeration of Affected Hosts**
+
+3.1. Conduct a thorough enumeration process for `webserver01` and `dbserver01`:
+   - Check system logs (e.g., Windows Event Viewer, Syslog) for any unusual activity.
+   - Review network traffic logs to identify potential lateral movement paths.
+
+3.2. Identify any additional hosts that may have been compromised or accessed:
+   - Use security tools such as Splunk or Graylog to search for similar patterns of unauthorized access.
+   - Document all identified hosts and their statuses (e.g., potentially affected, isolated).
+
+**Step 4: Forensic Image Collection**
+
+4.1. Collect forensic images from `webserver01` and `dbserver01`:
+   - Use a write-blocker to ensure that the evidence is not altered.
+   - Create an image of each drive using tools like Encase or FTK Imager.
+
+4.2. Securely transfer the forensic images to a read-only storage device:
+   - Store the images in a secure location, such as a designated forensic server within the SOC environment.
+
+4.3. Analyze the collected data for further insights into the incident:
+   - Use digital forensics tools to parse through logs and traffic captures.
+   - Look for signs of additional compromise or exfiltration activities.
+
+**Conclusion:**
+The investigation has established that unauthorized lateral movement occurred from IP 192.168.10.54, affecting `webserver01` and `dbserver01`. All affected accounts have been reset to new passwords, and forensic images have been collected for further analysis. The next steps will be to conduct a thorough review of the forensic data and update security policies to prevent future breaches.
+
+**Next Steps:**
+- Conduct a full incident report.
+- Perform a post-incident review with relevant stakeholders.
+- Update security protocols based on

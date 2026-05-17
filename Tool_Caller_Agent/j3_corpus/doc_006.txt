@@ -1,0 +1,64 @@
+### SOC Runbook Excerpt: Triage Workflow for Phishing Email Reported by Employee
+
+#### Header Analysis Steps:
+
+1. **Initial Review:**
+   - **Date/Time:** March 23, 2023, 14:56 UTC.
+   - **Incident ID:** PH-007-2023.
+   - **Reporter:** Jane Doe, IT Support Department.
+
+2. **Email Header Analysis:**
+   - **From Address:** `phishing@maliciousdomain.com`.
+   - **Subject Line:** Urgent: Update Your Account Information.
+   - **To Address:** jane.doe@example.corp.
+   - **Date Sent:** March 21, 2023, 16:45 UTC.
+   - **IP Address of Sender:** 192.0.2.10 (Suspected Phishing Server).
+   - **SPF Record Check:** No valid SPF record for `maliciousdomain.com`.
+   - **DKIM Verification:** Failed verification.
+
+3. **Attachment Review:**
+   - **File Name:** update_info.zip.
+   - **File Type:** ZIP archive.
+   - **Size:** 12.5 KB.
+   - **Content-Type:** application/zip.
+
+4. **URL Analysis:**
+   - **Link in Email Body:** `https://updateinfo.example.com`.
+   - **URL Check:** Suspicious domain, no valid SSL certificate.
+
+#### Attachment Sandboxing Procedure:
+
+1. **Isolation and Quarantine:**
+   - **Action Taken:** The `update_info.zip` attachment has been quarantined from the employee’s workstation (Host ID: HOST-0123456789).
+   - **Software Used:** CylancePROTECT v10.0.
+
+2. **Sandboxing Environment Setup:**
+   - **Execution in Sandbox:** The ZIP file was extracted and its contents were inspected within a sandboxed environment (Sandbox ID: SAN-0987654321) to prevent any potential lateral movement or data exfiltration.
+   - **Initial Scan Results:** No immediate threats identified, but the contents of the ZIP archive are suspicious.
+
+3. **Dynamic Analysis:**
+   - **File Extraction:** The extracted files were monitored for any signs of malicious activity (e.g., process injection, network connections).
+   - **Execution Monitoring:** Suspicious executable was detected and isolated for further analysis.
+   - **Result:** The file executed a benign-looking installer, which then contacted an external server at 192.0.2.10.
+
+#### User Communication Template:
+
+**Subject: Urgent: Incident Response - Phishing Email**
+
+Dear Jane Doe,
+
+Thank you for reporting the phishing email that was received on March 23, 2023, at 14:56 UTC. We have initiated an immediate investigation into this matter to ensure the security of our organization.
+
+**Summary of Findings:**
+- The sender's IP address (192.0.2.10) is associated with known phishing activity.
+- The email contained a suspicious ZIP file (`update_info.zip`) that was quarantined and analyzed in a sandbox environment.
+- Initial dynamic analysis revealed no immediate threats, but further investigation is underway.
+
+**Next Steps:**
+- **Password Change:** We recommend that you change your password immediately to prevent any unauthorized access. Please use the self-service password reset tool available at `https://auth.example.corp`.
+- **Security Awareness Training:** You will be enrolled in a security awareness training module to help identify and avoid similar incidents in the future.
+- **Further Assistance:** If you have any questions or need additional support, please contact our SOC team at [SOCEmail@example.com].
+
+Thank you for your cooperation. We value your role in maintaining the security of our organization.
+
+Best regards

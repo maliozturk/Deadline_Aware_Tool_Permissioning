@@ -1,0 +1,80 @@
+### SOC Runbook Excerpt: Unauthorized Lateral Movement
+
+**Title:** Investigating Unauthorized Lateral Movement Detected by Network Monitoring
+
+**Objective:** To investigate an incident where unauthorized lateral movement has been detected within the network, ensuring the identification of affected systems, credential resets, and forensic evidence collection.
+
+---
+
+#### **1. Incident Overview**
+
+- **Date/Time:** September 20, 2023, 14:35 UTC
+- **Source:** Network Intrusion Detection System (NIDS)
+- **Affected Systems:** 
+  - Hostname: `HR-Workstation-1` (IP Address: 192.168.10.25)
+  - Hostname: `Finance-Server-3` (IP Address: 192.168.11.50)
+
+#### **2. Initial Response**
+
+**Step 1:** Isolate the affected systems to prevent further unauthorized access.
+
+   - Disconnect `HR-Workstation-1` and `Finance-Server-3` from the network.
+   
+**Step 2:** Notify the Incident Response Team (IRT) and relevant stakeholders, including legal counsel if necessary.
+
+---
+
+#### **3. Investigation**
+
+**Step 1: Enumeration of Affected Hosts**
+
+   - Use PowerShell scripts to list all processes running on `HR-Workstation-1` and `Finance-Server-3`.
+   
+     ```powershell
+     Get-Process | Select-Object ProcessName, Id, StartTime
+     ```
+
+   - Check for any suspicious or non-standard services, network connections, or open ports.
+
+**Step 2: Credential Reset Procedures**
+
+   - For `HR-Workstation-1`:
+     - Prompt the user to change their password immediately.
+     - Use a secure method to perform the password reset through an administrative account.
+     - Ensure the old credentials are deleted from all systems where they may have been cached.
+
+   - For `Finance-Server-3`:
+     - Reset the administrator account and any other high-privilege accounts that were potentially compromised.
+     - Implement multi-factor authentication (MFA) for these accounts moving forward.
+
+**Step 3: Forensic Image Collection**
+
+   - Use a dedicated forensic tool to create an image of `HR-Workstation-1`'s hard drive, preserving the current state of the system.
+   
+     ```shell
+     dd if=/dev/sda of=hr_workstation_20230920.img bs=4M status=progress
+     ```
+
+   - Similarly, collect a forensic image of `Finance-Server-3`'s hard drive.
+
+     ```shell
+     dd if=/dev/sdb of=finance_server_20230920.img bs=4M status=progress
+     ```
+
+   - Document the time and method used for collection to ensure chain-of-custody is maintained.
+
+---
+
+#### **4. Reporting**
+
+**Step 1:** Compile a detailed report including:
+- Timeline of events.
+- Description of actions taken.
+- Identification of affected systems.
+- Recommendations for improving security posture, such as implementing more robust access controls or enhancing monitoring tools.
+
+**Step 2:** Share the findings with relevant stakeholders and maintain communication throughout the incident response process to ensure transparency and accountability.
+
+---
+
+This runbook excerpt provides a structured approach to addressing unauthorized lateral movement within an organization's network, ensuring that affected systems are isolated, credentials are securely reset, and forensic evidence is properly collected for analysis.

@@ -1,0 +1,46 @@
+### Containment Procedure for Compromised Windows Endpoint Detected via EDR Alert
+
+#### Objective:
+To contain the compromised endpoint to prevent further compromise or data exfiltration while preserving evidence for forensic analysis.
+
+---
+
+**Step 1: Identification of Compromised Host**
+- **Action:** Upon receiving an alert from the EDR (Endpoint Detection and Response) tool, immediately identify the affected host. Verify the hostname is `server02` with IP address `192.168.1.35`.
+- **Timeline:** Immediate action within 5 minutes of detection.
+
+**Step 2: Isolation of Compromised Host**
+- **Action:** Ensure the compromised server, `server02`, is isolated from the network to prevent lateral movement.
+    - Use network security tools (e.g., firewalls) to segment `server02` into a separate VLAN or subnet.
+    - Disconnect any physical connections if necessary.
+- **Timeline:** Within 15 minutes of isolation.
+
+**Step 3: Evidence Preservation**
+- **Action:** Collect and preserve evidence from the compromised host without altering it. Use read-only mechanisms where possible.
+    - Enable write-protection on local storage devices.
+    - Document all actions taken to prevent contamination of evidence.
+- **Timeline:** Immediately upon isolation.
+
+**Step 4: System Analysis and Logging Review**
+- **Action:** Perform a comprehensive analysis of `server02` using the EDR tool. Focus on:
+    - Reviewing logs for suspicious activities, including unauthorized access attempts or data exfiltration.
+    - Checking for signs of malware infection such as unusual processes, registry modifications, or unexpected file activity.
+- **Timeline:** Within 30 minutes of isolation.
+
+**Step 5: Communication and Escalation**
+- **Action:** Notify the incident response team via a secure communication channel. Provide details including:
+    - Hostname (`server02`), IP address (`192.168.1.35`), and initial findings.
+    - Request further instructions for containment, remediation, and forensics.
+- **Timeline:** Within 5 minutes of completing the isolation and evidence preservation steps.
+
+**Step 6: Escalation Criteria**
+- **Criteria:** If the compromised host is part of a critical business system or contains sensitive data, escalate immediately to the CIRT (Computer Incident Response Team) for further action. Additionally, if multiple hosts are affected within a short period, this also requires immediate escalation.
+- **Action:** Provide detailed logs and screenshots as evidence.
+
+**Step 7: Documentation**
+- **Action:** Document all steps taken in the incident response logbook. Record timestamps, actions performed, and any anomalies observed.
+- **Timeline:** Continuously update throughout the containment phase.
+
+---
+
+By following these steps, the security operations center can effectively contain a compromised Windows endpoint while ensuring that evidence is preserved for subsequent analysis and remediation efforts.

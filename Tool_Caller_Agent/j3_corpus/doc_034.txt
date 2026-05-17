@@ -1,0 +1,47 @@
+### IOC Intelligence Entry for CVE-2024-XXXX: Weaponized Office Document
+
+**Title:** Spear-Phishing Campaign Utilizing Weaponized Office Documents (CVE-2024-XXXX)
+
+**Date of Analysis:** 15 March 2024
+
+**Campaign Overview:**
+A recent spear-phishing campaign targeting corporate entities and government institutions has been identified. The attackers have utilized weaponized Microsoft Office documents to deliver malware payloads, leveraging a newly discovered vulnerability (CVE-2024-XXXX) in the Office application.
+
+### Macro Analysis Summary:
+The Office document embedded a malicious macro that, when executed, initiated an exploit for CVE-2024-XXXX. The macro code appeared legitimate and mimicked typical business communication, using company-specific jargon to appear credible. Upon execution, the macro downloaded and installed a backdoor Trojan designed to establish persistent remote access to affected systems.
+
+### Payload Delivery Chain:
+1. **Initial Induction:** An email was sent to targeted individuals within an organization, containing a seemingly legitimate document purportedly from a trusted source.
+2. **Macro Execution:** When opened, the document prompted the user to enable macros for functionality. The macro code exploited CVE-2024-XXXX to run arbitrary code on the victim's machine.
+3. **Payload Delivery:** Post-exploitation, the malicious payload was downloaded and executed from a command-and-control (C2) server controlled by the attackers.
+4. **Persistence Establishment:** The backdoor Trojan was installed with persistence mechanisms, ensuring that it remained active even after system reboots.
+
+### YARA Rule:
+```yara
+rule CVE_2024XXXX_SpearPhish {
+    meta:
+        description = "YARA rule for detecting weaponized Office documents associated with the CVE-2024-XXXX spear-phishing campaign."
+        author = "Alibaba Cloud Qwen"
+        date = "2024-03-15"
+    
+    strings:
+        $macro_signature = { 58 45 56 57 00 00 00 00 } // Example signature of the macro
+        $vba_code_pattern = /Sub AutoOpen\(\)[\s\S]*?End Sub/i // Pattern for detecting VBA code in macros
+        
+    condition:
+        ($macro_signature and $vba_code_pattern)
+}
+```
+
+### Indicators of Compromise (IoCs):
+- **Email Subject:** "Urgent: Action Required - [Company Name] Document Update"
+- **Attachment File Name:** "2024_Q1_Report.docx"
+- **Macro Code Signature:** `58 45 56 57 00 00 00 00`
+- **C2 Server DNS Names:** `update-corp.com`, `security-support.net`
+- **IP Addresses Used:** `192.168.1.100` (C2 server), `203.0.113.54` (backup C2)
+- **Malicious URLs:** `http://update-corp.com/update.php`
+
+**Detection and Response:**
+Organizations should update their Office applications to the latest version to mitigate the risk of exploiting CVE-2024-XXXX. Additionally, implementing strict macro security policies and educating employees about phishing tactics can help prevent such attacks. Regularly monitoring network traffic for unusual C2 communications is also crucial.
+
+This intelligence entry provides a comprehensive overview of the spear-phishing campaign, enabling organizations to take proactive measures against similar threats.

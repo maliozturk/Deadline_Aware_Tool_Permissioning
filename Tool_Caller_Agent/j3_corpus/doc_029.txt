@@ -1,0 +1,52 @@
+### IOC Intelligence Entry: Domain "evil-update.example.net" for DNS Tunneling Exfiltration
+
+#### Overview
+The domain `evil-update.example.net` is suspected to be used by a threat actor for DNS tunneling exfiltration. This technique involves utilizing the DNS protocol to covertly transmit data, bypassing traditional security measures such as firewalls and intrusion detection systems.
+
+#### DNS Query Pattern Analysis
+DNS queries involving `evil-update.example.net` exhibit unique patterns that can indicate malicious activity:
+1. **Frequency of Queries**: The domain is queried frequently within a short period (e.g., multiple times per minute), which deviates from normal user behavior.
+2. **Query Length and Structure**: The query strings often contain unusual character sequences or base64-encoded data, suggesting the transmission of encoded information.
+3. **Variation in Subdomains**: Queries may use different subdomains (e.g., `data1.evil-update.example.net`, `data2.evil-update.example.net`), indicating a method to split and exfiltrate large amounts of data.
+
+#### Associated Campaigns
+The domain is linked to the following campaigns:
+1. **Campaign X-045**: An advanced persistent threat (APT) group targeting financial institutions in North America.
+2. **Operation StealthNet**: A spear-phishing campaign that uses malicious attachments to gain initial access, followed by DNS tunneling for exfiltration.
+
+#### Detection Rules
+To detect the use of `evil-update.example.net` for DNS tunneling:
+1. **Anomaly-Based Monitoring**:
+   - **Query Frequency Thresholds**: Set up alerts when the domain is queried more than 50 times within a minute.
+   - **Character Analysis**: Use regular expressions to identify queries containing base64 patterns or unusual character sequences.
+
+2. **Behavioral Analysis**:
+   - **Subdomain Variation Monitoring**: Track subdomains and look for rapid changes in query frequency that indicate data exfiltration attempts.
+   - **DNS Response Time Analysis**: Monitor DNS response times; increased latency could suggest the presence of a covert channel.
+
+3. **Network Traffic Analysis**:
+   - **Traffic Volume**: Analyze network traffic for spikes in DNS traffic originating from internal hosts during off-peak hours.
+   - **Data Exfiltration Signatures**: Use machine learning models to identify patterns indicative of data exfiltration via DNS tunneling.
+
+#### Example Alert Rules
+1. **Query Frequency Rule**:
+   ```
+   alert if dns.query("evil-update.example.net", _) over 50 times within 60 seconds and src ip = <Internal IP Address>
+   ```
+
+2. **Character Pattern Detection**:
+   ```
+   alert if dns.query(_, /base64/) or dns.query(_, /[A-Za-z0-9+/]{10,}/) and domain = "evil-update.example.net"
+   ```
+
+3. **Subdomain Variation Alert**:
+   ```
+   alert if count distinct subdomains of evil-update.example.net over 5 minutes > 10 and src ip = <Internal IP Address>
+   ```
+
+4. **Latency Analysis Rule**:
+   ```
+   alert if average dns.response.time("evil-update.example.net") > 2 seconds during 30 minute window
+   ```
+
+By implementing these detection rules, organizations can effectively monitor for the use of `evil-update.example.net` in DNS tunneling operations and take proactive measures to mitigate the risk.

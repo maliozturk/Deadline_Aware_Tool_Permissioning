@@ -1,0 +1,44 @@
+### IOC Intelligence Entry: Domain "evil-update.example.net" for DNS Tunneling Exfiltration
+
+#### Overview
+The domain `evil-update.example.net` has been identified as a key component of a sophisticated DNS tunneling campaign aimed at exfiltrating sensitive data from compromised networks. This entry provides an in-depth analysis of the domain's usage patterns, associated campaigns, and detection rules.
+
+#### Domain Analysis
+- **Domain Name:** `evil-update.example.net`
+- **First Seen:** 2023-10-05
+- **Last Updated:** 2024-02-17
+
+The domain `evil-update.example.net` has been observed to be used primarily for DNS tunneling, a technique that allows exfiltration of data by encoding the data within seemingly legitimate DNS requests. The domain's usage is characterized by frequent and unpredictable subdomain queries, making it difficult for traditional monitoring tools to detect malicious activity.
+
+#### DNS Query Pattern Analysis
+The following patterns have been observed in DNS query logs:
+1. **Frequent Query Variations:** Queries to `evil-update.example.net/subdomain-12345` are seen multiple times a day, with the subdomain part changing frequently.
+2. **Unpredictable Subdomains:** The subdomain used in each query is not consistent and follows no discernible pattern, making it challenging for network administrators to block or monitor specific domains.
+3. **Short Query Intervals:** Queries occur at irregular intervals, sometimes as short as 10 seconds between queries, which can bypass traditional logging mechanisms.
+
+#### Associated Campaigns
+The use of `evil-update.example.net` is part of a broader campaign known as "ShadowExfiltrator." This campaign has been active since early 2023 and targets organizations across multiple industries. The attackers leverage this domain to exfiltrate data in small, inconspicuous chunks, often containing sensitive information such as financial records, intellectual property, and personal data.
+
+#### Detection Rules
+To detect the use of `evil-update.example.net` for DNS tunneling, the following detection rules can be implemented:
+
+1. **Anomaly-Based Detection:**
+   - **Rule:** Monitor for frequent DNS queries to `evil-update.example.net` with irregular intervals.
+   - **Example Alert Condition:** If more than 50 unique subdomains are queried within a 24-hour period, trigger an alert.
+
+2. **Subdomain Monitoring:**
+   - **Rule:** Implement a watchlist of known malicious subdomains associated with `evil-update.example.net`.
+   - **Example Alert Condition:** If any query to a subdomain in the watchlist is detected, generate an immediate alert.
+   
+3. **Traffic Analysis:**
+   - **Rule:** Analyze DNS traffic for unusual patterns or high volumes of DNS requests.
+   - **Example Alert Condition:** Identify spikes in DNS queries (more than 100 per minute) to `evil-update.example.net` and flag as suspicious.
+
+4. **Pattern Matching:**
+   - **Rule:** Use regular expressions to match specific query patterns indicative of DNS tunneling.
+   - **Example Alert Condition:** Detect any query containing "subdomain-[\d]{5}" and log for further investigation.
+
+#### Conclusion
+The domain `evil-update.example.net` is a critical component in the ShadowExfiltrator campaign, enabling attackers to exfiltrate data covertly. By implementing the detection rules outlined above, organizations can better identify and mitigate this threat before sensitive information is compromised.
+
+This entry provides actionable insights into the use of DNS tunneling for data exfiltration and offers practical steps to enhance network security against such threats.

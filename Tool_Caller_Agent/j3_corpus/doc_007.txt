@@ -1,0 +1,71 @@
+### SOC Runbook Excerpt: Triage Workflow for a Phishing Email Reported by an Employee
+
+#### Header Analysis Steps:
+
+1. **Email Source Identification**:
+   - Verify the sender's email address to determine if it matches known legitimate sources.
+   - Check the domain name and ensure that it aligns with the expected business domain (e.g., `companyname.com` instead of `compayname.com`).
+   - Cross-reference the sender’s email address with our internal DNS records.
+
+2. **Email Content Inspection**:
+   - Review the email for any suspicious elements such as grammatical errors, unusual links, or odd formatting.
+   - Analyze the subject line and body content for signs of phishing attempts (e.g., urgent requests, threats, promises of rewards).
+
+3. **Attachment Analysis**:
+   - Identify if there are any attachments in the email.
+   - Use a secure sandbox environment to open the attachment without executing its contents on our network.
+
+4. **URL Inspection**:
+   - If hyperlinks are present, hover over them (without clicking) to inspect the URL for authenticity and legitimacy.
+   - Use online services like `urlvoid.com` or similar tools to scan URLs for known malicious activity.
+
+#### Attachment Sandboxing Procedure:
+
+1. **Isolate the Email Environment**:
+   - Place the email in a quarantined environment isolated from our main network.
+   
+2. **Extract and Analyze Attachments**:
+   - Use a dedicated sandbox (e.g., `Cuckoo Sandbox` or `Malwarebytes Email Scanner`) to extract and analyze the attachment.
+   - Monitor for any suspicious activities such as process creation, file system changes, network connections, or registry modifications.
+
+3. **Generate Report**:
+   - Document findings from the sandbox analysis, including any malicious indicators detected (e.g., command-and-control server communications, payloads).
+   - If necessary, conduct further investigations into these indicators.
+
+4. **Containment and Remediation**:
+   - Isolate affected systems if suspicious activity is detected.
+   - Notify relevant teams for immediate remediation actions (e.g., patch management, endpoint detection).
+
+#### User Communication Template:
+
+---
+
+**Subject: Urgent: Phishing Email Investigation**
+
+Dear [Employee's Name],
+
+We have received a report that you may have received a phishing email. Our Security Operations Center (SOC) team is conducting an investigation to ensure the security of our systems and data.
+
+Please provide the following details for your assistance:
+- Time and date when you received the email.
+- Exact subject line and content of the email.
+- Attachments, if any, that were opened or viewed.
+
+We recommend taking the following steps until further notice:
+1. **Do not click on any links** in the email unless verified through our IT support channels.
+2. **Do not open any attachments** from unknown sources.
+3. If you clicked a link or opened an attachment and encountered any unusual behavior, please immediately notify us.
+
+Thank you for your cooperation in maintaining the security of our organization.
+
+Best regards,
+
+[Your Name]
+Security Operations Center
+[Company Name]
+Phone: [Phone Number]
+Email: [SOC Email]
+
+---
+
+This runbook ensures a systematic approach to handling phishing reports, reducing potential risks and ensuring timely response.

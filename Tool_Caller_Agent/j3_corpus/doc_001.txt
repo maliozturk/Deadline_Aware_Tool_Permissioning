@@ -1,0 +1,43 @@
+### SOC Runbook Excerpt: Containment Procedure for Compromised Windows Endpoint Detected via EDR Alert
+
+#### Incident Overview:
+On [Date], the endpoint with hostname "WORKSTATION-01" was detected by our Endpoint Detection and Response (EDR) system as compromised, based on an alert generated from suspicious activity patterns.
+
+#### Objective:
+The objective of this containment procedure is to isolate and secure the compromised endpoint while preserving evidence for further analysis. This will prevent the spread of potential malware and ensure a thorough investigation can be conducted without interference.
+
+#### Action Steps:
+
+1. **Confirmation of Compromise:**
+   - Verify that the EDR alert is accurate by cross-referencing logs and network activity.
+   - Document all observed behaviors, such as unusual process activity or unexpected outbound connections.
+
+2. **Isolation:**
+   - Immediately disconnect "WORKSTATION-01" from the corporate network to prevent further spread of malware.
+   - Use the EDR tool to identify any other potentially affected endpoints and take similar measures if necessary.
+   - Ensure that the endpoint remains powered on but isolated to avoid data loss.
+
+3. **Containment:**
+   - Utilize the EDR to snapshot the system state at the time of detection, including file hashes, running processes, and network connections.
+   - Execute a full disk image using an approved forensic imaging tool if necessary. This will allow for detailed analysis later on.
+   - Identify any known malicious processes or files and terminate them using the EDR interface.
+
+4. **Evidence Preservation:**
+   - Collect all relevant logs from "WORKSTATION-01" including system event logs, application logs, and network traffic logs.
+   - Preserve any volatile data such as open connections, recently opened files, or running scripts that could provide context to the incident.
+   - Document all actions taken during containment for audit purposes.
+
+5. **Escalation Criteria:**
+   - If the EDR alert indicates a high-severity threat (e.g., ransomware), escalate immediately to the Incident Response Team.
+   - Escalate if multiple endpoints are affected or if the compromise extends beyond the initial detection point.
+   - Notify legal and compliance teams if there is evidence of data breaches or regulatory violations.
+
+6. **Communication:**
+   - Inform the IT team responsible for "WORKSTATION-01" about the incident and provide them with details on containment actions.
+   - Keep stakeholders updated on the progress of containment efforts via regular briefings.
+
+#### Next Steps:
+- Conduct a post-mortem analysis to determine the root cause of the compromise and implement preventive measures to avoid future incidents.
+- Update security policies, configurations, and training as necessary based on findings from this incident.
+
+By following these steps, we aim to contain the threat effectively while ensuring that all evidence is properly preserved for further investigation.

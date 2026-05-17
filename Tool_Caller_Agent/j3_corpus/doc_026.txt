@@ -1,0 +1,46 @@
+### IOC Intelligence Entry
+
+**File Hash:** SHA-256: a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6
+
+**Title:** Cobalt Strike Beacon Payload Linked to Malicious Activity
+
+#### Detection Signatures
+The file with the hash a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6 is suspected to be a variant of the Cobalt Strike beacon payload. This file has been observed in multiple instances and can be detected through the following signatures:
+
+- **File Signature:** The file exhibits characteristics typical of a Cobalt Strike payload, including the presence of specific strings such as "Buckshot Bravo," which is commonly used in Cobalt Strike.
+- **PE Headers Analysis:** Upon analysis, the PE headers indicate that this binary has been compiled with Visual C++ and contains embedded base64-encoded data, which is often used for command-and-control (C2) communication.
+- **Network Traffic Analysis:** The file generates network traffic characterized by outbound HTTP/HTTPS requests to a known malicious domain. These domains are typically registered under suspicious names such as "update-serv[.]com" or "patch-serve[.]net."
+
+#### Behavioral Indicators
+The following behaviors can be indicative of the presence and activity of this Cobalt Strike beacon payload:
+
+- **Process Creation:** The process is often created with high privileges, using techniques like `CreateProcess` or `ShellExecute`, to ensure persistence.
+- **File System Manipulation:** The payload may modify system files, such as adding entries to the Windows registry under keys like `HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run`.
+- **Network Activity:** Regular connections are established with the C2 server at intervals of approximately 30 seconds. These connections attempt to download additional payloads or exfiltrate data.
+- **Memory Injection:** The payload may inject itself into legitimate processes to avoid detection by security software.
+
+#### MITRE ATT&CK Mapping
+The behavior and characteristics of this file align with multiple techniques in the MITRE ATT&CK framework:
+
+1. **Persistence, Privilege Escalation (T1543):**
+   - Techniques: Registry Run Keys/Startup Folder, Token Manipulation
+   - Description: The payload uses registry entries to ensure persistence and potentially elevates its privileges.
+
+2. **Execution (T1059):**
+   - Techniques: File and Directory Permissions Modification, Process Injection
+   - Description: By modifying file permissions and injecting code into existing processes, the payload can maintain a low profile and evade detection.
+
+3. **Command and Control Communication (T1071):**
+   - Sub-techniques: HTTP Server on Victim Machine, HTTPS Protocol
+   - Description: The beacon establishes communication with C2 servers via HTTP/HTTPS requests to download additional payloads or exfiltrate data.
+
+4. **Exfiltration of Data (T1041):**
+   - Techniques: Network Share, Exfiltration Over Public CDN
+   - Description: Data is often exfiltrated from the infected system using network shares or cloud storage services like OneDrive.
+
+5. **Lateral Movement (T1028):**
+   - Techniques: Remote Services, API Abuse
+   - Description: The beacon may use remote desktop protocols or APIs to move laterally within a network.
+
+#### Conclusion
+The file hash a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u

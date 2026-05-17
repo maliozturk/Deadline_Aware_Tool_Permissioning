@@ -1,0 +1,44 @@
+**Threat Intelligence Note**
+
+**Title:** Compromise of Popular Open-Source npm Package Affects Millions
+
+**Date Released:** March 28, 2023
+
+**Summary:**
+A significant security incident has been identified involving a widely used open-source npm package named `secure-login`. The compromise was detected on February 15, 2023, and affects versions of the package released between January 1, 2022, and March 15, 2023. This threat intelligence note aims to provide a detailed analysis of the incident, including the timeline, affected versions, and indicators of compromise (IoCs).
+
+**Timeline:**
+
+- **February 14, 2023:** Initial signs of unusual activity were observed within the package repository.
+- **February 15, 2023:** A security analyst noticed an unauthorized push to the `secure-login` npm package with a new version number. The malicious code was quickly identified and removed from the main repository.
+- **February 16, 2023:** An advisory was issued, informing developers of the compromise and advising them to update their packages to the latest secure version (v4.5.7).
+- **March 28, 2023:** This threat intelligence note is released, providing a comprehensive overview of the incident.
+
+**Affected Versions:**
+The compromised versions of `secure-login` are those released between January 1, 2022, and March 15, 2023. Specifically, any version below v4.5.7 should be considered potentially affected.
+
+**Indicators of Compromise (IoCs):**
+
+- **Malicious Code Signatures:**
+  - MD5 Hash: `d98e9cfe3a6b12c0f9d3e9cb47f8a1b5`
+  - SHA-256 Hash: `5e9c8f3d0e3a6812f9de9cb47e9c1b5f8a2d3e4b3c4d1e2f5e6c9dab3c78ef0a`
+  - SHA-512 Hash: `1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef`
+
+- **Suspicious Hostnames:**
+  - `malicious.updateserver.com`
+  - `suspiciousupdateapi.net`
+
+- **IP Addresses:**
+  - `192.0.2.1` (used for command and control communications)
+  - `198.51.100.2` (reported as a server hosting the malicious code)
+
+**Recommendations:**
+
+1. **Immediate Update:** All developers using `secure-login` should update to version v4.5.7 or higher.
+2. **Security Audits:** Perform security audits on all open-source packages used in your projects.
+3. **Monitoring:** Continuously monitor dependencies and package repositories for unusual activity.
+
+This threat intelligence note is intended to raise awareness among the developer community regarding this supply-chain compromise and to provide actionable steps to mitigate potential risks.
+
+**Contact Information:**
+For further information or assistance, please contact the security team at `security@secure-login.com`.

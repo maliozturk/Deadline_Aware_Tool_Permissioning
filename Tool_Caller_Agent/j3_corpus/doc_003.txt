@@ -1,0 +1,55 @@
+### SOC Runbook Excerpt: Containment Procedure for a Compromised Windows Endpoint
+
+#### **1. Objective**
+The objective of this procedure is to contain a compromised Windows endpoint detected via the EDR (Endpoint Detection and Response) alert as quickly and effectively as possible, minimizing the impact on the network infrastructure.
+
+#### **2. Situation Overview**
+- **Date/Time:** 05/19/2023 - 14:37
+- **EDR Alert ID:** EDR123456
+- **Host Name:** WKS-AUDIT-01
+- **IP Address:** 192.168.10.10
+
+#### **3. Containment Actions**
+**Step 1: Isolation of the Compromised Endpoint**
+- **Action:** Immediately isolate the compromised endpoint from the network by disabling its network interface or disconnecting it physically.
+- **Justification:** This step prevents potential lateral movement and reduces the risk of further compromise.
+
+**Step 2: Review EDR Alert Details**
+- **Action:** Retrieve detailed logs from WKS-AUDIT-01, including but not limited to:
+  - Network connections
+  - Suspicious processes
+  - File system changes
+  - Registry modifications
+- **Tools:** Use the EDR platform’s interface to view and export these logs.
+- **Justification:** Understanding the nature of the compromise is critical for effective containment.
+
+**Step 3: Perform a System Scan**
+- **Action:** Execute a full-system scan using the endpoint’s built-in antivirus software and any additional third-party tools (e.g., Malwarebytes).
+- **Tools:** Ensure EDR supports integration with these tools.
+- **Justification:** Identifying and removing malware is essential to prevent further damage.
+
+**Step 4: Review Event Logs**
+- **Action:** Examine the Windows event logs for signs of compromise, focusing on security events (ID 4624, 5138) and potential indicators of compromise.
+- **Tools:** Use PowerShell or third-party log management tools to search for relevant entries.
+- **Justification:** Event logs provide a historical context that can help in understanding the extent of the breach.
+
+**Step 5: Disable Sensitive Services**
+- **Action:** Temporarily disable any services that may have been tampered with, such as scheduled tasks or remote desktop access.
+- **Tools:** Use the Task Scheduler and Remote Desktop Configuration tools.
+- **Justification:** This action prevents unauthorized activities from continuing.
+
+#### **4. Escalation Criteria**
+- **Criteria 1:** If initial containment measures fail to stop the spread of the malware or if additional sensitive data is detected as compromised.
+- **Action: Contact the Incident Response Team (IRT) and provide detailed findings.
+- **Timeframe:** Within 30 minutes.
+
+#### **5. Evidence Preservation Notes**
+- **Step 1:** Ensure all relevant logs, system snapshots, and forensic images of WKS-AUDIT-01 are securely stored in the organization’s forensics repository.
+- **Step 2:** Document all actions taken during containment in a detailed incident response log for future analysis and reporting.
+- **Step 3:** Update the EDR alert to reflect current status and any additional findings.
+
+#### **6. Next Steps**
+- **Action:** Conduct an immediate post-incident review with relevant stakeholders to discuss the incident, identify lessons learned, and update security policies as necessary.
+- **Tools:** Use collaboration tools such as Microsoft Teams or Slack for real-time communication.
+
+By following this procedure, the SOC team can effectively contain a compromised endpoint, mitigate further damage, and gather critical evidence for future analysis.

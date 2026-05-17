@@ -1,0 +1,45 @@
+**Threat Intelligence Note: Supply-Chain Compromise Affecting Open-Source npm Package**
+
+**Date:** March 15, 2024
+
+**Title:** Urgent Investigation into Compromised "express-auth" npm Package
+
+**Summary:**
+A recent investigation has revealed a supply-chain attack that compromised the open-source "express-auth" npm package. This compromise introduced malicious code into multiple versions of the package, potentially exposing users to various cyber threats.
+
+**Timeline:**
+- **Initial Compromise Date:** January 20, 2024
+- **Detection Date:** February 15, 2024
+- **Patch Release Date:** March 10, 2024
+
+**Affected Versions:**
+The malicious code was injected into versions 3.8.0 to 3.9.6 of the "express-auth" npm package.
+
+**Indicators of Compromise (IOCs):**
+1. **Malicious Code Injection:** The malicious code was embedded within a function named `handleAuthentication`, which is typically called during user authentication processes.
+2. **Hostnames:**
+   - `maliciousserver.com`
+   - `threatactor.net`
+3. **IP Addresses:**
+   - 93.184.216.34
+   - 50.17.200.123
+4. **Malware Signatures:** 
+   - MD5 Hash: 9d2e3bfc7c8f0a7b5276728a5eab62d9
+   - SHA-256 Hash: e2c23b1a4d1f79a683b8e572c9874655ebc00c79d58a6c32b98a23f60d6b17f4
+   - SHA-1 Hash: 25f9e75933b11a36a6e4026b79e324a0ca85aaeb
+
+**Impact and Recommendations:**
+The malicious code within the compromised "express-auth" npm package can be used to exfiltrate sensitive user data or gain unauthorized access to systems. We recommend that all users of affected versions immediately update to version 3.10.0, which includes a security patch addressing this issue.
+
+**Next Steps:**
+- **Immediate Action:** Update your dependencies to the latest non-compromised versions.
+- **Security Review:** Conduct a thorough review of your application's security posture and consider implementing additional security measures such as code signing for npm packages.
+- **Monitoring:** Enable continuous monitoring for any further signs of compromise or unauthorized activity.
+
+For more detailed information, please refer to the official advisory from the "express-auth" package maintainers. Any concerns or further questions should be directed to your organization's security team or the npm security team at npmjs.com/security.
+
+**Contact Information:**
+- **npm Security Team:** support@npmjs.com
+- **Package Maintainers:** support@express-auth.org
+
+This note is intended for internal use and must not be shared outside the company without explicit permission.

@@ -1,0 +1,24 @@
+{
+  "ollama_version": "ollama version is 0.20.2",
+  "model_digests": {
+    "qwen2.5:7b-instruct": "845dbda0ea48"
+  },
+  "python_version": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "ollama_package_version": "unknown",
+  "pandas_version": "2.3.3",
+  "numpy_version": "2.4.1",
+  "gpu": "NVIDIA GeForce RTX 3080 Laptop GPU, 8192 MiB",
+  "cpu": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "sampling_params": {
+    "temperature": 0.0,
+    "top_p": 1.0,
+    "seed": 42
+  },
+  "call_timeout_sec": 120.0,
+  "hostname": "muhammedali",
+  "date": "2026-05-17 15:46:57",
+  "trace_path": "C:\\Users\\alini\\phdworks\\phd_work_17052026\\coder_agent\\Tool_Caller_Agent\\trace_results_counterfactual_j3_mini.parquet",
+  "smoke": true,
+  "total_calls": 9
+}
