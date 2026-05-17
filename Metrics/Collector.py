@@ -50,6 +50,7 @@ class MetricsCollector:
 
     utility_model_utility_model : Utility_Model
     warmup_time_f64             : float = 0.0
+    num_tiers_i32               : int   = 2
     paugbeta_list_f64           : List[float] = field(default_factory=lambda: [0.0, 1.0])
     end_time_f64_opt            : Optional[float] = None
 
@@ -194,6 +195,29 @@ class MetricsCollector:
             else:
                 mode_counts_dict_obj["unknown"] += 1
 
+        # Per-tier accounting (J-mode support)
+        J = self.num_tiers_i32
+        tier_counts_dict: Dict[int, int] = {}
+        for task_ in self.completed_tasks_list_task:
+            tier_idx = getattr(task_, "chosen_tier_i32", None)
+            if tier_idx is None:
+                # Fallback from Mode for backward compat.
+                # TODO(Prompt 4+): once tier-indexed routing is the sole path,
+                # this fallback should emit a logged warning rather than
+                # silently recovering.
+                if task_.chosen_mode_mode_opt == Mode.FAST:
+                    tier_idx = 0
+                elif task_.chosen_mode_mode_opt == Mode.SLOW:
+                    tier_idx = J - 1
+                else:
+                    continue
+            tier_counts_dict[tier_idx] = tier_counts_dict.get(tier_idx, 0) + 1
+        total_tiered = sum(tier_counts_dict.values())
+        tier_fractions_list_f64: List[float] = []
+        for j in range(J):
+            count_j = tier_counts_dict.get(j, 0)
+            tier_fractions_list_f64.append(float(count_j / total_tiered) if total_tiered > 0 else 0.0)
+
                                          
         qlen_mean_f64 = (
             float(np.mean(self.queue_len_samples_list_i32))
@@ -239,6 +263,7 @@ class MetricsCollector:
             "response_time": resp_stats_summary_stats,
             "waiting_time": wait_stats_summary_stats,
             "mode_counts_completed": mode_counts_dict_obj,
+            "tier_fractions": tier_fractions_list_f64,
             "queue_len_mean": qlen_mean_f64,
             "queue_len_p90": qlen_p90_f64,
             "paug_horizon": horizon_f64,

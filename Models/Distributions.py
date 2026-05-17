@@ -37,6 +37,16 @@ class Service_Time_Model(Protocol):
     def Quantile(self, mode_mode: Mode, q_f64: float) -> float:
         ...
 
+    def Sample_By_Tier(self, tier_index: int, rng_generator: np.random.Generator) -> float:
+        """Sample service time for a given tier index. Default J=2 mapping."""
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Sample(mode, rng_generator)
+
+    def Expected_By_Tier(self, tier_index: int) -> float:
+        """Expected service time for a given tier index. Default J=2 mapping."""
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Expected(mode)
+
 
 @dataclass(frozen=True)
 class Exponential_Interarrival:
@@ -100,6 +110,14 @@ class Lognormal_Service_Times:
 
         val_f64 = math.exp(mu_f64 + sigma_f64 * z_f64)
         return max(float(val_f64), float(self.min_service_time_f64))
+
+    def Sample_By_Tier(self, tier_index: int, rng_generator: np.random.Generator) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Sample(mode, rng_generator)
+
+    def Expected_By_Tier(self, tier_index: int) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Expected(mode)
 
 
 @dataclass(frozen=True)
@@ -244,6 +262,18 @@ class Trace_Service_Times:
         weight = pos - lower
         return float(samples[lower] * (1.0 - weight) + samples[upper] * weight)
 
+    def Sample_By_Tier(self, tier_index: int, rng_generator: np.random.Generator) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Sample(mode, rng_generator)
+
+    def Sample_By_Tier_For_Task(self, task_task: "Task", tier_index: int, rng_generator: np.random.Generator) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Sample_For_Task(task_task, mode, rng_generator)
+
+    def Expected_By_Tier(self, tier_index: int) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Expected(mode)
+
 
 @dataclass
 class EWMA_Service_Time_Estimator:
@@ -313,6 +343,18 @@ class EWMA_Service_Time_Estimator:
             "slow_count": int(self._count_dict_mode_to_i32[Mode.SLOW]),
             "fast_count": int(self._count_dict_mode_to_i32[Mode.FAST]),
         }
+
+    def Sample_By_Tier(self, tier_index: int, rng_generator: np.random.Generator) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Sample(mode, rng_generator)
+
+    def Sample_By_Tier_For_Task(self, task_task: "Task", tier_index: int, rng_generator: np.random.Generator) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Sample_For_Task(task_task, mode, rng_generator)
+
+    def Expected_By_Tier(self, tier_index: int) -> float:
+        mode = Mode.FAST if tier_index == 0 else Mode.SLOW
+        return self.Expected(mode)
 
 
 def _Has_Error(val_opt: Optional[str]) -> bool:

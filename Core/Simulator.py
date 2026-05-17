@@ -17,7 +17,7 @@ import numpy as np
 
 from Configurations import Simulation_Config
 from Core.Events import Event, Event_Calendar, Event_Type
-from Core.Task import Mode, Task
+from Core.Task import Mode, Task, _tier_to_mode
 from Metrics.Collector import MetricsCollector
 from Models.Distributions import Interarrival_Model, Service_Time_Model
 from Models.Policy_Base import Scheduling_Policy, System_State
@@ -61,6 +61,11 @@ class Simulator:
         self._arrivals_count_i32  : int   = 0
 
         self._in_system_list_task: List[Task] = []
+
+        # J-mode: number of tiers (default 2 for backward compat)
+        self._num_tiers_i32: int = int(getattr(policy_scheduling_policy, 'num_tiers', 2))
+        # Propagate J into the metrics collector for tier_fractions sizing
+        self.metrics_metrics_collector.num_tiers_i32 = self._num_tiers_i32
 
     def _Make_Task(self, arrival_time_f64: float) -> Task:
         self._next_task_id_i32 += 1
@@ -186,7 +191,11 @@ class Simulator:
 
         # All policies are defined as arrival-epoch mode selectors in the paper setup.
         state_at_arrival = self._State()
-        task_.chosen_mode_mode_opt = self.policy_scheduling_policy.Decide_Mode(task_, state_at_arrival)
+        tier_decision = self.policy_scheduling_policy.Decide_Mode(task_, state_at_arrival)
+        # Store tier index and map to Mode for backward compat
+        J = self._num_tiers_i32
+        task_.chosen_tier_i32 = int(tier_decision)
+        task_.chosen_mode_mode_opt = _tier_to_mode(int(tier_decision), J)
 
         self.queue_deque_task.append(task_)
 
@@ -214,17 +223,43 @@ class Simulator:
                 self.policy_scheduling_policy.Observe_Task_Outcome(task_task_opt)
             return
 
-                                                 
-        mode_mode = task_task_opt.chosen_mode_mode_opt if task_task_opt.chosen_mode_mode_opt else self.policy_scheduling_policy.Decide_Mode(task_task_opt, self._State())
-                                                                                            
-        task_task_opt.Mark_Started(self.now_f64, mode_mode=mode_mode)
-
-                                                         
-        sample_for_task = getattr(self.service_model_service_time, "Sample_For_Task", None)
-        if callable(sample_for_task):
-            service_time_f64 = float(sample_for_task(task_task_opt, mode_mode, self.rng_rng))
+        # Resolve mode: use arrival-epoch decision if available, else re-query policy.
+        J = self._num_tiers_i32
+        if task_task_opt.chosen_mode_mode_opt is not None:
+            mode_mode = task_task_opt.chosen_mode_mode_opt
         else:
-            service_time_f64 = float(self.service_model_service_time.Sample(mode_mode, self.rng_rng))
+            tier_decision = self.policy_scheduling_policy.Decide_Mode(task_task_opt, self._State())
+            task_task_opt.chosen_tier_i32 = int(tier_decision)
+            mode_mode = _tier_to_mode(int(tier_decision), J)
+            task_task_opt.chosen_mode_mode_opt = mode_mode
+                                                                                             
+        task_task_opt.Mark_Started(self.now_f64, mode_mode=mode_mode, num_tiers=J)
+
+        # Sample service time.
+        # For J>2, prefer Sample_By_Tier to avoid misrouting middle tiers
+        # through the binary Mode mapping. For J=2, use the legacy Mode path.
+        tier_idx = task_task_opt.chosen_tier_i32
+        if J > 2 and tier_idx is not None:
+            sample_by_tier_for_task = getattr(self.service_model_service_time, "Sample_By_Tier_For_Task", None)
+            sample_by_tier = getattr(self.service_model_service_time, "Sample_By_Tier", None)
+            if callable(sample_by_tier_for_task):
+                service_time_f64 = float(sample_by_tier_for_task(task_task_opt, tier_idx, self.rng_rng))
+            elif callable(sample_by_tier):
+                service_time_f64 = float(sample_by_tier(tier_idx, self.rng_rng))
+            else:
+                # Fallback: Mode-based dispatch (will misroute middle tiers)
+                sample_for_task = getattr(self.service_model_service_time, "Sample_For_Task", None)
+                if callable(sample_for_task):
+                    service_time_f64 = float(sample_for_task(task_task_opt, mode_mode, self.rng_rng))
+                else:
+                    service_time_f64 = float(self.service_model_service_time.Sample(mode_mode, self.rng_rng))
+        else:
+            # J=2: use existing Mode-based path (exact backward compat)
+            sample_for_task = getattr(self.service_model_service_time, "Sample_For_Task", None)
+            if callable(sample_for_task):
+                service_time_f64 = float(sample_for_task(task_task_opt, mode_mode, self.rng_rng))
+            else:
+                service_time_f64 = float(self.service_model_service_time.Sample(mode_mode, self.rng_rng))
         task_task_opt.service_time_f64_opt = service_time_f64
 
         self.server_server.busy_bool = True
@@ -312,18 +347,23 @@ class Simulator:
 
                                       
         if self.policy_scheduling_policy.Should_Switch_Mode(task_, self._State()):
-                                                                         
+                                                                          
             task_.mode_switches_i32 += 1
+            # TODO(Prompt 4): For J>2, a policy may want to switch to an
+            # intermediate tier (e.g. tier 2 → tier 1) rather than always
+            # downgrading to tier 0.  Revisit when FTC-SE and other
+            # mode-switching policies arrive.
             task_.chosen_mode_mode_opt = Mode.FAST
+            task_.chosen_tier_i32 = 0  # tier 0 = fastest
 
-                                                                 
+                                                                  
             sample_for_task = getattr(self.service_model_service_time, "Sample_For_Task", None)
             if callable(sample_for_task):
                 remaining_service_f64 = float(sample_for_task(task_, Mode.FAST, self.rng_rng))
             else:
                 remaining_service_f64 = float(self.service_model_service_time.Sample(Mode.FAST, self.rng_rng))
 
-                                                                                    
+                                                                                     
             task_.service_time_f64_opt = float(task_.service_consumed_f64 + remaining_service_f64)
 
             new_end_f64 = self.now_f64 + remaining_service_f64

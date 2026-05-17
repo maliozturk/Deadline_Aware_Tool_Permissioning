@@ -11,7 +11,7 @@
 
 from collections import deque
 from dataclasses import dataclass
-from typing import Deque, Optional, Protocol
+from typing import Deque, Optional, Protocol, Union
 
 from Core.Task import Mode, Task
 
@@ -67,7 +67,7 @@ class Scheduling_Policy(Protocol):
         queue_deque_task.extend(new_queue)
         return selected_task
 
-    def Decide_Mode(self, task: Task, state_system_state: System_State) -> Mode:
+    def Decide_Mode(self, task: Task, state_system_state: System_State) -> int:
         ...
 
     def Should_Switch_Mode(self, task: Task, state_system_state: System_State) -> bool:
