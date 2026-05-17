@@ -12,11 +12,12 @@
 """Three-tier (J=3) trace collection harness.
 
 Runs each prompt under three system-prompt-induced depth tiers
-(C=quick, B=structured, A=deep) for each Ollama backend.
+(C=quick, B=structured, A=deep) for each backend.
 
 Usage:
-    python Tool_Caller_Agent/Agent_V3_J3.py               # full sweep
-    python Tool_Caller_Agent/Agent_V3_J3.py --smoke        # smoke test (30 rows)
+    python Tool_Caller_Agent/Agent_V3_J3.py --smoke              # smoke (Ollama)
+    python Tool_Caller_Agent/Agent_V3_J3.py --full               # full (Ollama)
+    python Tool_Caller_Agent/Agent_V3_J3.py --full --clarifai    # full (Clarifai)
 """
 
 from __future__ import annotations
@@ -35,6 +36,7 @@ from typing import Any, Dict, List, Optional
 import numpy as np
 import ollama
 import pandas as pd
+from openai import OpenAI
 from tqdm import tqdm
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -63,6 +65,16 @@ TIER_MAX_TOKENS = {"C": 200, "B": 600, "A": 1500}
 BACKENDS = ["llama3.1", "qwen2.5:7b-instruct", "mistral:7b-instruct"]
 SMOKE_BACKEND = "qwen2.5:7b-instruct"
 
+# ── Clarifai / Trinity Mini config ───────────────────────────────────────────
+# Paste your PAT below before running with --clarifai
+CLARIFAI_PAT = "ebfb4b55ca984121b3e62a7ac8bed5db"
+CLARIFAI_BASE_URL = "https://api.clarifai.com/v2/ext/openai/v1"
+CLARIFAI_MODEL = (
+    "https://clarifai.com/arcee_ai/AFM/models/trinity-mini/"
+    "versions/25d54e4b3b344da6b39a89faa47e8bcb"
+)
+CLARIFAI_BACKEND_NAME = "trinity-mini-clarifai"
+
 SAMPLING_PARAMS = {
     "temperature": 0.0,
     "top_p": 1.0,
@@ -70,7 +82,7 @@ SAMPLING_PARAMS = {
 }
 
 CALL_TIMEOUT_SEC = 120.0
-BATCH_SIZE = 50
+BATCH_SIZE = 5
 PROGRESS_INTERVAL = 10
 
 # ── Retriever ────────────────────────────────────────────────────────────────
@@ -258,6 +270,89 @@ def _timed_chat_with_tools(
         }
 
 
+def _timed_chat_clarifai(
+    messages: List[Dict],
+    tools: Optional[List] = None,
+    max_tokens: int = 1500,
+    max_rounds: int = 3,
+) -> Dict[str, Any]:
+    """Run a chat via Clarifai OpenAI-compatible API with prompt-injected retrieval.
+
+    Clarifai's OpenAI endpoint does not support the `tools` parameter.
+    Instead we pre-execute retrieval and inject results into the conversation,
+    matching the KALAI pattern (plain-text tool menu + JSON response parsing).
+    """
+    client = OpenAI(base_url=CLARIFAI_BASE_URL, api_key=CLARIFAI_PAT)
+    t0 = time.time()
+    total_tool_calls = 0
+    all_retrieved_doc_ids: List[str] = []
+    accumulated_text = ""
+
+    # For tiers B/A: pre-execute retrieval based on the user prompt
+    if tools and max_rounds > 0:
+        # Extract user prompt from messages
+        user_msg = ""
+        for m in messages:
+            if m.get("role") == "user":
+                user_msg = m.get("content", "")
+                break
+
+        # Do retrieval rounds (1 for tier B, up to 3 for tier A)
+        queries = [user_msg]
+        # For tier A (max_rounds=3), generate follow-up queries from keywords
+        if max_rounds >= 3 and user_msg:
+            words = user_msg.split()
+            if len(words) > 5:
+                queries.append(" ".join(words[:len(words)//2]))
+                queries.append(" ".join(words[len(words)//2:]))
+
+        all_docs = []
+        seen_ids = set()
+        for q in queries[:max_rounds]:
+            results = _do_retrieve(q, k=3)
+            total_tool_calls += 1
+            for r in results:
+                if r["doc_id"] not in seen_ids:
+                    seen_ids.add(r["doc_id"])
+                    all_retrieved_doc_ids.append(r["doc_id"])
+                    all_docs.append(r)
+
+        # Inject retrieved docs into conversation
+        if all_docs:
+            docs_text = "\n\n---\n\n".join(
+                f"[{d['doc_id']}] (score={d['score']})\n{d['content'][:500]}"
+                for d in all_docs
+            )
+            messages.append({
+                "role": "user",
+                "content": f"RETRIEVED DOCUMENTS:\n\n{docs_text}\n\n"
+                           "Use these documents to answer the original question. "
+                           "Cite documents by their doc_id."
+            })
+
+    try:
+        resp = client.chat.completions.create(
+            model=CLARIFAI_MODEL,
+            messages=messages,
+            max_tokens=max_tokens,
+            temperature=SAMPLING_PARAMS["temperature"],
+            top_p=SAMPLING_PARAMS["top_p"],
+            seed=SAMPLING_PARAMS["seed"],
+            stream=False,
+        )
+        content = resp.choices[0].message.content or ""
+        accumulated_text = content
+        elapsed = round(time.time() - t0, 4)
+        return {"response_text": accumulated_text, "latency_sec": elapsed,
+                "tool_calls_count": total_tool_calls, "retrieved_doc_ids": all_retrieved_doc_ids,
+                "error_flag": False, "error_message": ""}
+    except Exception as e:
+        elapsed = round(time.time() - t0, 4)
+        return {"response_text": accumulated_text, "latency_sec": elapsed,
+                "tool_calls_count": total_tool_calls, "retrieved_doc_ids": all_retrieved_doc_ids,
+                "error_flag": True, "error_message": str(e)}
+
+
 # ── Provenance ───────────────────────────────────────────────────────────────
 
 def _collect_provenance(backends: List[str]) -> Dict:
@@ -411,13 +506,21 @@ def run_trace_collection(
         # Tier A gets 3 rounds, B gets 1, C gets 0
         max_rounds = {"C": 0, "B": 1, "A": 3}[tier]
 
-        result = _timed_chat_with_tools(
-            model=backend,
-            messages=messages,
-            tools=tools,
-            max_tokens=max_tokens,
-            max_rounds=max_rounds,
-        )
+        if backend == CLARIFAI_BACKEND_NAME:
+            result = _timed_chat_clarifai(
+                messages=messages,
+                tools=tools,
+                max_tokens=max_tokens,
+                max_rounds=max_rounds,
+            )
+        else:
+            result = _timed_chat_with_tools(
+                model=backend,
+                messages=messages,
+                tools=tools,
+                max_tokens=max_tokens,
+                max_rounds=max_rounds,
+            )
 
         row = {
             "prompt_id": prompt_id,
@@ -583,9 +686,9 @@ def _smoke_summary_and_checks() -> None:
         print(f"  {checks_passed}/{checks_total} SANITY CHECKS PASSED — DO NOT PROCEED")
 
 
-# ── Full sweep orchestration (Step 6: designed, not executed) ────────────────
+# ── Full sweep orchestration ─────────────────────────────────────────────────
 
-def run_full_sweep() -> None:
+def run_full_sweep(use_clarifai: bool = False) -> None:
     """Run the full trace collection sweep."""
     print("=" * 70)
     print("  FULL TRACE COLLECTION SWEEP")
@@ -593,27 +696,28 @@ def run_full_sweep() -> None:
 
     prompts = _load_prompts(COMBINED_PROMPTS_PATH)
 
-    # Cost estimation
+    if use_clarifai:
+        backends = [CLARIFAI_BACKEND_NAME]
+        print(f"  Backend: Clarifai Trinity Mini")
+        print(f"  Model:   {CLARIFAI_MODEL}")
+    else:
+        backends = BACKENDS
+
     n_prompts = len(prompts)
-    n_backends = len(BACKENDS)
+    n_backends = len(backends)
     n_tiers = len(TIER_NAMES)
     total_calls = n_prompts * n_backends * n_tiers
 
-    # Estimate from smoke if available
+    # Estimate: cloud ~3s avg, local ~27s avg
+    avg_lat = 3.0 if use_clarifai else 27.0
     if SMOKE_TRACE_PATH.exists():
         smoke_df = pd.read_parquet(SMOKE_TRACE_PATH)
-        mean_lat_per_tier = {}
-        for tier in ["C", "B", "A"]:
-            subset = smoke_df[smoke_df["tier"] == tier]
-            mean_lat_per_tier[tier] = subset["latency_sec"].mean()
-        avg_lat = sum(mean_lat_per_tier.values()) / len(mean_lat_per_tier)
-        est_hours = (total_calls * avg_lat) / 3600.0
-    else:
-        avg_lat = 30.0  # rough default
-        est_hours = (total_calls * avg_lat) / 3600.0
+        vals = [smoke_df[smoke_df["tier"] == t]["latency_sec"].mean() for t in ["C","B","A"]]
+        avg_lat = sum(vals) / len(vals)
+    est_hours = (total_calls * avg_lat) / 3600.0
 
     print(f"  Prompts:  {n_prompts}")
-    print(f"  Backends: {n_backends} ({', '.join(BACKENDS)})")
+    print(f"  Backends: {n_backends} ({', '.join(backends)})")
     print(f"  Tiers:    {n_tiers}")
     print(f"  Total calls: {total_calls}")
     print(f"  Estimated avg latency/call: {avg_lat:.1f}s")
@@ -622,7 +726,7 @@ def run_full_sweep() -> None:
 
     run_trace_collection(
         prompts=prompts,
-        backends=BACKENDS,
+        backends=backends,
         tiers=["C", "B", "A"],
         trace_path=MAIN_TRACE_PATH,
         smoke=False,
@@ -635,16 +739,23 @@ def main():
     parser = argparse.ArgumentParser(description="J=3 trace collection")
     parser.add_argument("--smoke", action="store_true", help="Run smoke test only")
     parser.add_argument("--full", action="store_true", help="Run full sweep")
+    parser.add_argument("--clarifai", action="store_true",
+                        help="Use Clarifai Trinity Mini instead of local Ollama")
     args = parser.parse_args()
+
+    if args.clarifai and CLARIFAI_PAT == "YOUR_CLARIFAI_PAT_HERE":
+        print("ERROR: Set CLARIFAI_PAT in Agent_V3_J3.py line 72 before using --clarifai")
+        sys.exit(1)
 
     if args.smoke:
         run_smoke_test()
     elif args.full:
-        run_full_sweep()
+        run_full_sweep(use_clarifai=args.clarifai)
     else:
-        print("Usage: python Agent_V3_J3.py --smoke | --full")
-        print("  --smoke  Run smoke test (30 rows)")
-        print("  --full   Run full sweep (all prompts × backends × tiers)")
+        print("Usage: python Agent_V3_J3.py --smoke | --full [--clarifai]")
+        print("  --smoke     Run smoke test (30 rows, Ollama)")
+        print("  --full      Run full sweep (Ollama, 3 backends)")
+        print("  --clarifai  Use Clarifai Trinity Mini (1 backend, fast)")
 
 
 if __name__ == "__main__":

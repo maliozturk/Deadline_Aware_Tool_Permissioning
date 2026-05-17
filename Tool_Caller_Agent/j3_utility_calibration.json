@@ -1,0 +1,44 @@
+{
+  "calibration_source": "embedding similarity with abstention handling vs gpt-oss-120b-high-throughput",
+  "reference_model": "gpt-oss-120b-high-throughput",
+  "n_prompts_calibrated": 165,
+  "abstention_handling": {
+    "rule_1_abstention_reference": "score = 0.5 for all tiers",
+    "rule_2_tier_abstained": "score = 0.2 for empty response against answerable ref",
+    "rule_3_normal": "cosine similarity, clipped to [0,1]"
+  },
+  "diagnostic_clean_subset": {
+    "n": 39,
+    "mu_clean_per_tier": [
+      0.2853,
+      0.352,
+      0.4025
+    ]
+  },
+  "tiers": [
+    {
+      "index": 0,
+      "name": "quick_lookup",
+      "mu": 0.2217,
+      "sigma": 0.0737,
+      "u_min": 0.0,
+      "u_max": 1.2
+    },
+    {
+      "index": 1,
+      "name": "structured_analysis",
+      "mu": 0.3748,
+      "sigma": 0.1404,
+      "u_min": 0.0,
+      "u_max": 1.2
+    },
+    {
+      "index": 2,
+      "name": "deep_investigation",
+      "mu": 0.4258,
+      "sigma": 0.1228,
+      "u_min": 0.0,
+      "u_max": 1.2
+    }
+  ]
+}
