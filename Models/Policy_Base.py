@@ -26,6 +26,10 @@ class System_State:
 
     server_remaining_time  : float
 
+    # Oracle policies (e.g. Mode-Aware) may inspect queued tasks' assigned tiers.
+    # Populated by Simulator._State(); existing policies simply ignore it.
+    queued_tasks_tuple     : tuple = ()
+
 
 class Scheduling_Policy(Protocol):
 

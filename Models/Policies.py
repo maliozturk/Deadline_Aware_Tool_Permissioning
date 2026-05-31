@@ -13,6 +13,7 @@ from collections import deque
 from dataclasses import dataclass, field
 from typing import Deque, List, Optional
 
+import math
 import numpy as np
 
 from Configurations import Policy_Config, Utility_Config
@@ -405,3 +406,204 @@ class Drift_Penalty_Myopic_Policy(Scheduling_Policy):
 
 
 Queue_Threshold_Policy = Queue_Length_Bang_Bang_Policy
+
+
+# =========================================================================
+#  CADTR — Context-Aware Dynamic Tool Resolution
+#  Added: Step 2 of CADTR migration
+# =========================================================================
+
+@dataclass
+class CADTR_Policy(FTCPolicy):
+    """
+    Context-Aware Dynamic Tool Resolution (CADTR).
+
+    Inherits the baseline feasibility gate from FTC, but introduces
+    dynamic, event-specific risk adaptation for mission-critical
+    orchestrators.  When a high-priority / critical event arrives,
+    the policy tightens its safety margin (epsilon) to favour the
+    faster Tactical tool, ensuring mission survival at the cost of
+    the Strategic intelligence bonus.
+
+    Technical mechanism
+    -------------------
+    ``_Current_Epsilon()`` is overridden to inject a context-dependent
+    shift on top of the base epsilon (static **or** PI-adapted).
+    This is necessary because in static-epsilon mode, the parent
+    ``_Current_Epsilon()`` reads from ``self.cfg.datp_epsilon_f64``
+    (a frozen config field), so mutating ``self._epsilon_f64`` would
+    have no effect.  The override guarantees the shift applies in
+    both modes.
+    """
+
+    # Negative buffer = stricter safety margin for critical events.
+    # -0.15 means "shrink the slack budget by 15 % for priority tasks".
+    priority_safety_buffer_f64: float = -0.15
+
+    def Decide_Mode(self, task: Task, state: System_State) -> int:
+        # 1. Read environment context: Is this a critical survival event?
+        is_critical = bool(getattr(task, "high_priority_bool", False))
+
+        # 2. Activate context-dependent epsilon shift for this decision
+        self._cadtr_context_shift_f64 = (
+            float(self.priority_safety_buffer_f64) if is_critical else 0.0
+        )
+
+        # 3. Run the core Feasibility Gate (uses overridden _Current_Epsilon)
+        chosen_tier = super().Decide_Mode(task, state)
+
+        # 4. Clear the context shift for the next event
+        self._cadtr_context_shift_f64 = 0.0
+
+        return chosen_tier
+
+    def _Current_Epsilon(self) -> float:
+        """Inject context-aware risk shift on top of the base epsilon."""
+        base_epsilon = super()._Current_Epsilon()
+        shift = float(getattr(self, "_cadtr_context_shift_f64", 0.0))
+        return float(base_epsilon) + shift
+
+
+# =========================================================================
+#  Reviewer 1 — Fair Deadline-Aware Baselines
+#  Added: Step 3 of CADTR migration
+# =========================================================================
+
+@dataclass
+class Mode_Aware_Baseline_Policy(FTCPolicy):
+    """
+    Fair Baseline requested by Reviewer 1: Mode-Aware Oracle.
+
+    Instead of approximating queue wait via a rho-weighted average,
+    computes the exact expected wait by inspecting each queued task's
+    already-assigned tier and summing the corresponding expected
+    service times.  This is a strictly better estimator than FTC's
+    rho-mix, making it a challenging "fair" benchmark.
+
+    Requires ``System_State.queued_tasks_tuple`` (populated by
+    Simulator._State).
+    """
+
+    def Decide_Mode(self, task: Task, state: System_State) -> int:
+        delta_k = task.deadline - state.now_f64
+        if delta_k <= 0:
+            return 0  # expired → fastest tier
+
+        J = self.num_tiers
+        s_per_tier = self._tier_service_times()
+
+        # --- Mode-aware exact wait estimation ---
+        # Sum actual expected service times for each queued task
+        # based on its already-assigned tier.
+        exact_queue_wait = 0.0
+        for queued_task in state.queued_tasks_tuple:
+            tier = getattr(queued_task, "chosen_tier_i32", None)
+            if tier is not None and 0 <= tier < J:
+                exact_queue_wait += s_per_tier[tier]
+            else:
+                # Fallback: assume worst-case (slowest tier)
+                exact_queue_wait += s_per_tier[J - 1]
+
+        in_service = (
+            float(state.server_remaining_time)
+            if state.server_busy_bool and self.cfg.datp_include_in_service
+            else 0.0
+        )
+        W_hat = in_service + exact_queue_wait
+
+        epsilon = self._Current_Epsilon()
+        budget = float(self.cfg.datp_slack_factor) * delta_k * (1.0 + epsilon)
+
+        # Select highest feasible tier
+        selected_tier = 0
+        for j in range(J - 1, -1, -1):
+            if (W_hat + s_per_tier[j]) <= budget:
+                selected_tier = j
+                break
+
+        return selected_tier
+
+    def Should_Switch_Mode(self, task: Task, state: System_State) -> bool:
+        return False
+
+
+@dataclass
+class Expected_Utility_Oracle_Policy(FTCPolicy):
+    """
+    Fair Baseline requested by Reviewer 1: Myopic CDF Oracle
+    (Theorem 4.3 decision rule).
+
+    Estimates P(on-time completion) for each tier using a Gaussian
+    CDF approximation of service time, then selects the tier that
+    maximises expected utility:
+
+        EU(j) = P(wait + service_j <= deadline) × utility(j)
+
+    This is the strongest possible myopic baseline: it uses
+    probabilistic reasoning about deadline feasibility and
+    utility-maximisation.  However, it is static — it does not
+    adapt its risk tolerance based on task priority (unlike CADTR).
+    """
+
+    # Coefficient of variation for service-time CDF approximation
+    cdf_cv_f64: float = 0.15
+    # Utility values matching CADTR physical model
+    tactical_utility_f64: float = 1.0    # base survival
+    strategic_utility_f64: float = 1.5   # base + bonus
+
+    def Decide_Mode(self, task: Task, state: System_State) -> int:
+        delta_k = task.deadline - state.now_f64
+        if delta_k <= 0:
+            return 0
+
+        J = self.num_tiers
+        s_per_tier = self._tier_service_times()
+
+        # Estimate wait using rho-weighted average (same as FTC base)
+        rho = self._effective_rho_vec()
+        if self.cfg.datp_wait_estimator == "conservative":
+            s_avg = s_per_tier[J - 1]
+        else:
+            s_avg = sum(rho[j] * s_per_tier[j] for j in range(J))
+
+        in_service = (
+            float(state.server_remaining_time)
+            if state.server_busy_bool and self.cfg.datp_include_in_service
+            else 0.0
+        )
+        W_hat = in_service + float(state.queue_length_i32) * s_avg
+        slack = delta_k - W_hat
+
+        # For each tier, compute P(service_j <= slack) and expected utility
+        best_tier = 0
+        best_eu = -1.0
+
+        for j in range(J):
+            s_j = s_per_tier[j]
+            std_j = s_j * float(self.cdf_cv_f64)
+
+            if std_j <= 0.0:
+                p_on_time = 1.0 if slack >= s_j else 0.0
+            else:
+                p_on_time = 0.5 * (1.0 + math.erf(
+                    (slack - s_j) / (std_j * math.sqrt(2.0))
+                ))
+
+            # Utility for tier j: linear interpolation for J > 2
+            if J <= 2:
+                u_j = self.tactical_utility_f64 if j == 0 else self.strategic_utility_f64
+            else:
+                t = j / (J - 1)
+                u_j = (self.tactical_utility_f64 * (1.0 - t)
+                       + self.strategic_utility_f64 * t)
+
+            eu_j = p_on_time * u_j
+
+            if eu_j > best_eu:
+                best_eu = eu_j
+                best_tier = j
+
+        return best_tier
+
+    def Should_Switch_Mode(self, task: Task, state: System_State) -> bool:
+        return False

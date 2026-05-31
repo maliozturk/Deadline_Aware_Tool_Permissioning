@@ -35,9 +35,12 @@ from Models.Distributions import (
 )
 from Models.Policies import (
     Baseline_Heuristic_Policy,
+    CADTR_Policy,
+    Expected_Utility_Oracle_Policy,
     Fcfs_Always_Fast_Policy,
     Fcfs_Always_Slow_Policy,
     FTCPolicy,
+    Mode_Aware_Baseline_Policy,
     Static_Mix_Policy,
     Queue_Length_Bang_Bang_Policy,
     Queue_Threshold_Policy,
@@ -45,7 +48,7 @@ from Models.Policies import (
     Drift_Penalty_Myopic_Policy,
 )
 from Core.Task import Mode
-from Models.Utility import Firm_Deadline_Quality_Utility
+from Models.Utility import Firm_Deadline_Quality_Utility, CADTR_Mission_Utility
 
 
 POLICY_LABELS = {
@@ -59,6 +62,9 @@ POLICY_LABELS = {
     "Baseline_Heuristic_Policy": "TTL-aware heuristic",
     "FTCPolicy": "FTC*",
     "DATPPolicy": "FTC*",
+    "CADTR_Policy": "CADTR",
+    "Mode_Aware_Baseline_Policy": "Mode-Aware Oracle",
+    "Expected_Utility_Oracle_Policy": "Myopic CDF Oracle",
 }
 
 
@@ -225,6 +231,9 @@ def Run_Baseline() -> None:
         "TTL_Feasibility_Bang_Bang_Policy",
         "Drift_Penalty_Myopic_Policy",
         "DATPPolicy",
+        "CADTR_Policy",
+        "Mode_Aware_Baseline_Policy",
+        "Expected_Utility_Oracle_Policy",
     ]
 
     Path("Results").mkdir(parents=True, exist_ok=True)
@@ -243,7 +252,7 @@ def Run_Baseline() -> None:
     priority_policy_summaries: dict = {}
 
     for policy_name in policy_names:
-        simulation_config = Simulation_Config()
+        simulation_config = Simulation_Config(priority_task_rate_f64=0.20)
 
         interarrival_exponential = Exponential_Interarrival(simulation_config.arrival_config.lambda_rate_f64)
         service_cfg = simulation_config.service_config
@@ -275,8 +284,8 @@ def Run_Baseline() -> None:
             service_lognormal_service_times = base_service_model
 
         utility_rng = np.random.default_rng(simulation_config.seed_i32 + 2000)
-        utility_model_firm_deadline_quality_utility = Firm_Deadline_Quality_Utility(
-            simulation_config.utility_config,
+        utility_model_firm_deadline_quality_utility = CADTR_Mission_Utility(
+            cfg_utility_config=simulation_config.utility_config,
             rng_opt=utility_rng,
         )
 
@@ -317,6 +326,25 @@ def Run_Baseline() -> None:
 
         elif policy_name in {"FTCPolicy", "DATPPolicy"}:
             policy_scheduling_policy  =  FTCPolicy(simulation_config.policy_config, service_model=service_lognormal_service_times)
+
+        elif policy_name == "CADTR_Policy":
+            policy_scheduling_policy = CADTR_Policy(
+                cfg=simulation_config.policy_config,
+                service_model=service_lognormal_service_times,
+                priority_safety_buffer_f64=-0.15,
+            )
+
+        elif policy_name == "Mode_Aware_Baseline_Policy":
+            policy_scheduling_policy = Mode_Aware_Baseline_Policy(
+                cfg=simulation_config.policy_config,
+                service_model=service_lognormal_service_times,
+            )
+
+        elif policy_name == "Expected_Utility_Oracle_Policy":
+            policy_scheduling_policy = Expected_Utility_Oracle_Policy(
+                cfg=simulation_config.policy_config,
+                service_model=service_lognormal_service_times,
+            )
 
         else:
             raise ValueError(f"Policy name {policy_name} not recognized.")

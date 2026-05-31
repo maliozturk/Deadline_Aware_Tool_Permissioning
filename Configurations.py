@@ -59,22 +59,66 @@ class Service_Config:
 @dataclass(frozen=True)
 class Utility_Config:
 
-    firm_deadline_bool         : bool  = True
-    slow_success_utility_f64   : float = 1.0                         
-    slow_success_std_f64       : float = 0.10
-    slow_success_min_f64       : float = 0.0
-    slow_success_max_f64       : Optional[float] = 1.2
+    # --- CADTR Mission-Critical Utility ---
+    base_survival_utility_f64       : float = 1.0    # Granted by BOTH Tactical and Strategic tools
+    strategic_logging_bonus_f64     : float = 0.5    # Granted ONLY by Strategic tool (telemetry, audit, crypto)
+    utility_noise_std_f64           : float = 0.02   # Small organic variance (graphs aren't perfectly flat)
 
-    fast_success_utility_f64   : float = 0.5                         
-    fast_success_std_f64       : float = 0.05
-    fast_success_min_f64       : float = 0.0
-    fast_success_max_f64       : Optional[float] = None
+    # Priority scaling (for premium/high-priority swarm experiments)
+    high_priority_multiplier_f64    : float = 1.2
 
-                                                                   
-    high_priority_slow_success_utility_f64 : float = 1.2
-    high_priority_fast_success_utility_f64 : float = 0.6
+    missed_deadline_utility_f64     : float = 0.0    # Catastrophic failure
+    min_utility_f64                 : float = 0.0
+    max_utility_f64                 : float = 2.0
 
-    missed_deadline_utility_f64: float = 0.0
+    # Firm deadline semantics (kept for backward compat with old utility class)
+    firm_deadline_bool              : bool  = True
+
+    # ---------------------------------------------------------------
+    # Backward-compatibility properties
+    # Map old field names to CADTR equivalents so Firm_Deadline_Quality_Utility,
+    # Drift_Penalty_Myopic_Policy, and Paper_Experiments.py keep working.
+    # ---------------------------------------------------------------
+
+    @property
+    def slow_success_utility_f64(self) -> float:
+        return self.base_survival_utility_f64 + self.strategic_logging_bonus_f64
+
+    @property
+    def fast_success_utility_f64(self) -> float:
+        return self.base_survival_utility_f64
+
+    @property
+    def slow_success_std_f64(self) -> float:
+        return self.utility_noise_std_f64
+
+    @property
+    def fast_success_std_f64(self) -> float:
+        return self.utility_noise_std_f64
+
+    @property
+    def slow_success_min_f64(self) -> float:
+        return self.min_utility_f64
+
+    @property
+    def slow_success_max_f64(self) -> "Optional[float]":
+        return self.max_utility_f64
+
+    @property
+    def fast_success_min_f64(self) -> float:
+        return self.min_utility_f64
+
+    @property
+    def fast_success_max_f64(self) -> "Optional[float]":
+        return None  # original default was None for fast
+
+    @property
+    def high_priority_slow_success_utility_f64(self) -> float:
+        return (self.base_survival_utility_f64 + self.strategic_logging_bonus_f64) * self.high_priority_multiplier_f64
+
+    @property
+    def high_priority_fast_success_utility_f64(self) -> float:
+        return self.base_survival_utility_f64 * self.high_priority_multiplier_f64
 
 
 @dataclass(frozen=True)

@@ -100,7 +100,8 @@ class Simulator:
             queue_length_i32=len(self.queue_deque_task),
             server_busy_bool=self.server_server.busy_bool,
             current_task_task_opt=self.server_server.current_task_task_opt,
-            server_remaining_time=remaining
+            server_remaining_time=remaining,
+            queued_tasks_tuple=tuple(self.queue_deque_task),
         )
 
     def Initialize(self) -> None:
