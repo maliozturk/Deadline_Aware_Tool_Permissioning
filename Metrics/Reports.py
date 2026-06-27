@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC) / CADTR
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Metrics/Reports.py
 #  Purpose: Format aggregated metrics into a report string.

@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC) / CADTR
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Models/__init__.py
 #  Purpose: Models package initializer.

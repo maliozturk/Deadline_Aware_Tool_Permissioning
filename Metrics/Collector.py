@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC) / CADTR
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Metrics/Collector.py
 #  Purpose: Collect per-task metrics and aggregate statistics.

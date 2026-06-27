@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC) / CADTR
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Core/Simulator.py
 #  Purpose: Run the single-server discrete-event simulation.
@@ -73,6 +73,7 @@ class Simulator:
         ttl_mean_f64 = float(ttl_cfg.ttl_seconds_f64)
         ttl_std_f64 = float(ttl_cfg.ttl_std_f64)
         ttl_min_f64 = float(ttl_cfg.ttl_min_f64)
+        ttl_max_opt = ttl_cfg.ttl_max_f64
 
         if ttl_std_f64 > 0.0:
             ttl_sample_f64 = float(self.rng_rng.normal(loc=ttl_mean_f64, scale=ttl_std_f64))
@@ -80,6 +81,8 @@ class Simulator:
             ttl_sample_f64 = ttl_mean_f64
 
         ttl_f64 = max(ttl_sample_f64, ttl_min_f64)
+        if ttl_max_opt is not None:
+            ttl_f64 = min(ttl_f64, float(ttl_max_opt))
         deadline_f64 = arrival_time_f64 + ttl_f64
         priority_rate_f64 = float(self.cfg_simulation_config.priority_task_rate_f64)
         is_high_priority = bool(self.rng_rng.random() < priority_rate_f64)

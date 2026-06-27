@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC) / CADTR
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Configurations.py
 #  Purpose: Define configuration dataclasses for simulation components.
@@ -26,6 +26,7 @@ class Ttl_Config:
     ttl_seconds_f64 : float
     ttl_std_f64 : float = 0.5
     ttl_min_f64 : float = 0.05
+    ttl_max_f64 : Optional[float] = None   # upper clip; None = no cap
 
     def __post_init__(self) -> None:
         if self.ttl_seconds_f64 <= 0.0:
@@ -34,6 +35,8 @@ class Ttl_Config:
             raise ValueError("ttl_std_f64 must be >= 0.")
         if self.ttl_min_f64 <= 0.0:
             raise ValueError("ttl_min_f64 must be > 0.")
+        if self.ttl_max_f64 is not None and self.ttl_max_f64 <= self.ttl_min_f64:
+            raise ValueError("ttl_max_f64 must be > ttl_min_f64.")
 
 
 @dataclass(frozen=True)
@@ -143,86 +146,34 @@ class Policy_Config:
 
                                                        
                                                                                                       
-    datp_slack_factor: float = 1.0                              
+    ftc_slack_factor: float = 1.0                              
                                                                                                        
-    datp_epsilon_f64: float = 0.0
+    ftc_epsilon_f64: float = 0.0
 
                                                                           
-    datp_adaptive_epsilon_enabled_bool: bool = False
-    datp_adaptive_epsilon_window_i32: int = 25
-    datp_adaptive_epsilon_kp_f64:        float = 0.02
-    datp_adaptive_epsilon_ki_f64:        float = 0.002
-    datp_adaptive_epsilon_min_f64:       float = -.10
-    datp_adaptive_epsilon_max_f64:       float =  .10
+    ftc_adaptive_epsilon_enabled_bool: bool = False
+    ftc_adaptive_epsilon_window_i32: int = 25
+    ftc_adaptive_epsilon_kp_f64:        float = 0.02
+    ftc_adaptive_epsilon_ki_f64:        float = 0.002
+    ftc_adaptive_epsilon_min_f64:       float = -.10
+    ftc_adaptive_epsilon_max_f64:       float =  .10
 
                                       
                                                                       
                                                                    
-    datp_wait_estimator: str = "mix"                          
+    ftc_wait_estimator: str = "mix"                          
 
                                               
-    datp_queue_slow_mix_p: float = 0.55
+    ftc_queue_slow_mix_p: float = 0.55
 
                                                                             
-    datp_include_in_service: bool = True
+    ftc_include_in_service: bool = True
 
                                             
-    datp_trace_enabled_bool: bool = False
+    ftc_trace_enabled_bool: bool = False
 
                                                
-    datp_quantile_q_f64: float = 0.9
-
-    @property
-    def tfg_slack_factor(self) -> float:
-        return self.datp_slack_factor
-
-    @property
-    def tfg_epsilon_f64(self) -> float:
-        return self.datp_epsilon_f64
-
-    @property
-    def tfg_adaptive_epsilon_enabled_bool(self) -> bool:
-        return self.datp_adaptive_epsilon_enabled_bool
-
-    @property
-    def tfg_adaptive_epsilon_window_i32(self) -> int:
-        return self.datp_adaptive_epsilon_window_i32
-
-    @property
-    def tfg_adaptive_epsilon_kp_f64(self) -> float:
-        return self.datp_adaptive_epsilon_kp_f64
-
-    @property
-    def tfg_adaptive_epsilon_ki_f64(self) -> float:
-        return self.datp_adaptive_epsilon_ki_f64
-
-    @property
-    def tfg_adaptive_epsilon_min_f64(self) -> float:
-        return self.datp_adaptive_epsilon_min_f64
-
-    @property
-    def tfg_adaptive_epsilon_max_f64(self) -> float:
-        return self.datp_adaptive_epsilon_max_f64
-
-    @property
-    def tfg_wait_estimator(self) -> str:
-        return self.datp_wait_estimator
-
-    @property
-    def tfg_queue_slow_mix_p(self) -> float:
-        return self.datp_queue_slow_mix_p
-
-    @property
-    def tfg_include_in_service(self) -> bool:
-        return self.datp_include_in_service
-
-    @property
-    def tfg_trace_enabled_bool(self) -> bool:
-        return self.datp_trace_enabled_bool
-
-    @property
-    def tfg_quantile_q_f64(self) -> float:
-        return self.datp_quantile_q_f64
+    ftc_quantile_q_f64: float = 0.9
 
 
 

@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC) / CADTR
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Models/Distributions.py
 #  Purpose: Define interarrival and service-time distributions.
@@ -120,6 +120,13 @@ class Lognormal_Service_Times:
         return self.Expected(mode)
 
 
+# Module-level cache of parsed traces, keyed by (path, columns, filters).
+# Parsing the trace CSV is the dominant per-simulation cost; caching makes
+# long serial sweeps (e.g. reproduce/run_sweep.py --serial) practical without
+# changing any results (the parsed rows are read-only during sampling).
+_TRACE_CACHE: Dict[tuple, tuple] = {}
+
+
 @dataclass(frozen=True)
 class Trace_Service_Times:
 
@@ -143,6 +150,23 @@ class Trace_Service_Times:
         csv_path = self.csv_path_str
         if not os.path.isabs(csv_path):
             csv_path = os.path.normpath(csv_path)
+
+        cache_key = (
+            os.path.abspath(csv_path),
+            self.fast_latency_column_str,
+            self.slow_latency_column_str,
+            self.drop_error_rows_bool,
+            self.prompt_type_filter_opt,
+        )
+        cached = _TRACE_CACHE.get(cache_key)
+        if cached is not None:
+            rows_list, fast_samples, slow_samples, fast_sorted, slow_sorted = cached
+            object.__setattr__(self, "_rows_list_dict", rows_list)
+            object.__setattr__(self, "_fast_samples_list_f64", fast_samples)
+            object.__setattr__(self, "_slow_samples_list_f64", slow_samples)
+            object.__setattr__(self, "_fast_sorted_list_f64", fast_sorted)
+            object.__setattr__(self, "_slow_sorted_list_f64", slow_sorted)
+            return
 
         rows_list: List[Dict[str, object]] = []
         fast_samples: List[float] = []
@@ -183,11 +207,15 @@ class Trace_Service_Times:
         if not rows_list:
             raise ValueError(f"No usable rows found in trace CSV: {csv_path}")
 
+        fast_sorted = sorted(fast_samples)
+        slow_sorted = sorted(slow_samples)
         object.__setattr__(self, "_rows_list_dict", rows_list)
         object.__setattr__(self, "_fast_samples_list_f64", fast_samples)
         object.__setattr__(self, "_slow_samples_list_f64", slow_samples)
-        object.__setattr__(self, "_fast_sorted_list_f64", sorted(fast_samples))
-        object.__setattr__(self, "_slow_sorted_list_f64", sorted(slow_samples))
+        object.__setattr__(self, "_fast_sorted_list_f64", fast_sorted)
+        object.__setattr__(self, "_slow_sorted_list_f64", slow_sorted)
+        _TRACE_CACHE[cache_key] = (rows_list, fast_samples, slow_samples,
+                                   fast_sorted, slow_sorted)
 
     def _Row_For_Task(self, task_task: "Task", rng_generator: np.random.Generator) -> Dict[str, object]:
         meta = task_task.meta_dict_obj

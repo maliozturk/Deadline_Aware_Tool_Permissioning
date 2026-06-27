@@ -1,6 +1,6 @@
 # =============================================================================
-#  DEADLINE-AWARE TOOL PERMISSIONING (DATP)
-#  Product Signature: DATP
+#  FIRM-DEADLINE TOOL CONTROL (FTC) / CADTR
+#  Product Signature: FTC
 # ------------------------------------------------------------------------------
 #  File: Tool_Caller_Agent/Agent_V3.py
 #  Purpose: Run prompt batches against the model and log trace results.
@@ -519,13 +519,15 @@ def safe_sleep():
     if SLEEP_BETWEEN_CALLS_SEC and SLEEP_BETWEEN_CALLS_SEC > 0:
         time.sleep(SLEEP_BETWEEN_CALLS_SEC)
 
-def timed_chat(model: str, messages, tools=None):
+def timed_chat(model: str, messages, tools=None, options=None):
     t0 = time.time()
     try:
-        if tools is None:
-            resp = ollama.chat(model=model, messages=messages)
-        else:
-            resp = ollama.chat(model=model, messages=messages, tools=tools)
+        kwargs = {"model": model, "messages": messages}
+        if tools is not None:
+            kwargs["tools"] = tools
+        if options is not None:
+            kwargs["options"] = options
+        resp = ollama.chat(**kwargs)
         elapsed = time.time() - t0
         return resp, elapsed, None
     except Exception as e:

@@ -1,0 +1,12 @@
+# Core dependencies for the FTC/CADTR simulation, analysis, and figures.
+# Tested with Python 3.11 (also runs on 3.9+).
+numpy>=1.24
+scipy>=1.10
+pandas>=2.0
+matplotlib>=3.7
+pytest>=7.0
+
+# Optional: only needed to (re)collect LLM latency traces in Tool_Caller_Agent/
+# (requires a local Ollama server with the relevant models pulled).
+# ollama>=0.3
+# tqdm>=4.65

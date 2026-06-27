@@ -51,41 +51,41 @@ class FTCPolicy(Scheduling_Policy):
     _epsilon_f64: float = field(init=False, default=0.0)
 
     def __post_init__(self) -> None:
-        if self.cfg.datp_wait_estimator not in {"conservative", "mix"}:
-            raise ValueError("datp_wait_estimator must be one of {'conservative','mix'}.")
-        p = float(self.cfg.datp_queue_slow_mix_p)
+        if self.cfg.ftc_wait_estimator not in {"conservative", "mix"}:
+            raise ValueError("ftc_wait_estimator must be one of {'conservative','mix'}.")
+        p = float(self.cfg.ftc_queue_slow_mix_p)
         if not (0.0 <= p <= 1.0):
-            raise ValueError("datp_queue_slow_mix_p must be in [0, 1].")
-        if float(self.cfg.datp_slack_factor) <= 0:
-            raise ValueError("datp_slack_factor must be > 0.")
-        eps = float(self.cfg.datp_epsilon_f64)
+            raise ValueError("ftc_queue_slow_mix_p must be in [0, 1].")
+        if float(self.cfg.ftc_slack_factor) <= 0:
+            raise ValueError("ftc_slack_factor must be > 0.")
+        eps = float(self.cfg.ftc_epsilon_f64)
         if not (-1.0 < eps <= 1.0):
-            raise ValueError("datp_epsilon_f64 must be in (-1, 1].")
+            raise ValueError("ftc_epsilon_f64 must be in (-1, 1].")
 
-        self._epsilon_f64 = float(self.cfg.datp_epsilon_f64)
-        self._epsilon_recent_misses_deque_i32 = deque(maxlen=int(self.cfg.datp_adaptive_epsilon_window_i32))
+        self._epsilon_f64 = float(self.cfg.ftc_epsilon_f64)
+        self._epsilon_recent_misses_deque_i32 = deque(maxlen=int(self.cfg.ftc_adaptive_epsilon_window_i32))
 
-        if self.cfg.datp_adaptive_epsilon_enabled_bool:
-            if self.cfg.datp_adaptive_epsilon_window_i32 <= 0:
-                raise ValueError("datp_adaptive_epsilon_window_i32 must be > 0.")
-            if float(self.cfg.datp_adaptive_epsilon_kp_f64) < 0:
-                raise ValueError("datp_adaptive_epsilon_kp_f64 must be >= 0.")
-            if float(self.cfg.datp_adaptive_epsilon_ki_f64) < 0:
-                raise ValueError("datp_adaptive_epsilon_ki_f64 must be >= 0.")
-            eps_min = float(self.cfg.datp_adaptive_epsilon_min_f64)
-            eps_max = float(self.cfg.datp_adaptive_epsilon_max_f64)
+        if self.cfg.ftc_adaptive_epsilon_enabled_bool:
+            if self.cfg.ftc_adaptive_epsilon_window_i32 <= 0:
+                raise ValueError("ftc_adaptive_epsilon_window_i32 must be > 0.")
+            if float(self.cfg.ftc_adaptive_epsilon_kp_f64) < 0:
+                raise ValueError("ftc_adaptive_epsilon_kp_f64 must be >= 0.")
+            if float(self.cfg.ftc_adaptive_epsilon_ki_f64) < 0:
+                raise ValueError("ftc_adaptive_epsilon_ki_f64 must be >= 0.")
+            eps_min = float(self.cfg.ftc_adaptive_epsilon_min_f64)
+            eps_max = float(self.cfg.ftc_adaptive_epsilon_max_f64)
             if eps_min <= -1.0:
-                raise ValueError("datp_adaptive_epsilon_min_f64 must be > -1.")
+                raise ValueError("ftc_adaptive_epsilon_min_f64 must be > -1.")
             if eps_max <= -1.0:
-                raise ValueError("datp_adaptive_epsilon_max_f64 must be > -1.")
+                raise ValueError("ftc_adaptive_epsilon_max_f64 must be > -1.")
             if eps_min > eps_max:
-                raise ValueError("datp_adaptive_epsilon_min_f64 must be <= datp_adaptive_epsilon_max_f64.")
+                raise ValueError("ftc_adaptive_epsilon_min_f64 must be <= ftc_adaptive_epsilon_max_f64.")
             self._epsilon_f64 = self._Clamp_Epsilon(self._epsilon_f64)
 
         # Build rho_vec for J-mode support.
         # For J=2: rho_vec = (1-rho_scalar, rho_scalar) to recover existing rule.
         if self.rho_vec is None:
-            rho_scalar = float(self.cfg.datp_queue_slow_mix_p)
+            rho_scalar = float(self.cfg.ftc_queue_slow_mix_p)
             self.rho_vec = [1.0 - rho_scalar, rho_scalar]
 
     def Decide_Mode(self, task: Task, state: System_State) -> int:
@@ -101,18 +101,18 @@ class FTCPolicy(Scheduling_Policy):
 
         # Compute s_avg using rho_vec
         rho = self._effective_rho_vec()
-        if self.cfg.datp_wait_estimator == "conservative":
+        if self.cfg.ftc_wait_estimator == "conservative":
             s_avg = s_per_tier[J - 1]  # worst-case = slowest
         else:
             s_avg = sum(rho[j] * s_per_tier[j] for j in range(J))
 
         # Backlog estimate
-        in_service = float(state.server_remaining_time) if (state.server_busy_bool and self.cfg.datp_include_in_service) else 0.0
+        in_service = float(state.server_remaining_time) if (state.server_busy_bool and self.cfg.ftc_include_in_service) else 0.0
         W_hat = in_service + float(state.queue_length_i32) * s_avg
 
         epsilon = self._Current_Epsilon()
         budget = (
-            float(self.cfg.datp_slack_factor)
+            float(self.cfg.ftc_slack_factor)
             * float(delta_k)
             * (1.0 + float(epsilon))
         )
@@ -125,7 +125,7 @@ class FTCPolicy(Scheduling_Policy):
                 break
 
         # Backward-compatible trace recording (using Mode for J=2)
-        if self.cfg.datp_trace_enabled_bool:
+        if self.cfg.ftc_trace_enabled_bool:
             decision_mode = Mode.SLOW if selected_tier == J - 1 else Mode.FAST
             self.decision_trace_list.append(
                 FTC_Decision_Trace(
@@ -177,7 +177,7 @@ class FTCPolicy(Scheduling_Policy):
         return False
 
     def Observe_Task_Outcome(self, task: Task) -> None:
-        if not self.cfg.datp_adaptive_epsilon_enabled_bool:
+        if not self.cfg.ftc_adaptive_epsilon_enabled_bool:
             return
 
         missed = 1
@@ -193,15 +193,15 @@ class FTCPolicy(Scheduling_Policy):
             return
 
         dmr_k = float(np.mean(self._epsilon_recent_misses_deque_i32))
-        target = float(self.cfg.datp_epsilon_f64)
+        target = float(self.cfg.ftc_epsilon_f64)
         # error = target - dmr_k  (same as original)
         error = target - dmr_k
 
-        kp = float(self.cfg.datp_adaptive_epsilon_kp_f64)
-        ki = float(self.cfg.datp_adaptive_epsilon_ki_f64)
+        kp = float(self.cfg.ftc_adaptive_epsilon_kp_f64)
+        ki = float(self.cfg.ftc_adaptive_epsilon_ki_f64)
 
-        eps_min = float(self.cfg.datp_adaptive_epsilon_min_f64)
-        eps_max = float(self.cfg.datp_adaptive_epsilon_max_f64)
+        eps_min = float(self.cfg.ftc_adaptive_epsilon_min_f64)
+        eps_max = float(self.cfg.ftc_adaptive_epsilon_max_f64)
 
         provisional_integral = self._epsilon_error_integral_f64 + float(error)
         candidate = self._epsilon_f64 + (kp * error) + (ki * provisional_integral)
@@ -229,25 +229,16 @@ class FTCPolicy(Scheduling_Policy):
         return
 
     def _Current_Epsilon(self) -> float:
-        if self.cfg.datp_adaptive_epsilon_enabled_bool:
+        if self.cfg.ftc_adaptive_epsilon_enabled_bool:
             return float(self._epsilon_f64)
-        return float(self.cfg.datp_epsilon_f64)
+        return float(self.cfg.ftc_epsilon_f64)
 
     def _Clamp_Epsilon(self, eps_f64: float) -> float:
-        if not self.cfg.datp_adaptive_epsilon_enabled_bool:
+        if not self.cfg.ftc_adaptive_epsilon_enabled_bool:
             return float(eps_f64)
-        eps_min = float(self.cfg.datp_adaptive_epsilon_min_f64)
-        eps_max = float(self.cfg.datp_adaptive_epsilon_max_f64)
+        eps_min = float(self.cfg.ftc_adaptive_epsilon_min_f64)
+        eps_max = float(self.cfg.ftc_adaptive_epsilon_max_f64)
         return float(np.clip(float(eps_f64), eps_min, eps_max))
-
-    def TFG_Policy_Identifier(self) -> None:
-        return self.FTC_Policy_Identifier()
-
-
-DATP_Decision_Trace = FTC_Decision_Trace
-DATPPolicy = FTCPolicy
-TFG_Decision_Trace = FTC_Decision_Trace
-TFGPolicy = FTCPolicy
 
 
 @dataclass
@@ -430,7 +421,7 @@ class CADTR_Policy(FTCPolicy):
     ``_Current_Epsilon()`` is overridden to inject a context-dependent
     shift on top of the base epsilon (static **or** PI-adapted).
     This is necessary because in static-epsilon mode, the parent
-    ``_Current_Epsilon()`` reads from ``self.cfg.datp_epsilon_f64``
+    ``_Current_Epsilon()`` reads from ``self.cfg.ftc_epsilon_f64``
     (a frozen config field), so mutating ``self._epsilon_f64`` would
     have no effect.  The override guarantees the shift applies in
     both modes.
@@ -506,13 +497,13 @@ class Mode_Aware_Baseline_Policy(FTCPolicy):
 
         in_service = (
             float(state.server_remaining_time)
-            if state.server_busy_bool and self.cfg.datp_include_in_service
+            if state.server_busy_bool and self.cfg.ftc_include_in_service
             else 0.0
         )
         W_hat = in_service + exact_queue_wait
 
         epsilon = self._Current_Epsilon()
-        budget = float(self.cfg.datp_slack_factor) * delta_k * (1.0 + epsilon)
+        budget = float(self.cfg.ftc_slack_factor) * delta_k * (1.0 + epsilon)
 
         # Select highest feasible tier
         selected_tier = 0
@@ -561,14 +552,14 @@ class Expected_Utility_Oracle_Policy(FTCPolicy):
 
         # Estimate wait using rho-weighted average (same as FTC base)
         rho = self._effective_rho_vec()
-        if self.cfg.datp_wait_estimator == "conservative":
+        if self.cfg.ftc_wait_estimator == "conservative":
             s_avg = s_per_tier[J - 1]
         else:
             s_avg = sum(rho[j] * s_per_tier[j] for j in range(J))
 
         in_service = (
             float(state.server_remaining_time)
-            if state.server_busy_bool and self.cfg.datp_include_in_service
+            if state.server_busy_bool and self.cfg.ftc_include_in_service
             else 0.0
         )
         W_hat = in_service + float(state.queue_length_i32) * s_avg

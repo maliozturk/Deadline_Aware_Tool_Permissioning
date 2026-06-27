@@ -1,209 +1,176 @@
-﻿# Deadline-Aware Tool Permissioning (DATP) for Tool-Augmented LLM Serving Under Firm Deadlines
+# Context-Aware Dynamic Tool Resolution (CADTR) for Deadline-Constrained Autonomous Agents
 
-This repository provides a discrete-event simulation framework for deadline-constrained LLM serving with multiple inference modes. It introduces Deadline Aware Tool Permissioning (DATP), a policy that gates slow vs fast inference using deadline slack and an optional epsilon margin. The simulation uses empirical service-time traces (paired FAST/SLOW) or lognormal models, and supports standard baseline policies for rigorous comparisons.
+This repository contains the simulation framework, data, and analysis code for the
+paper **"Context-Aware Dynamic Tool Resolution for Deadline-Constrained Autonomous
+Agents"** (PeerJ Computer Science, manuscript ID&nbsp;141785).
 
-The outputs are designed for publication-quality figures and tables. The proposed policy is labeled as "DATP*" in all plots and tables.
+It provides a trace-driven, discrete-event simulator of a non-preemptive
+single-server queue with **firm deadlines** and a multi-resolution tool menu
+(a fast *Tactical* mode and a slower *Strategic* mode). It implements:
 
-## System model
-- Single-server queue, FCFS, non-preemptive service.
-- Poisson arrivals with rate lambda (configurable in each experiment script).
-- Deadlines drawn from a truncated Normal distribution with minimum TTL 0.05 seconds.
-- Queue drop on deadline expiry enabled.
-- Firm-deadline utility: missed deadlines yield zero utility.
-- Simulation horizon 100000, warmup 1000.
-- Empirical service-time source is the default (paired trace sampling).
+- **FTC** (*Firm-Deadline Tool Control*) — an arrival-epoch feasibility-gating policy.
+- **CADTR** (*Context-Aware Dynamic Tool Resolution*) — FTC plus an event-driven,
+  priority-dependent ε-shift that shields critical tasks under load (the proposed method).
+- Baselines/oracles: **F-BB**, **FTC\***, **Mode-Aware Oracle**, **Myopic CDF Oracle**.
 
-## Policies and baselines
-- AlwaysFast (AF)
-- AlwaysSlow (AS)
-- StaticMix (p=0.5)
-- QueueThreshold (Q0=5)
-- DriftPenaltyMyopic (V=1.0)
-- TTL-aware heuristic
-- Proposed: DATP* (Deadline Aware Tool Permissioning; epsilon can be fixed or adaptive)
+Running the steps below reproduces every figure and table in the paper.
 
-## TTL regimes (used in outputs)
-- TTL Regime I (mu=28, sigma=9) -> very_tight
-- TTL Regime II (mu=35, sigma=10) -> tight
-- TTL Regime III (mu=45, sigma=12) -> relaxed
-- TTL Regime IV (mu=60, sigma=15) -> very_relaxed
+---
 
-All figures and tables map preset names to the "TTL Regime I-IV" labels.
+## Description
 
-## Empirical service-time data and counterfactual generation
-Empirical service times are derived from counterfactual FAST/SLOW generations using an LLM agent:
-- Generator: `Tool_Caller_Agent/Agent_V3.py`
-- Model: Ollama `llama3.1`
-- Tool schema: `fast_lookup` and `deep_reasoner`
-- Prompt sets: `Tool_Caller_Agent/Prompts.py`
-
-Tool definitions (router phase):
-- `fast_lookup`: short, factual, single-sentence answers for simple questions.
-- `deep_reasoner`: long, step-by-step reasoning for complex prompts.
-
-Tool schema JSON (from `Tool_Caller_Agent/Agent_V3.py`):
-```json
-[
-  {
-    "type": "function",
-    "function": {
-      "name": "fast_lookup",
-      "description": "Use this for simple, factual, quick questions that do not require reasoning.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "The query to answer"
-          }
-        },
-        "required": ["query"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "deep_reasoner",
-      "description": "Use this for complex, multi-step, philosophical, or coding tasks requiring detailed explanation.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "query": {
-            "type": "string",
-            "description": "The complex query"
-          }
-        },
-        "required": ["query"]
-      }
-    }
-  }
-]
-```
-
-The router call exposes these tools to the model. For trace generation we still execute both FAST and SLOW instructions to record counterfactual latencies for the same prompt.
-- Outputs: `Tool_Caller_Agent/trace_results_counterfactual.db` and `Tool_Caller_Agent/trace_results_counterfactual.csv`
-
-The CSV contains prompt metadata, router choices, latencies, response lengths, and full response text. This database can be reused for other research tasks such as offline routing or response-length modeling.
-
-Example paired responses (text truncated):
-
-```text
-Prompt: Which ocean is on the east coast of the United States?
-FAST (0.3283s): The Atlantic Ocean is on the east coast of the United States.
-SLOW (6.4724s): To answer this question, we must consider the geography of the United States and its relationship to the world's oceans. Step 1: Identify the major oceans surrounding the Americas. There are five major oceans that...
-
-Prompt: Which planet is known as the Red Planet?
-FAST (0.5113s): Mars is known as the Red Planet due to its reddish appearance caused by iron oxide in its soil.
-SLOW (8.9127s): Let's break down this question step by step to understand which planet is indeed known as the Red Planet. Step 1: Understanding the question. The question asks us to identify a specific planet that is commonly...
-
-Prompt: Compare Monte Carlo methods vs deterministic numerical methods for estimating integrals or uncertainties; provide use-cases.
-FAST (0.6478s): Monte Carlo methods are stochastic and more accurate for complex problems, but deterministic numerical methods like Gaussian quadrature are faster and more efficient for simple problems with known distributions.
-SLOW (14.9888s): Monte Carlo Methods vs Deterministic Numerical Methods: A Comparative Analysis. Numerical integration is a fundamental task in mathematics, physics, engineering, and other fields, where the objective is to estimate...
-```
-
-Summary utilities:
-- `Tool_Caller_Agent/Agent_V3.py` prints descriptive stats and a lognormal fit snippet.
-
-[//]: # (- `Analysis/Agent_Results_Stats.py` writes summary stats for the first 1335 usable FAST/SLOW samples.)
-
-[//]: # (## Reproducing paper outputs)
-
-[//]: # (All commands are run from the repository root.)
-
-[//]: # ()
-[//]: # (Recommended &#40;pipeline runner&#41;:)
-
-[//]: # (```bash)
-
-[//]: # (python Analysis/Run_Paper_Outputs.py)
-
-[//]: # (```)
-
-[//]: # (This executes the following scripts in order:)
-
-[//]: # (- `Analysis/DP_vs_DATP_V_Sweep.py`)
-
-[//]: # (- `Analysis/Trace_ECDF.py`)
-
-[//]: # (- `Analysis/Policy_GridSearch_vs_DATP.py`)
-
-[//]: # (- `Analysis/Agent_Results_Stats.py`)
-
-[//]: # (- `Analysis/Journal_Experiments.py`)
-
-[//]: # ()
-[//]: # (Individual scripts:)
-
-[//]: # (```bash)
-
-[//]: # (python Analysis/Journal_Experiments.py)
-
-[//]: # (python Analysis/DP_vs_DATP_V_Sweep.py)
-
-[//]: # (python Analysis/Policy_GridSearch_vs_DATP.py)
-
-[//]: # (python Analysis/Trace_ECDF.py)
-
-[//]: # (python Analysis/Premium_Priority_Table.py)
-
-[//]: # (```)
-
-[//]: # ()
-[//]: # (### Experiment outputs)
-
-[//]: # (- Main table &#40;D1&#41;: `Results/Journal/main_table/main_table.csv`)
-
-[//]: # (- Load sweep &#40;D2&#41;: `Results/Journal/load_sweep/utility_vs_lambda.png`, `Results/Journal/load_sweep/dmr_vs_lambda.png`)
-
-[//]: # (- Epsilon trade-off &#40;D3&#41;: `Results/Journal/epsilon_tradeoff/DATP_epsilon_pareto.png`)
-
-[//]: # (- ECDF plots: `Results/Trace_ECDF/ecdf_fast_vs_slow.png`, `Results/Trace_ECDF/ecdf_fast_vs_slow_by_prompt_type.png`)
-
-[//]: # (- Premium priority table: `Results/Journal/premium_table/premium_policy_table.csv`)
-
-[//]: # (- Agent stats table: `Results/Agent_Stats/agent_results_stats.csv`)
-
-### Configuration points
-- Global defaults: `Configurations.py`
-- Journal experiments: `Analysis/Journal_Experiments.py` (lambda sweep, epsilon list, TTL presets)
-- DATP settings: `Configurations.py` under `Policy_Config`
-- Service-time source: `Configurations.py` under `Service_Config`
-
-If you want to switch to a lognormal service model or to a different trace CSV, update `Configurations.py`.
+Tool-augmented agents under firm deadlines must decide, per request, whether to
+invoke a slow tool-rich pipeline (higher utility, higher latency/variance) or a
+fast pipeline (base utility, low latency). A missed deadline yields zero utility.
+The simulator replays empirically measured LLM service-time traces and evaluates
+scheduling/permissioning policies on critical-task miss rate, overall miss rate,
+realized utility, and Strategic-tool usage as the arrival rate λ varies.
 
 ## Repository layout
-- `Analysis/`: experiment scripts and plotting utilities.
-- `Core/`: simulation engine and task definitions.
-- `Models/`: policies, distributions, and utility models.
-- `Metrics/`: metrics collection and summary stats.
-- `Tool_Caller_Agent/`: trace generation and raw data assets.
-- `Results/`: generated figures and tables.
 
-## Agent specifications
-The trace generator agent uses:
-- Ollama client with model `llama3.1`.
-- Router tool schema with two tools: `fast_lookup` (short answer) and `deep_reasoner` (long answer).
-- Counterfactual execution of both FAST and SLOW prompts to record paired service times.
-- DB schema stored in `Tool_Caller_Agent/trace_results_counterfactual.db`.
+```
+Configurations.py          # all simulation configuration dataclasses
+Core/                      # discrete-event engine (Simulator, Events, Task, ToolTier)
+Models/                    # Policies (FTC, CADTR, baselines, oracles), Distributions, Utility
+Metrics/                   # metrics collection and summaries
+General_Definitions/       # shared types
+Tool_Caller_Agent/         # LLM trace generation + the empirical traces (data)
+reproduce/                 # scripts that regenerate the paper's tables and figures
+tests/                     # self-contained regression test
+_archive/                  # superseded/legacy scripts (not needed for reproduction)
+requirements.txt
+```
 
-## Compute environment (tested)
-- OS: Windows 11 Home 10.0.26100 (64-bit)
-- CPU: AMD Ryzen 7 5800H with Radeon Graphics
-- GPU: RTX 3080 Laptop GPU (8GB)
-- RAM: 31.4 GiB
-- Python: 3.9.13
-- Key packages: numpy 2.4.1, matplotlib 3.10.8
-- Optional for trace collection: ollama, tqdm
+## Requirements
 
-## Notes on reproducibility
-- All stochastic runs are seeded; see `Simulation_Config.seed_i32` and experiment scripts for seed offsets.
-- Default service-time sampling uses the trace CSV; ensure it is available at `Tool_Caller_Agent/trace_results_counterfactual.csv`.
-- Figures follow a unified serif style for publication quality (DPI 300, consistent font and line settings).
+- Python 3.9+ (tested on 3.11).
+- Install dependencies:
 
-## Thanks
-If you like our work, please cite/star the repository. Also feel free to write for comments/improvements. 
+  ```bash
+  pip install -r requirements.txt
+  ```
 
-Primary Author: **Muhammet Ali Ozturk** (muhammetaliozturk.official@gmail.com) (Turkiye, Hacettepe University - Computer Engineering Department. PhD. Student)
+  Core packages: `numpy`, `scipy`, `pandas`, `matplotlib`, `pytest`.
+- **Trace collection only** (optional, not needed to reproduce results from the
+  shipped data): a local [Ollama](https://ollama.com) server plus `ollama` and
+  `tqdm` Python packages.
 
-Advisor: **Assoc. Prof. Harun Artuner** (harun.artuner@gmail.com)
+## Dataset information
+
+Empirical end-to-end service-time traces are collected by a tool-routing LLM agent.
+For each prompt, **both** the FAST and SLOW pipelines are executed (counterfactual
+pairing), recording paired latencies, router choice, response text/length, and errors.
+
+| File | Backend | Description |
+|------|---------|-------------|
+| `Tool_Caller_Agent/trace_results_counterfactual.csv` | Llama&nbsp;3.1 | Canonical trace; the **service-time source for the simulator** (1335 prompts, 1332 usable after error filtering). |
+| `Tool_Caller_Agent/trace_results_counterfactual_qwen2.5-7b.csv` | Qwen&nbsp;2.5&nbsp;7B | Cross-backend latency comparison (ECDF). |
+| `Tool_Caller_Agent/trace_results_counterfactual_mistral-7b-instruct.csv` | Mistral&nbsp;7B Instruct | Cross-backend latency comparison (ECDF). |
+
+Key columns: `prompt`, `prompt_type`, `router_choice`,
+`fast_generation_only_sec`, `slow_generation_only_sec`,
+`fast_response_length_char`, `slow_response_length_char`, `fast_error`, `slow_error`.
+
+The simulator replays the **Llama&nbsp;3.1** trace; the Qwen and Mistral traces are
+used only for the cross-backend service-time ECDF figure.
+
+## Code information / methodology
+
+- **System model:** single-server, FCFS, non-preemptive queue; Poisson arrivals at
+  rate λ; firm deadlines (late or abandoned ⇒ zero utility); two priority classes
+  (25% critical in the threat-burst experiment).
+- **Utility:** Tactical = base survival utility (1.0); Strategic = base + intelligence
+  bonus (1.5); critical tasks ×1.2.
+- **TTL regime (main sweep):** fixed (deterministic) deadline budget of 35 s.
+- **Policy parameters:** FTC ρ = 0.55, ε = 0; CADTR critical ε-shift Δ = −0.20.
+- **Sweep:** λ ∈ {0.03, 0.05, …, 0.19}, 30 replications (seed base 42),
+  simulation horizon 100,000 time units, warm-up 1,000.
+
+Configuration lives in `Configurations.py`; the sweep settings are at the top of
+`reproduce/run_sweep.py`.
+
+## Usage — reproducing the paper
+
+All commands run from the repository root. Outputs are written under `Results/`
+(git-ignored, regenerable).
+
+### 1. Main results: table + "hero" figures
+
+```bash
+python reproduce/run_sweep.py            # add --serial on machines that block multiprocessing
+python reproduce/make_figures.py
+```
+
+- `run_sweep.py` writes `Results/lambda_sweep/sweep_stats.csv` (per-(λ,policy) mean/SD/CI),
+  `sweep_raw.csv`, and `main_table.csv` (the representative table at λ ∈ {0.03, 0.11, 0.19}),
+  and prints the paired t-tests at λ = 0.11.
+- `make_figures.py` reads `sweep_stats.csv` and writes, to `Results/figures/`:
+
+  | Paper figure | File |
+  |--------------|------|
+  | Critical-task miss rate ("hero graph") | `hero_graph_premium_mr.{png,pdf}` |
+  | Strategic usage on critical tasks ("shield") | `shield_mechanism_slow_frac.{png,pdf}` |
+  | Overall mean utility | `overall_utility.{png,pdf}` |
+  | Overall deadline miss rate | `overall_miss_rate.{png,pdf}` |
+
+  (If the manuscript figure directory `Tex/PeerJ/Results/CADTR/` exists, the PDFs
+  are also copied there.)
+
+### 2. Cross-backend service-time ECDF figure
+
+```bash
+python reproduce/make_multimodel_ecdf.py
+```
+
+Reads the three per-backend traces and writes
+`Results/Trace_ECDF/ecdf_fast_vs_slow_multimodel.{png,pdf}` and
+`ecdf_multimodel_summary.csv`.
+
+### 3. (Optional) Re-collect LLM traces
+
+Requires a local Ollama server. The Llama-3.1 trace is already provided; to add
+other backends (same prompts, same fast/slow process, fixed 50-prompt sample):
+
+```bash
+ollama pull qwen2.5:7b
+python Tool_Caller_Agent/collect_multimodel_traces.py --model qwen2.5:7b
+
+ollama pull mistral:7b-instruct
+python Tool_Caller_Agent/collect_multimodel_traces.py --model mistral:7b-instruct
+```
+
+The canonical Llama-3.1 trace was generated with `Tool_Caller_Agent/Agent_V3.py`.
+
+### 4. Tests
+
+```bash
+pytest -q
+```
+
+A self-contained regression that checks the simulator reproduces known headline
+values on the committed Llama-3.1 trace.
+
+## Reproducibility notes
+
+- All runs are seeded (`seed base 42`); results are deterministic per seed.
+- `run_sweep.py --serial` avoids Python multiprocessing for restricted environments.
+- The service-time source is set in `Configurations.py` (`Service_Config`); switch to
+  a lognormal model by setting `service_time_source="lognormal"`.
+
+## Citation
+
+If you use this code or data, please cite:
+
+> M. A. Öztürk and H. Artuner, "Context-Aware Dynamic Tool Resolution for
+> Deadline-Constrained Autonomous Agents," PeerJ Computer Science (under review),
+> manuscript ID 141785.
+
+## License & contributions
+
+See `LICENSE`. Issues and pull requests are welcome; please open an issue describing
+the change before submitting a PR.
+
+## Authors
+
+- **Muhammet Ali Öztürk** — Hacettepe University, Computer Engineering (PhD student).
+- **Assoc. Prof. Harun Artuner** — Advisor, Hacettepe University.
